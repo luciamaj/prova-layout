@@ -12,7 +12,7 @@
                     <div class="piramide-section"></div>
                 </div>
             </div>
-            <div class="cibo-container d-flex flex-wrap">
+            <div class="cibo-container d-flex flex-wrap justify-content-center">
                 <div class="fooditem">CIBO</div>
                 <div class="fooditem">CIBO</div>
                 <div class="fooditem">CIBO</div>
