@@ -1,7 +1,7 @@
 <template>
   <div class="piramide">
     <div class="main-wrapper">
-        <div class="content">
+         <div class="content">
             <div class="piramide-container">
                 <div class="piramide-sections-container">
                     <div ref="section1" class="piramide-section"></div>

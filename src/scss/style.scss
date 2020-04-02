@@ -48,6 +48,54 @@ body {
     }
 }
 
+
+/*--------
+ cultura
+------------*/
+.cultura{
+    .img{
+        width: auto;
+        height: 55px;
+    }
+    .main-wrapper{
+        .container{
+            .text-piatto{
+                color: black;
+                text-align: center;
+                padding: 20px 0;
+                text-transform: uppercase;
+                font-size: 0.7rem;
+                line-height: 20px;
+            }
+            .cane{
+                top:50%;
+                padding-top: 20px;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: 2px solid black;
+                background-color: pink;
+            }
+            .cane2{
+                top:50%;
+                right: 20px;
+                padding-top: 5px;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: 2px solid black;
+                background-color: pink;
+            }
+            height: 500px;
+            background-color:blueviolet;
+            .animali-container {
+                background-color: chartreuse;
+                width: 100%;
+                flex-grow : 1;
+            }
+        }
+    }
+   
 // APP PIRAMIDE
 .piramide {
     .food-image {
