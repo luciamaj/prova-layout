@@ -15,7 +15,8 @@
             <div class="cibo-container d-flex flex-wrap justify-content-center">
                 <template v-for="(cibo, idx) in food">
                     <div v-bind:key="idx" class="fooditem">
-                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" height="100%" width="100%">
+                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image">
+                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image">
                     </div>
                 </template>
             </div>
