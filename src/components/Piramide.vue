@@ -2,7 +2,9 @@
   <div class="Piramide">
     <div class="main-wrapper">
         <div class="content">
-            <div class="piramide-container">Piramide</div>
+            <div class="piramide-container">
+                <img src="/static/piramide.png">
+            </div>
             <div class="cibo-container d-flex flex-wrap">
                 <div class="fooditem">CIBO</div>
                 <div class="fooditem">CIBO</div>
@@ -32,6 +34,6 @@ import gsap from 'gsap';
 import { Draggable } from 'gsap';
 
 export default {
-    
+
 }
 </script>
