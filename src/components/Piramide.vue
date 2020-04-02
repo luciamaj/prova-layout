@@ -17,11 +17,14 @@
                     <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name">
                         <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '1'">
                         <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '2'">
-
                     </div>
                 </template>
             </div>
-            <div class="resetbtn-container">RESET</div>
+            <div class="resetbtn-container">
+                <div id="button-reset">
+                    RESET
+                </div>
+            </div>
         </div>
     </div>
   </div>
@@ -57,8 +60,8 @@ export default {
 
                 console.log(firstDest, secondDest);
 
-                timeline.to(cookie1, 1, { y: -(dims.y - firstDest.y), scale: 0.5});
-                timeline.to(cookie2, 1, { y: -(dims.y - secondDest.y), scale: 0.5 });
+                timeline.to(cookie1, 1, { y: -(dims.y - firstDest.y), x: -30,  scale: 0.5});
+                timeline.to(cookie2, 1, { y: -(dims.y - secondDest.y), x: 50, scale: 0.5 });
             }
         },
         getPagePositions() {
