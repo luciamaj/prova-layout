@@ -1,5 +1,5 @@
 <template>
-  <div class="Home">
+  <div class="home">
       <div class="container">
         <div class="spacer">
           <div ref="cane" class="cane">cane</div>

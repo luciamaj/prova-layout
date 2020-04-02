@@ -12,8 +12,8 @@ body {
     color: $primary
 }
 
-// APP PIRAMIDE
-.piramide {
+//APP PROVA HOME
+.home {
     .box { 
         height: 60px; 
         width: 60px; 
@@ -38,7 +38,10 @@ body {
         border: 2px solid black;
         background-color: pink;
     }
-    
+}
+
+// APP PIRAMIDE
+.piramide {
     .button-footer {
         background-color: blueviolet;
         height: 100px;
