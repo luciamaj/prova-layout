@@ -55,11 +55,39 @@ body {
     background: black;  
 }
 
-.navbar {
-    height: 20vh;  
-    display: flex;
+.piramide-container {
     background-color: chartreuse;
     width: 100%;
+    flex-grow : 1;
+}
+
+.cibo-container {
+    display: flex;
+    background-color: gray;
+    width: 100%;
+}
+
+.resetbtn-container {
+    height: 10%;  
+    display: flex;
+    background-color: aqua;
+    width: 100%;
+}
+
+.fooditem {
+    width: 100px;
+    height: 100px;
+    background-color: blanchedalmond;
+    margin: 10px;
+    border-color: black;
+    border-width: 10px;
+}
+
+.content {
+    height: 100%;
+    background-color: coral;
+    display: flex;
+    flex-flow: column;
 }
 
 .section {

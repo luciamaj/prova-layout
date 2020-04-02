@@ -1,7 +1,24 @@
 <template>
   <div class="Piramide">
     <div class="main-wrapper">
-        <div class="navbar"> ciaoo </div>
+        <div class="content">
+            <div class="piramide-container">Piramide</div>
+            <div class="cibo-container d-flex flex-wrap">
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+                <div class="fooditem">CIBO</div>
+            </div>
+            <div class="resetbtn-container">RESET</div>
+        </div>
         <!-- <div class="section left col-xs-3">
         <div class="half"><h4>Top left</h4></div>
         <div class="half"><h4>Bottom left</h4></div> -->
