@@ -1,7 +1,7 @@
 <template>
   <div class="Piramide">
     <div class="main-wrapper">
-        <div class="content">
+         <div class="content">
             <div class="piramide-container">
                 <img src="/static/piramide.png">
             </div>
@@ -34,6 +34,7 @@ import gsap from 'gsap';
 import { Draggable } from 'gsap';
 
 export default {
+
 
 }
 </script>
