@@ -15,8 +15,8 @@
             <div class="cibo-container d-flex flex-wrap justify-content-center">
                 <template v-for="(cibo) in food">
                     <div v-on:click="moveFood(cibo.name)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name">
-                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image">
-                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image">
+                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '1'">
+                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '2'">
                     </div>
                 </template>
             </div>
@@ -49,8 +49,11 @@ export default {
         moveFood(element) {
             console.log("THE ELEMENT CLICKED", element);
             if(element == "cookie") {
-                const { cookie } = this.$refs;
-                timeline.to(cookie, 1, { y: -250 });
+                const { cookie1 } = this.$refs;
+                const { cookie2 } = this.$refs;
+
+                timeline.to(cookie1, 1, { y: -250 });
+                timeline.to(cookie2, 1, { y: -450 });
             }
         }
     }
