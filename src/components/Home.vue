@@ -93,7 +93,6 @@ export default {
           if(this.hitTest($(".box")), "1%") {
             console.log("HO COLPITO L'ALTRO BOX");
           }
-          
         }
       });
 

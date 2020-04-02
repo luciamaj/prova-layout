@@ -12,11 +12,12 @@
                     <div ref="section6" class="piramide-section"></div>
                 </div>
             </div>
-            <div class="cibo-container d-flex flex-wrap justify-content-center">
+            <div class="cibo-container d-flex flex-wrap justify-content-center" ref="ciboContainer">
                 <template v-for="(cibo) in food">
-                    <div v-on:click="moveFood(cibo.name)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name">
+                    <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name">
                         <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '1'">
                         <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '2'">
+
                     </div>
                 </template>
             </div>
@@ -33,8 +34,8 @@ import { Draggable } from 'gsap';
 import { data } from './../data/piramide.js'
 
 const timeline = new TimelineLite();
-var overlapThreshold = "50%";
- 
+let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, section5: {}, section6: {}}
+
 export default {
     data() {
         return {
@@ -46,18 +47,30 @@ export default {
     },
     methods: {
         moveFood(element) {
-            console.log("THE ELEMENT CLICKED", element);
-            if(element == "cookie") {
-                const { cookie1, cookie2 } = this.$refs;
+            console.log("THE ELEMENT CLICKED", element.secondDestination);
+            if(element.name == "cookie") {
+                const { cookie, cookie1, cookie2, ciboContainer } = this.$refs;
+                let dims = ciboContainer.getBoundingClientRect();
+                console.log("DIMSSS", dims);
+                let firstDest = dimensions[element.firstDestination];
+                let secondDest = dimensions[element.secondDestination];
 
-                timeline.to(cookie1, 1, { y: -250 });
-                timeline.to(cookie2, 1, { y: -450 });
+                console.log(firstDest, secondDest);
+
+                timeline.to(cookie1, 1, { y: -(dims.y - firstDest.y)  });
+                timeline.to(cookie2, 1, { y: -(dims.y - secondDest.y)  });
             }
         },
         getPagePositions() {
             const { section1, section2, section3, section4, section5, section6 } = this.$refs;
             const section1Dimensions = section1.getBoundingClientRect();
-            console.log("SECTION1 DIMENSIONS", section1Dimensions);
+            const section2Dimensions = section2.getBoundingClientRect();
+
+
+            dimensions.section1 = section1Dimensions;
+            dimensions.section2 = section2Dimensions;
+
+            console.log("SECTION1 DIMENSIONS", dimensions);
         }
     }, 
 }
