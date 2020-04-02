@@ -1,0 +1,82 @@
+$success: rgb(47, 155, 54);
+$warning:  rgb(255, 147, 24);
+$danger: rgb(210, 74, 63);
+$off: rgb(97, 96, 96);
+$primary: rgb(0, 0, 0);
+$background: rgb(255, 255, 255);
+$area:rgba(231, 231, 231, 0.925);
+
+$spacer-width: 40px;
+
+body {
+    color: $primary
+}
+
+.box { 
+    height: 60px; 
+    width: 60px; 
+    background: red; 
+  }
+
+.box2 { 
+    height: 60px; 
+    width: 60px; 
+    background: green; 
+}
+
+.cane {
+    position:absolute;
+    width: 200px;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 20px;
+    color: white;
+    border-radius:10px;
+    border: 2px solid black;
+    background-color: pink;
+}
+
+.button-footer {
+    background-color: blueviolet;
+    height: 100px;
+}
+
+.main-wrapper {
+    height: 100vh;
+    background-color: cadetblue;
+}
+
+.left {
+    background: grey;  
+  }
+  
+.right {
+    background: black;  
+}
+
+.navbar {
+    height: 20vh;  
+    display: flex;
+    background-color: chartreuse;
+    width: 100%;
+}
+
+.section {
+    height: 100%;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.half {
+    background: #f9f9f9;
+    height: 50%;  
+    width: 100%;
+    margin: 15px 0;
+}
+
+h4 {
+    color: white;  
+}
