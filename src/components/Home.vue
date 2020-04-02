@@ -1,5 +1,5 @@
 <template>
-  <div class="Home">
+  <div class="home">
       <div class="container">
         <div class="spacer">
           <div ref="cane" class="cane">cane</div>
@@ -93,7 +93,6 @@ export default {
           if(this.hitTest($(".box")), "1%") {
             console.log("HO COLPITO L'ALTRO BOX");
           }
-          
         }
       });
 
