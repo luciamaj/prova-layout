@@ -9,7 +9,15 @@ $area:rgba(231, 231, 231, 0.925);
 $spacer-width: 40px;
 
 body {
-    color: $primary
+    color: $primary;
+    user-select: none;
+
+    /* DISABLE SELECT TEXT */
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 //APP PROVA HOME
@@ -68,7 +76,7 @@ body {
     }
 
     .piramide-sections-container {
-        background-image: url("/static/piramide.png");
+        background-image: url("/static/piramide/piramide.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
@@ -100,10 +108,8 @@ body {
     .fooditem {
         width: 100px;
         height: 100px;
-        background-color: blanchedalmond;
         margin: 10px;
-        border-color: black;
-        border-width: 10px;
+        padding: 20px;
     }
     
     .content {

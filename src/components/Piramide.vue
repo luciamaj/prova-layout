@@ -13,18 +13,11 @@
                 </div>
             </div>
             <div class="cibo-container d-flex flex-wrap justify-content-center">
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
-                <div class="fooditem">CIBO</div>
+                <template v-for="(cibo, idx) in food">
+                    <div v-bind:key="idx" class="fooditem">
+                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" height="100%" width="100%">
+                    </div>
+                </template>
             </div>
             <div class="resetbtn-container">RESET</div>
         </div>
@@ -36,8 +29,14 @@
 import { TimelineLite } from 'gsap'
 import gsap from 'gsap';
 import { Draggable } from 'gsap';
-
+import { data } from './../data/piramide.js'
+ 
 export default {
-
+    data() {
+        return {
+            food: data.food,
+        }
+    }
 }
+
 </script>
