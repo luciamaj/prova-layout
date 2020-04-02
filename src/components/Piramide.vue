@@ -1,5 +1,5 @@
 <template>
-  <div class="Piramide">
+  <div class="piramide">
     <div class="main-wrapper">
         <div class="content">
             <div class="piramide-container">
@@ -21,9 +21,6 @@
             </div>
             <div class="resetbtn-container">RESET</div>
         </div>
-        <!-- <div class="section left col-xs-3">
-        <div class="half"><h4>Top left</h4></div>
-        <div class="half"><h4>Bottom left</h4></div> -->
     </div>
   </div>
 </template>
