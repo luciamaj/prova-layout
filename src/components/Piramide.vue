@@ -3,7 +3,14 @@
     <div class="main-wrapper">
         <div class="content">
             <div class="piramide-container">
-                <img src="/static/piramide.png">
+                <div class="piramide-sections-container">
+                    <div class="piramide-section"></div>
+                    <div class="piramide-section"></div>
+                    <div class="piramide-section"></div>
+                    <div class="piramide-section"></div>
+                    <div class="piramide-section"></div>
+                    <div class="piramide-section"></div>
+                </div>
             </div>
             <div class="cibo-container d-flex flex-wrap">
                 <div class="fooditem">CIBO</div>
