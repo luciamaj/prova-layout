@@ -34,6 +34,28 @@ body {
     background-color: cadetblue;
 }
 
+.cibocitta {
+    .mode {
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+        cursor: pointer;
+    }
+
+    .risposta {
+        padding-bottom: 20px;
+        cursor: pointer;
+    }
+
+    #easy {
+        background-color: green;
+    }
+
+    #hard {
+        background-color: red;
+    }
+}
+
 //APP PROVA HOME
 .home {
     .box { 

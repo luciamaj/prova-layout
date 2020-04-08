@@ -33,9 +33,6 @@ export default {
     computed: {
       //
     },
-    mounted() {
-        //
-    },
     created() {
         //
     },

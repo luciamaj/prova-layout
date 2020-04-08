@@ -49,14 +49,6 @@ export default {
     mounted() {
         this.getPagePositions();
     },
-    enter (el, done) {
-      TweenMax.to(el, 1, {
-        rotationY: 360,
-        transformOrigin: '50% 50%',
-        ease: Back.easeOut
-      })
-      done()
-    },
     methods: {
         moveFood(element) {
             console.log("THE ELEMENT CLICKED", element.secondDestination);

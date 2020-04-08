@@ -1,9 +1,10 @@
 <template>
   <div class="piramide-homepage">
     <div class="main-wrapper">
+                    <button v-on:click="move">MOVE</button>
         <div class="content">
-            <component v-bind:is="homepage" style="display:none;"></component>
-            <component v-bind:is="app"></component>
+            <component ref="cane" v-bind:is="homepage"></component>
+            <component ref="gatto" v-bind:is="app"></component>
         </div>
     </div>            
   </div>
@@ -16,11 +17,13 @@ import gsap from 'gsap';
 import Draggable from "gsap/Draggable";
 import { TimelineLite } from 'gsap';
 import { TweenMax } from 'gsap';
+import { CSSPlugin } from 'gsap/CSSPlugin'
 import JQuery from 'jquery';
 let $ = JQuery;
 
 let intro = { template: "#intro-template" };
 console.log("THE INTRO", TweenMax);
+gsap.registerPlugin(CSSPlugin)
 
 export default {
     components: { },
@@ -34,7 +37,7 @@ export default {
       //
     },
     mounted() {
-        //
+        
     },
     created() {
         //
@@ -43,7 +46,12 @@ export default {
         //
     },
     methods: {
-        //
+        move() {
+            const { cane } = this.$refs;
+            console.log(cane);
+            const timeline = new TimelineLite();
+            timeline.to(cane, 1, { y: 1000, x: 2000,  scale: 0.5});
+        }
     }
   }
 </script>

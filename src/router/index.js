@@ -37,8 +37,8 @@ const router = new Router({
       component: Cultura
     },
     {
-      path: '/cibo-città',
-      name: 'cibo e città',
+      path: '/cibocitta',
+      name: 'cibocitta',
       component: CiboCitta
     }
   ]
