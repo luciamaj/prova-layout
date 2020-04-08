@@ -20,6 +20,20 @@ body {
     -ms-user-select: none;
 }
 
+// SCSS GENERALE I COLORI SOLO SOLO DI PROVA
+
+.content {
+    height: 100%;
+    background-color: coral;
+    display: flex;
+    flex-flow: column;
+}
+
+.main-wrapper {
+    height: 100vh;
+    background-color: cadetblue;
+}
+
 //APP PROVA HOME
 .home {
     .box { 
@@ -59,11 +73,6 @@ body {
     .button-footer {
         background-color: blueviolet;
         height: 100px;
-    }
-    
-    .main-wrapper {
-        height: 100vh;
-        background-color: cadetblue;
     }
     
     .left {
@@ -129,13 +138,6 @@ body {
         margin: 10px;
         padding: 20px;
         position: relative;
-    }
-    
-    .content {
-        height: 100%;
-        background-color: coral;
-        display: flex;
-        flex-flow: column;
     }
     
     .section {
