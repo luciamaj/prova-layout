@@ -148,6 +148,40 @@ body {
 }  
 // APP PIRAMIDE
 .piramide {
+    .slick-slider{
+        display: inline-flex;
+    }
+    .slick-arrow{
+        background-color: transparent;
+        border: 0;
+        height: 50px;
+        width: 40px;
+        font-size: 0;
+    }
+    .slick-prev{
+        background-image:url("/static/general/arrow_sx.png") ;
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: contain;
+        float: left;
+    }
+
+    .slick-next{
+        background-image: url("/static/general/arrow_dx.png");
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: contain;
+        float: right;
+    }
+
+    .slick-list{
+        width: 80vw;
+        margin: auto;
+    }
+    .slick-track{
+        display: flex;
+    }
+
     .food-image {
         position: absolute;
         width: 60%;
@@ -326,14 +360,14 @@ body {
             font-size: 0;
         }
         .slick-prev{
-            background-image:url("/static/piatto_virtuale/arrow_sx.png") ;
+            background-image:url("/static/general/arrow_sx.png") ;
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: contain;
             float: left;
         }
         .slick-next{
-            background-image: url("/static/piatto_virtuale/arrow_dx.png");
+            background-image: url("/static/general/arrow_dx.png");
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: contain;
