@@ -35,6 +35,7 @@ import { TimelineLite } from 'gsap'
 import gsap from 'gsap';
 import { Draggable } from 'gsap';
 import { data } from './../../data/piramide.js'
+import { TweenMax } from 'gsap';
 
 const timeline = new TimelineLite();
 let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, section5: {}, section6: {}}
@@ -47,6 +48,14 @@ export default {
     },
     mounted() {
         this.getPagePositions();
+    },
+    enter (el, done) {
+      TweenMax.to(el, 1, {
+        rotationY: 360,
+        transformOrigin: '50% 50%',
+        ease: Back.easeOut
+      })
+      done()
     },
     methods: {
         moveFood(element) {
