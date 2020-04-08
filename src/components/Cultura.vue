@@ -6,23 +6,16 @@
             <div ref="cane1" class="cane"><p class="text-piatto">commestibile</p></div>
             <div ref="cane2" class="cane2"><p class="text-piatto">non commestibile</p> </div>
             <div ref="box" class="box"><img src="../assets/cammello.jpg" alt="" class="img"></div>
-            <div ref="box2" class="box2"></div>
+            <div class="elements">
+              <template v-for="(elem,index) in gen">
+                <div :ref="'box'+index" class="box-el"  v-bind:key="(elem,index)">{{elem.name}}</div>
+              </template>
+            </div>
+            
+            
+            
           </div>
           
-          <!--div class="animali-container d-flex flex-wrap">
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-              <div class="fooditem">CIBO</div>
-          </div-->
          
         </div>
 
@@ -36,7 +29,7 @@
 import { TimelineLite } from 'gsap'
 import gsap from 'gsap';
 import Draggable from "gsap/Draggable";
-import { quiz } from './../quiz/quiz.js';
+import { data } from './../data/cultura.js'
 import JQuery from 'jquery';
 let $ = JQuery;
 
@@ -44,7 +37,9 @@ export default {
     components: { },
     data () {
         return {
-                     
+              
+          gen: data.generi,
+              
         }
     },
     computed: {
@@ -52,12 +47,14 @@ export default {
     },
     mounted() {
       gsap.registerPlugin(Draggable);
-      const { box, box2, cane1, cane2} = this.$refs
+     
+      const { box,box0, box1,box2,box3 , cane1, cane2} = this.$refs
       const timeline = new TimelineLite();
       var overlapThreshold = "50%"; 
       var k = 0
       var z = 0
       var comm=null;
+      
      
       console.log("the cane", cane1);
     
@@ -80,7 +77,7 @@ export default {
         }
       });
 */
-      Draggable.create(box2, {
+      Draggable.create(box0, {
         bounds:window,
         throwProps: true,
         
@@ -100,6 +97,9 @@ export default {
           },
         onDragEnd:function(e) {
           console.log("DRAG ENDED "+comm);
+          if(comm==true){
+            console.log("target "+this.target.data);
+          }
         }
       });
     },
