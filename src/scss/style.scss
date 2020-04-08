@@ -20,6 +20,42 @@ body {
     -ms-user-select: none;
 }
 
+// SCSS GENERALE I COLORI SOLO SOLO DI PROVA
+
+.content {
+    height: 100%;
+    background-color: coral;
+    display: flex;
+    flex-flow: column;
+}
+
+.main-wrapper {
+    height: 100vh;
+    background-color: cadetblue;
+}
+
+.cibocitta {
+    .mode {
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+        cursor: pointer;
+    }
+
+    .risposta {
+        padding-bottom: 20px;
+        cursor: pointer;
+    }
+
+    #easy {
+        background-color: green;
+    }
+
+    #hard {
+        background-color: red;
+    }
+}
+
 //APP PROVA HOME
 .home {
     .box { 
@@ -123,11 +159,6 @@ body {
         height: 100px;
     }
     
-    .main-wrapper {
-        height: 100vh;
-        background-color: cadetblue;
-    }
-    
     .left {
         background: grey;  
       }
@@ -191,13 +222,6 @@ body {
         margin: 10px;
         padding: 20px;
         position: relative;
-    }
-    
-    .content {
-        height: 100%;
-        background-color: coral;
-        display: flex;
-        flex-flow: column;
     }
     
     .section {
