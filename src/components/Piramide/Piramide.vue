@@ -21,13 +21,19 @@
                 </template>
                 
             </div>
-            <slick ref="slick" :options="slickOptions" :arrows="true" >
-                <template v-for="(cibo, index) in food" >
-                    <div class="food-item"  v-bind:key="(cibo,index)"> 
-                        <div class="mainName">{{cibo.name}}</div>
-                    </div>
-                </template>
-            </slick>
+            <div ref="ciboContainer"  class="cibo-container">
+                <slick ref="slick" :options="slickOptions" :arrows="true" style="position: absolute; z-index:">
+                    <template v-for="(cibo, index) in food">
+                        <div class="food-item"  v-bind:key="(cibo,index)"> 
+                            <div class="mainName">{{cibo.name}}</div>
+                            <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name" :id="cibo.name">
+                                <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :id="cibo.name + '1'" class="food-image" :ref="cibo.name + '1'">
+                                <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :id="cibo.name + '2'" class="food-image" :ref="cibo.name + '2'">
+                            </div>
+                        </div>
+                    </template>
+                </slick>
+            </div>
             <div class="resetbtn-container">
                 <div id="button-reset" v-on:click="resetPositions()">
                     RESET
@@ -45,12 +51,13 @@ import { Draggable } from 'gsap';
 import { data } from './../../data/piramide.js'
 import { TweenMax } from 'gsap';
 import Slick from 'vue-slick';
+import carousel from 'vue-owl-carousel'
 
 const timeline = new TimelineLite();
 let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, section5: {}, section6: {}}
 
 export default {
-    components: { Slick },
+    components: { Slick, carousel },
     data() {
         return {
             food: data.food,
@@ -80,9 +87,13 @@ export default {
                 let secondDest = dimensions[element.secondDestination];
 
                 console.log(firstDest, secondDest);
+                
+                document.getElementById("cookie2").style.position = "absolute";
+                document.getElementById("cookie2").style.zIndex = 999;
 
-                timeline.to(cookie1, 1, { y: -(dims.y - firstDest.y), x: -30,  scale: 0.5});
-                timeline.to(cookie2, 1, { y: -(dims.y - secondDest.y), x: 50, scale: 0.5 });
+                
+                timeline.to(cookie1, 1, { y: -200, x: -30,  scale: 0.5});
+                timeline.to(cookie2, 1, { y: 200, x: 50, scale: 0.5 });
             }
         },
         getPagePositions() {
