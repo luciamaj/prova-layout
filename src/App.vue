@@ -7,6 +7,7 @@
 
 <style lang="scss">
 @import 'css/flaticon.css';
+@import '../node_modules/slick-carousel/slick/slick.css';
 @import 'css/libs/bootstrap.min.css';
 @import 'scss/style.scss';
 </style>

@@ -219,3 +219,117 @@ body {
         color: white;  
     }
 }
+
+
+
+//APP PIATTO VIRTUALE
+
+.piatto{
+    font-family: sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 100vh;
+    .over{
+       
+        position: absolute;
+        top: 0;
+        z-index: 20;
+        visibility:hidden;
+        width: 100%;
+        text-align: center;
+        background-color: blanchedalmond;
+       
+        img{
+            width: auto;
+            height: 100vh;
+        }
+
+    }
+    .topPart{
+        padding: 25px 0;
+        margin: 0;
+        
+
+        img{
+            width: auto;
+            height: 450px;
+            margin-bottom: 25px;
+        }
+
+        .btn-control{
+            width:70px;
+            height:70px;
+            text-transform: uppercase;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            background-color: transparent;
+            border: 0;
+        }
+        .cancella{
+            background-image: url("/static/piatto_virtuale/cancella.png");
+        }
+        .fine{
+            background-image: url("/static/piatto_virtuale/fine.png");
+        }
+        h3{
+            font-weight: 700;
+            color: whitesmoke;
+        }
+    }
+
+    .foodList{
+        vertical-align: middle;
+        padding: 50px 30px;
+        height: 30vh;
+
+        .slick-slider{
+            display: inline-flex;
+        }
+        .slick-arrow{
+            background-color: transparent;
+            border: 0;
+            height: 80px;
+            width: 70px;
+            font-size: 0;
+        }
+        .slick-prev{
+            background-image:url("/static/piatto_virtuale/arrow_sx.png") ;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            float: left;
+        }
+        .slick-next{
+            background-image: url("/static/piatto_virtuale/arrow_dx.png");
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            float: right;
+        }
+
+        .slick-list{
+            width: 80vw;
+            margin: auto;
+        }
+        .slick-track{
+            display: flex;
+        }
+
+        .food-item{
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            .mainName{
+                font-size: 2rem;
+            }
+            .secondName{
+                font-size: .8rem;
+                // position: relative; */
+                //bottom: 10px;
+            }
+        }
+    }
+
+}

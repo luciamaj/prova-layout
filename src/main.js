@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import 'popper.js';
 import 'jquery';
+import 'vue-slick';
 import 'bootstrap';
 import { i18n } from './plugins/i18n.js';
 import CountryFlag from 'vue-country-flag'

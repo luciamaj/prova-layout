@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './../components/Home.vue'
 import Piramide from './../components/Piramide.vue'
 import Cultura from './../components/Cultura.vue'
+import Piatto from './../components/PiattoVirtuale.vue'
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ const router = new Router({
       path: '/cultura',
       name: 'cultura',
       component: Cultura
+    },
+    {
+      path: '/piatto_virtuale',
+      name: 'piattoVirtuale',
+      component: Piatto
     },
   ]
 })
