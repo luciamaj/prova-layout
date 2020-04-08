@@ -169,8 +169,20 @@ body {
     .resetbtn-container {
         height: 10%;  
         display: flex;
-        background-color: aqua;
         width: 100%;
+        margin: auto;
+        background-color: cornflowerblue;
+        cursor: pointer;
+    }
+
+    #button-reset {
+        text-align: center;
+        width: 100%;
+        vertical-align: middle;
+        margin: auto; /* Important */ 
+        font-size: large;
+        font-weight: 700;
+        color: white;
     }
     
     .fooditem {
