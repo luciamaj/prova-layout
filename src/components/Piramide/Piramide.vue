@@ -51,13 +51,12 @@ import { Draggable } from 'gsap';
 import { data } from './../../data/piramide.js'
 import { TweenMax } from 'gsap';
 import Slick from 'vue-slick';
-import carousel from 'vue-owl-carousel'
 
 const timeline = new TimelineLite();
 let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, section5: {}, section6: {}}
 
 export default {
-    components: { Slick, carousel },
+    components: { Slick },
     data() {
         return {
             food: data.food,
