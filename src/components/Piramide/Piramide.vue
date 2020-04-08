@@ -12,7 +12,7 @@
                     <div ref="section6" class="piramide-section"></div>
                 </div>
             </div>
-            <div class="cibo-container d-flex flex-wrap justify-content-center" ref="ciboContainer">
+            <!-- <div class="cibo-container d-flex flex-wrap justify-content-center" ref="ciboContainer">
                 <template v-for="(cibo) in food">
                     <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name" :id="cibo.name">
                         <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '1'">
@@ -20,15 +20,15 @@
                     </div>
                 </template>
                 
-            </div>
-            <div ref="ciboContainer"  class="cibo-container">
-                <slick ref="slick" :options="slickOptions" :arrows="true" style="position: absolute; z-index:">
+            </div> -->
+            <div ref="ciboContainer">
+                <slick ref="slick" :options="slickOptions" :arrows="true" >
                     <template v-for="(cibo, index) in food">
                         <div class="food-item"  v-bind:key="(cibo,index)"> 
                             <div class="mainName">{{cibo.name}}</div>
                             <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name" :id="cibo.name">
-                                <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :id="cibo.name + '1'" class="food-image" :ref="cibo.name + '1'">
-                                <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :id="cibo.name + '2'" class="food-image" :ref="cibo.name + '2'">
+                                <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '1'">
+                                <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '2'">
                             </div>
                         </div>
                     </template>
@@ -86,13 +86,9 @@ export default {
                 let secondDest = dimensions[element.secondDestination];
 
                 console.log(firstDest, secondDest);
-                
-                document.getElementById("cookie2").style.position = "absolute";
-                document.getElementById("cookie2").style.zIndex = 999;
 
-                
-                timeline.to(cookie1, 1, { y: -200, x: -30,  scale: 0.5});
-                timeline.to(cookie2, 1, { y: 200, x: 50, scale: 0.5 });
+                timeline.to(cookie1, 1, { y: 1200, x: -30,  scale: 0.5});
+                timeline.to(cookie2, 1, { y: 1200, x: 50, scale: 0.5 });
             }
         },
         getPagePositions() {

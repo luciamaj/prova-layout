@@ -29,6 +29,38 @@ body {
     flex-flow: column;
 }
 
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .list {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 64px;
+    font-size: 62px;
+    line-height: 1;
+    margin-bottom: 24px;
+    color: #fff;
+  
+    .list-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 64px;
+      text-align: center;
+      border: 1px solid #f2f2f2;
+    }
+  }
+
 .main-wrapper {
     height: 100vh;
     background-color: cadetblue;
