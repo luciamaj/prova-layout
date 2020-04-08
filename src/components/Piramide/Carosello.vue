@@ -20,11 +20,13 @@
 <script>
 import { TimelineLite } from 'gsap'
 import gsap from 'gsap';
-import { Draggable } from 'gsap';
+import Draggable from 'gsap/Draggable';
 import { data } from './../../data/piramide.js'
 import { TweenMax } from 'gsap';
 import { TweenLite } from 'gsap';
+import { Linear } from 'gsap';
 import Slick from 'vue-slick';
+import jquery from 'jquery';
 
 const timeline = new TimelineLite();
 let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, section5: {}, section6: {}}
@@ -32,32 +34,39 @@ let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, sectio
 export default {
     data() {
         return {
-		list: ["10", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+		list: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
         overflow: false,
         currentPos: 0
         }
 	},
 	computed: {
 		count() {
+            console.log("DOCUMENT", document);
 			return this.list.length
 		}
 	},
 	methods: {
     moveLeft() {
-      console.log("MOVE LEFT");
       const items = this.$refs.list.querySelectorAll('li')
       const itemWidth = this.$refs.viewport.clientWidth / 4
-      const wrapWidth = this.count * itemWidth
+      const wrapWidth = this.count * itemWidth;
+      console.log("LEFT", this.currentPos);
+     
       
-      TweenMax.to(items, 1, {left: this.currentPos += itemWidth}) 
+      if (this.currentPos != 0) {
+                TweenMax.to(items, 1, {left: this.currentPos += itemWidth}) 
+      }
     },
     moveRight() {
-      console.log("MOVE LEFT");
       const items = this.$refs.list.querySelectorAll('li')
       const itemWidth = this.$refs.viewport.clientWidth / 4
-      const wrapWidth = this.count * itemWidth
+      const wrapWidth = 5 * itemWidth
+             console.log("TOTAL", wrapWidth);
+      console.log("RIGHT", this.currentPos);
       
-      TweenMax.to(items, 1, {left: this.currentPos -= itemWidth}) 
+      if (this.currentPos != -wrapWidth -itemWidth) {
+                TweenMax.to(items, 1, {left: this.currentPos -= itemWidth}) 
+      }
     },
     updateProgress() {
        const proxy = document.createElement("div")
@@ -82,14 +91,11 @@ export default {
     }
 	},
   mounted () {
+    //gsap.registerPlugin(Draggable);
     const proxy = document.createElement("div")
     const items = this.$refs.list.querySelectorAll('li')
     const itemWidth = this.$refs.viewport.clientWidth / 4
     const wrapWidth = this.count * itemWidth
-
-    TweenLite.set(this.$refs.list, {
-      left: -itemWidth 
-    })
 
     items.forEach((item, i) => {
       TweenLite.set(item, {
