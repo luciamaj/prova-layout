@@ -42,6 +42,7 @@ const router = new Router({
       name: 'piattoVirtuale',
       component: Piatto
     },
+    {
       path: '/cibocitta',
       name: 'cibocitta',
       component: CiboCitta

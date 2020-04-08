@@ -32,7 +32,7 @@
 
 import gsap from 'gsap';
 import { TimelineLite } from 'gsap';
-import data from '../../data/cibocitta.js'
+import data from '../../data/cibocitta.js';
 
 export default {
     components: { },

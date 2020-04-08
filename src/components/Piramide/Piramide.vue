@@ -19,7 +19,15 @@
                         <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '2'">
                     </div>
                 </template>
+                
             </div>
+            <slick ref="slick" :options="slickOptions" :arrows="true" >
+                <template v-for="(cibo, index) in food" >
+                    <div class="food-item"  v-bind:key="(cibo,index)"> 
+                        <div class="mainName">{{cibo.name}}</div>
+                    </div>
+                </template>
+            </slick>
             <div class="resetbtn-container">
                 <div id="button-reset" v-on:click="resetPositions()">
                     RESET
@@ -36,14 +44,26 @@ import gsap from 'gsap';
 import { Draggable } from 'gsap';
 import { data } from './../../data/piramide.js'
 import { TweenMax } from 'gsap';
+import Slick from 'vue-slick';
 
 const timeline = new TimelineLite();
 let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, section5: {}, section6: {}}
 
 export default {
+    components: { Slick },
     data() {
         return {
             food: data.food,
+            slickOptions: {
+                slidesToShow: 5,
+                slidesToScroll: 1,                 
+                accessibility: true,
+                adaptiveHeight: false,
+                arrows: true,
+                draggable: true,
+                edgeFriction: 0.30,
+                swipe: true
+            },
         }
     },
     mounted() {
