@@ -20,8 +20,8 @@
                 <ul class="list" ref="list">
                   <div class="list-item" v-for="(cibo, index) in food">
                       <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name" :id="cibo.name">
-                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '1'">
-                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '2'">
+                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '1'">
+                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" class="food-image" :ref="cibo.name + '2'">
                       </div>
                   </div>
                 </ul>
