@@ -146,6 +146,7 @@ export default {
       }
     },
     moveFood(element) {
+      console.log("THE ELEMENT", element);
           jquery("." + element.name + "-container").addClass("done");
 
            const timeline = new TimelineLite();
@@ -155,23 +156,47 @@ export default {
 
             let first = this.$refs[element.name + '1'];
             let second = this.$refs[element.name + '2'];
+
+            let firstJ = document.getElementById(element.name + '1');
+            let cont = document.getElementById('piramide-container');
+
+            let duplica = firstJ.cloneNode(true);
+            duplica.style.position = 'absolute';
+            TweenLite.set(duplica, {x: firstJ.x, y: firstJ.y, width: firstJ.width, height: firstJ.height, top: firstJ.top, bottom: firstJ.bottom});
+
+            cont.appendChild(duplica);
+
+            console.log(firstJ);
+
             const { ciboContainer } = this.$refs;
             let dims = ciboContainer.getBoundingClientRect();
             let firstDest = dimensions[element.firstDestination];
             let secondDest = dimensions[element.secondDestination];
 
             console.log("DIMENSIONS", firstDest, secondDest);
-            timeline.to(first, 1, { y: -500, x: -200,  scale: 0.5});
+            //TweenLite.set(first, {x:20, y:20});
+
+            console.log("RECT", firstJ.getBoundingClientRect())
+
+            //timeline.to(first, 1, { y: -500, x: -200,  scale: 0.5});
             timeline.to(second, 1, { y: -550, x: -200, scale: 0.5 });
         },
       getPagePositions() {
             const { section1, section2, section3, section4, section5, section6 } = this.$refs;
             const section1Dimensions = section1.getBoundingClientRect();
             const section2Dimensions = section2.getBoundingClientRect();
+             const section3Dimensions = section3.getBoundingClientRect();
+            const section4Dimensions = section4.getBoundingClientRect();
+             const section5Dimensions = section5.getBoundingClientRect();
+            const section6Dimensions = section6.getBoundingClientRect();
 
 
             dimensions.section1 = section1Dimensions;
             dimensions.section2 = section2Dimensions;
+            dimensions.section3 = section3Dimensions;
+            dimensions.section4 = section4Dimensions;
+            dimensions.section5 = section5Dimensions;
+            dimensions.section6 = section6Dimensions;
 
             console.log("SECTION1 DIMENSIONS", dimensions);
         },
@@ -194,6 +219,7 @@ export default {
         }
 	},
   mounted () {
+    this.getPagePositions();
     //gsap.registerPlugin(Draggable);
     const proxy = document.createElement("div")
     const items = this.$refs.list.querySelectorAll('.list-item')

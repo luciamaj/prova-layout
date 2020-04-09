@@ -87,8 +87,8 @@ export default {
 
                 console.log(firstDest, secondDest);
 
-                timeline.to(cookie1, 1, { y: 1200, x: -30,  scale: 0.5});
-                timeline.to(cookie2, 1, { y: 1200, x: 50, scale: 0.5 });
+                /*timeline.to(cookie1, 1, { y: 1200, x: -30,  scale: 0.5});
+                timeline.to(cookie2, 1, { y: 1200, x: 50, scale: 0.5 });*/
             }
         },
         getPagePositions() {
