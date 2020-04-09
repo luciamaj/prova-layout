@@ -373,7 +373,7 @@ body {
                 transform: translate(-222px, -184px);
                 border: 1px solid green;
                 background-color: green;
-                opacity: 0.3;
+                opacity: 0.9;
                 border-radius: 50%;
                
                 /*animation-name: none;
@@ -397,7 +397,7 @@ body {
                 transform: translate(13px, -184px);
                 border: 1px solid green;
                 background-color: green;
-                opacity: 0.3;
+                opacity: 0.9;
                 border-radius: 50%;
             }
             .dish-3{
@@ -409,7 +409,7 @@ body {
                 transform: translate(-222px, 4px);
                 border: 1px solid green;
                 background-color: green;
-                opacity: 0.3;
+                opacity: 0.9;
                 border-radius: 50%;
             }
             .dish-4{
@@ -421,7 +421,7 @@ body {
                 transform: translate(13px, 4px);
                 border: 1px solid green;
                 background-color: green;
-                opacity: 0.3;
+                opacity: 0.9;
                 border-radius: 50%;
             }
         }
@@ -505,29 +505,7 @@ body {
             top: 68vh;
         }
 
-        .food-item{
-            height: 180px;
-            max-width: 180px;
-            color: white;
-            font-weight: 700;
-            position: relative;
-            text-transform: uppercase;
-            animation-name: none;
-            animation-duration:3s;
-            animation-fill-mode: both;
-            margin: 5px;
-            border: solid 1px red ;
-            border-radius: 50%;
-
-            .mainName{
-                font-size: 1.8rem;
-            }
-            .secondName{
-                font-size: .8rem;
-                // position: relative; */
-                //bottom: 10px;
-            }
-        }
+        
 
         @keyframes example {
            from {top: 0px; }
