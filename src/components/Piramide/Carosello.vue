@@ -1,8 +1,5 @@
 <template>
     <div>
-<label>
-    <input type="checkbox" name="overflow" id="overflow" v-model="overflow" /> Show overflow
-  </label>
   <button v-on:click="moveLeft()">LEFT</button>
   <button v-on:click="moveRight()">RIGHT</button>
   <div class="viewport" ref="viewport" :style="{overflow: overflow ? 'visible': 'hidden'}">
@@ -36,7 +33,8 @@ export default {
         return {
 		list: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
         overflow: false,
-        currentPos: 0
+        currentPos: 0,
+        currentItem: 1,
         }
 	},
 	computed: {
@@ -48,24 +46,29 @@ export default {
 	methods: {
     moveLeft() {
       const items = this.$refs.list.querySelectorAll('li')
-      const itemWidth = this.$refs.viewport.clientWidth / 4
+      const itemWidth = this.$refs.viewport.clientWidth / 7
       const wrapWidth = this.count * itemWidth;
       console.log("LEFT", this.currentPos);
+      console.log("the current item", this.currentItem);
      
       
-      if (this.currentPos != 0) {
-                TweenMax.to(items, 1, {left: this.currentPos += itemWidth}) 
+      if (this.currentItem > 1) {
+          this.currentItem -= 1;
+        TweenMax.to(items, 1, {left: this.currentPos += itemWidth}) 
       }
     },
     moveRight() {
       const items = this.$refs.list.querySelectorAll('li')
-      const itemWidth = this.$refs.viewport.clientWidth / 4
-      const wrapWidth = 5 * itemWidth
+      const itemWidth = this.$refs.viewport.clientWidth / 7
+      const wrapWidth = 2 * itemWidth
              console.log("TOTAL", wrapWidth);
+             console.log("the current item", this.currentItem);
       console.log("RIGHT", this.currentPos);
+      let rapporto = items.length % 7;
       
-      if (this.currentPos != -wrapWidth -itemWidth) {
-                TweenMax.to(items, 1, {left: this.currentPos -= itemWidth}) 
+      if (this.currentItem <= rapporto) {
+          this.currentItem += 1;
+            TweenMax.to(items, 1, {left: this.currentPos -= itemWidth}); 
       }
     },
     updateProgress() {
@@ -94,7 +97,7 @@ export default {
     //gsap.registerPlugin(Draggable);
     const proxy = document.createElement("div")
     const items = this.$refs.list.querySelectorAll('li')
-    const itemWidth = this.$refs.viewport.clientWidth / 4
+    const itemWidth = this.$refs.viewport.clientWidth / 7
     const wrapWidth = this.count * itemWidth
 
     items.forEach((item, i) => {
