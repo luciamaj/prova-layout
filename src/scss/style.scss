@@ -362,20 +362,23 @@ body {
             top: 0;
             height:450px ;
             width: inherit;
-            border: solid 1px green;
+            //border: solid 1px green;
 
             .dish-1{
-                width: 175px;
-                height: 175px;
+                width: 180px;
+                height: 180px;
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-219px, -181px);
-                //border: 1px solid green;
-                opacity: 1;
-                animation-name: none;
+                transform: translate(-222px, -184px);
+                border: 1px solid green;
+                background-color: green;
+                opacity: 0.3;
+                border-radius: 50%;
+               
+                /*animation-name: none;
                 animation-duration: 2.5s;
-                animation-fill-mode: both;
+                animation-fill-mode: both;*/
                 
                 img{
                     border-radius: 50%;
@@ -391,8 +394,11 @@ body {
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(13px, -102%);
+                transform: translate(13px, -184px);
                 border: 1px solid green;
+                background-color: green;
+                opacity: 0.3;
+                border-radius: 50%;
             }
             .dish-3{
                 width: 180px;
@@ -402,6 +408,9 @@ body {
                 left: 50%;
                 transform: translate(-222px, 4px);
                 border: 1px solid green;
+                background-color: green;
+                opacity: 0.3;
+                border-radius: 50%;
             }
             .dish-4{
                 width: 180px;
@@ -411,6 +420,9 @@ body {
                 left: 50%;
                 transform: translate(13px, 4px);
                 border: 1px solid green;
+                background-color: green;
+                opacity: 0.3;
+                border-radius: 50%;
             }
         }
 
@@ -445,12 +457,16 @@ body {
     }
 
     .foodList{
+        position: absolute;
         vertical-align: middle;
         padding: 50px 30px;
-        height: 30vh;
+        height: 100vh;
+        width: 100%;
+        border: solid 1px blue;
 
         .slick-slider{
             display: inline-flex;
+            z-index: 10;
         }
         .slick-arrow{
             background-color: transparent;
@@ -458,7 +474,9 @@ body {
             height: 80px;
             width: 70px;
             font-size: 0;
-            margin: auto;
+            margin: 40px auto;
+            position: relative;
+            top: 70vh;
         }
         .slick-prev{
             background-image:url("/static/general/arrow_sx.png") ;
@@ -477,16 +495,19 @@ body {
 
         .slick-list{
             width: 80vw;
-            height: 180px;
+            height: 92vh;
             margin: auto;
+            top:0;
+        
         }
         .slick-track{
             display: flex;
+            top: 68vh;
         }
 
         .food-item{
-            height: 150px;
-            width: 150px;
+            height: 180px;
+            max-width: 180px;
             color: white;
             font-weight: 700;
             position: relative;
@@ -496,6 +517,7 @@ body {
             animation-fill-mode: both;
             margin: 5px;
             border: solid 1px red ;
+            border-radius: 50%;
 
             .mainName{
                 font-size: 1.8rem;
@@ -509,11 +531,11 @@ body {
 
         @keyframes example {
            from {top: 0px; }
-            to {top: 200px; background-color: white;}
+            to {top: -200px; background-color: white;}
         }
         @keyframes curtain {
             from {top: 0px; }
-             to {top: -100vh; opacity: 0.5;}
+             to {top: -100vh; opacity: 0.8;}
         }
         
         @keyframes dish-drop {
