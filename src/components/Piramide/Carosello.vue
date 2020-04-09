@@ -31,7 +31,7 @@ let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, sectio
 export default {
     data() {
         return {
-		list: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+		list: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"],
         overflow: false,
         currentPos: 0,
         currentItem: 1,
@@ -59,14 +59,10 @@ export default {
     },
     moveRight() {
       const items = this.$refs.list.querySelectorAll('li')
-      const itemWidth = this.$refs.viewport.clientWidth / 7
-      const wrapWidth = 2 * itemWidth
-             console.log("TOTAL", wrapWidth);
-             console.log("the current item", this.currentItem);
-      console.log("RIGHT", this.currentPos);
-      let rapporto = items.length % 7;
+      const itemWidth = this.$refs.viewport.clientWidth / 7;
+      const wrapWidth = 2 * itemWidth;
       
-      if (this.currentItem <= rapporto) {
+      if (this.currentItem <= items.length - 7) {
           this.currentItem += 1;
             TweenMax.to(items, 1, {left: this.currentPos -= itemWidth}); 
       }
