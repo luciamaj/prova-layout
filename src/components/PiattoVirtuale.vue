@@ -8,7 +8,7 @@
                     <div class="col-lg-md-8 col-sm-10" ref="areaVass"> 
                         <img src="/static/piatto_virtuale/vassoio.png" alt="vassoio">
                         <div class="over-vassoio"> 
-                            <div class="dish-1" id="dish-1" ref="dish1"><img src="../assets/cammello.jpg" alt=""></div>
+                            <div class="dish-1" id="dish-1" ref="dish1"></div>
                             <div class="dish-2" id="dish-2" ref="dish2"></div>
                             <div class="dish-3" id="dish-3" ref="dish3"></div>
                             <div class="dish-4" id="dish-4" ref="dish4"></div>

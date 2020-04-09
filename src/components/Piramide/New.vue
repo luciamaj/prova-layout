@@ -42,9 +42,6 @@ import Slick from 'vue-slick';
 import jquery from 'jquery';
 let $ = jquery;
 
-const timeline = new TimelineLite();
-
-
 export default {
     components: { Slick },
     data() {
@@ -106,10 +103,13 @@ export default {
         },
 
         moveFood(element) {
+
             console.log("THE ELEMENT CLICKED", element.id);
             let dishDiv= document.getElementById(element.id);
             let item=element.id;
             let item_ref=this.$refs[item];
+
+                const timeline = new TimelineLite();
 
                 let dimsDish;
                 let dimOrizz= this.$refs.areaVass.getBoundingClientRect();
@@ -156,12 +156,12 @@ export default {
                 
                 timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
                 setTimeout(function(){
+
+                    console.log('#'+element.id);
                     
                     let myDiv2Para = $('#'+element.id).detach();
                     myDiv2Para.appendTo('#dish-1');
-                    myDiv2Para.style.top = '-200px';
-                    myDiv2Para.style.left = '-200px';
-                    dishDiv.style.transform="translateY(900px)";
+                    //dishDiv.style.transform="translate(50%, 0)";
 
                 }, 1000);
                 
@@ -175,6 +175,16 @@ export default {
                   timeline.to(cookie2, 1, { y: -250, x: 50, scale: 0.5 });*/
            
         },
+
+        completed(element) {
+            console.log("HO COMPLETATO!", element);
+
+            let myDiv2Para = $('#'+element.id).detach();
+                    myDiv2Para.appendTo('#dish-1');
+                    //myDiv2Para.style.top = '-200px';
+                    //myDiv2Para.style.left = '-200px';
+                    //dishDiv.style.transform="translateY(900px)";
+        }
       
     }
 }
