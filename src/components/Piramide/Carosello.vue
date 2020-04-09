@@ -2,17 +2,17 @@
     <div class="piramide">
       <div class="main-wrapper">
          <div class="content viewport" :style="{overflow: overflow ? 'visible': 'hidden'}">
-                       <div class="piramide-container">
+            <div id="piramide-container" class="piramide-container">
                 <div class="piramide-sections-container" ref="sectionList">
                     <div ref="section1" class="piramide-section"></div>
                     <div ref="section2" class="piramide-section"></div>
                     <div ref="section3" class="piramide-section"></div>
                     <div ref="section4" class="piramide-section"></div>
                     <div ref="section5" class="piramide-section"></div>
-                    <div ref="section6" class="piramide-section"></div>
+                    <div id="section6" ref="section6" class="piramide-section"></div>
                 </div>
             </div>
-           <div class="caro">
+           <div class="caro" ref="ciboContainer">
             <div ref="viewport" >
             <button v-on:click="moveLeft()">LEFT</button>
             <button v-on:click="moveRight()">RIGHT</button>
@@ -20,8 +20,8 @@
                 <ul class="list" ref="list">
                   <div class="list-item" v-for="(cibo, index) in food">
                       <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name" :id="cibo.name">
-                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '1'">
-                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '2'">
+                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '1'" :id="cibo.name + '1'">
+                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '2'" :id="cibo.name + '2'">
                       </div>
                   </div>
                 </ul>
@@ -89,6 +89,61 @@ export default {
             TweenMax.to(items, 1, {left: this.currentPos -= itemWidth}); 
       }
     },
+    moveFood(element) {
+            console.log("THE ELEMENT CLICKED", element.secondDestination);
+
+            let found = this.food.find(x => x.name == "cookie");
+            console.log("FOUND", found);
+
+            if(element.name == "cookie") {
+                const { cookie, cookie1, cookie2, ciboContainer } = this.$refs;
+                let dims = ciboContainer.getBoundingClientRect();
+                console.log("DIMSSS", dims);
+                let firstDest = dimensions[element.firstDestination];
+                let secondDest = dimensions[element.secondDestination];
+
+                console.log(firstDest, secondDest);
+                  found.hasMoved = "si";
+
+                  timeline.to(cookie1, 1, { y: -450, x: -30,  scale: 0.5});
+
+                  var photo = document.getElementById("cookie1");
+                  photo.id  = "cookie1moved";
+                  document.getElementById("piramide-container").appendChild(photo);
+
+                  timeline.to(cookie2, 1, { y: -250, x: 50, scale: 0.5 });
+            }
+        },
+      getPagePositions() {
+            const { section1, section2, section3, section4, section5, section6 } = this.$refs;
+            const section1Dimensions = section1.getBoundingClientRect();
+            const section2Dimensions = section2.getBoundingClientRect();
+
+
+            dimensions.section1 = section1Dimensions;
+            dimensions.section2 = section2Dimensions;
+
+            console.log("SECTION1 DIMENSIONS", dimensions);
+        },
+      resetPositions() {
+            let eventItems = this.$refs.ciboContainer.children;
+            let imgs = [];
+
+            for (const el of eventItems) {
+                for (const child of el.children) {
+                    imgs.push(child);
+                }
+            }
+
+            const { cookie, cookie1, cookie2, ciboContainer } = this.$refs;
+
+            timeline.to(eventItems, 1, { opacity: 0 });
+            timeline.to(imgs, 1, { y: 0, x: 0, scale: 1 });
+            timeline.to(eventItems, 1, { opacity: 1 });
+
+            
+            console.log("SectionList", eventItems.banana);
+        }
 	},
   mounted () {
     //gsap.registerPlugin(Draggable);
