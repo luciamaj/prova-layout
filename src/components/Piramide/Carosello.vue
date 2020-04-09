@@ -19,9 +19,9 @@
               <div class="list-container" ref="listContainer">
                 <ul class="list" ref="list">
                   <div class="list-item" v-for="(cibo, index) in food">
-                      <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name" :id="cibo.name">
-                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '1'" :id="cibo.name + '1'">
-                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '2'" :id="cibo.name + '2'">
+                      <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" :class="'fooditem ' + cibo.name + '-container'" :ref="cibo.name" :id="index">
+                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '1'" :id="cibo.name + '1'" :class="cibo.name">
+                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '2'" :id="cibo.name + '2'" :class="cibo.name">
                       </div>
                   </div>
                 </ul>
@@ -46,7 +46,6 @@ import { Linear } from 'gsap';
 import Slick from 'vue-slick';
 import jquery from 'jquery';
 
-const timeline = new TimelineLite();
 let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, section5: {}, section6: {}};
 
 export default {
@@ -67,52 +66,103 @@ export default {
 	},
 	methods: {
     moveLeft() {
-      const items = this.$refs.list.querySelectorAll('.list-item')
+      const items = this.$refs.list.querySelectorAll('.list-item');
+      const dones = this.$refs.list.querySelectorAll('.done')
+
       const itemWidth = this.$refs.viewport.clientWidth / 7
       const wrapWidth = this.count * itemWidth;
       console.log("LEFT", this.currentPos);
       console.log("the current item", this.currentItem);
+
+      const tl = new TimelineLite();
      
       
       if (this.currentItem > 1) {
+        let oldPos = this.currentPos;
+        let calc = oldPos += itemWidth
+
+          let step = this.currentItem - 7;
+          console.log("OUTSIDE", step);
+
+          console.log("CLIENTWIDTH", this.$refs.viewport.clientWidth);
+
+          let prova =  this.$refs.viewport.clientWidth - calc;
+          console.log("PROVA", prova);
+
+          let clientWidth = this.$refs.viewport.clientWidth
+
+          console.log("ITEMWIDTH", itemWidth);
+
           this.currentItem -= 1;
-        TweenMax.to(items, 1, {left: this.currentPos += itemWidth}) 
+          tl.to(items, 1, {left: this.currentPos += itemWidth}, 0); 
+          for(let done of dones) {
+            let id = parseInt(done.getAttribute('id')) + 1;
+            console.log("THE IDfsfdhbfreheh", id);
+
+            if (id - 7 > 0) {
+              console.log("sono oltre", id);
+              tl.to(done, 1, {left: -(calc)}, 0);
+            } else {
+              tl.to(done, 1, {left: -calc}, 0);
+            }
+          }     
       }
     },
     moveRight() {
       const items = this.$refs.list.querySelectorAll('.list-item')
       const itemWidth = this.$refs.viewport.clientWidth / 7;
       const wrapWidth = 2 * itemWidth;
+      const dones = this.$refs.list.querySelectorAll('.done')
+
+      console.log("RIGHT", this.currentPos);
+
+
+      console.log(dones);
+      const tl = new TimelineLite();
+      console.log(this.currentItem);
       
       if (this.currentItem <= items.length - 7) {
           this.currentItem += 1;
-            TweenMax.to(items, 1, {left: this.currentPos -= itemWidth}); 
+          let oldPos = this.currentPos;
+          let calc = oldPos -= itemWidth
+
+          let prova =  this.$refs.viewport.clientWidth - calc;
+          console.log("PROVA", prova);
+
+                    tl.to(items, 1, {left: this.currentPos -= itemWidth}, 0); 
+
+
+          for(let done of dones) {
+            let id = parseInt(done.getAttribute('id')) + 1;
+            console.log("THE ID", id);
+
+            if (id - 7 > 0) {
+              console.log("sono oltre", id);
+              tl.to(done, 1, {left: -(calc)}, 0);
+            } else {
+              tl.to(done, 1, {left: -calc}, 0);
+            }
+          }   
       }
     },
     moveFood(element) {
+          jquery("." + element.name + "-container").addClass("done");
+
+           const timeline = new TimelineLite();
             console.log("THE ELEMENT CLICKED", element.secondDestination);
 
-            let found = this.food.find(x => x.name == "cookie");
-            console.log("FOUND", found);
+            let found = this.food.find(x => x.name == name);
 
-            if(element.name == "cookie") {
-                const { cookie, cookie1, cookie2, ciboContainer } = this.$refs;
-                let dims = ciboContainer.getBoundingClientRect();
-                console.log("DIMSSS", dims);
-                let firstDest = dimensions[element.firstDestination];
-                let secondDest = dimensions[element.secondDestination];
+            let first = this.$refs[element.name + '1'];
+            let second = this.$refs[element.name + '2'];
+            const { ciboContainer } = this.$refs;
+            let dims = ciboContainer.getBoundingClientRect();
+            let firstDest = dimensions[element.firstDestination];
+            let secondDest = dimensions[element.secondDestination];
 
-                console.log(firstDest, secondDest);
-                  found.hasMoved = "si";
-
-                  timeline.to(cookie1, 1, { y: -450, x: -30,  scale: 0.5});
-
-                  var photo = document.getElementById("cookie1");
-                  photo.id  = "cookie1moved";
-                  document.getElementById("piramide-container").appendChild(photo);
-
-                  timeline.to(cookie2, 1, { y: -250, x: 50, scale: 0.5 });
-            }
+            console.log("DIMENSIONS", firstDest, secondDest);
+            timeline.to(first, 1, { y: -500, x: -200,  scale: 0.5});
+            timeline.to(second, 1, { y: -550, x: -200, scale: 0.5 });
         },
       getPagePositions() {
             const { section1, section2, section3, section4, section5, section6 } = this.$refs;
@@ -134,8 +184,6 @@ export default {
                     imgs.push(child);
                 }
             }
-
-            const { cookie, cookie1, cookie2, ciboContainer } = this.$refs;
 
             timeline.to(eventItems, 1, { opacity: 0 });
             timeline.to(imgs, 1, { y: 0, x: 0, scale: 1 });
