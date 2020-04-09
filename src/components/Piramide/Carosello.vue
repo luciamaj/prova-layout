@@ -2,15 +2,9 @@
     <div class="piramide">
       <div class="main-wrapper">
          <div class="content viewport" :style="{overflow: overflow ? 'visible': 'hidden'}">
-            <div id="piramide-container" class="piramide-container">
-                <div class="piramide-sections-container" ref="sectionList">
-                    <div ref="section1" class="piramide-section"></div>
-                    <div ref="section2" class="piramide-section"></div>
-                    <div ref="section3" class="piramide-section"></div>
-                    <div ref="section4" class="piramide-section"></div>
-                    <div ref="section5" class="piramide-section"></div>
-                    <div id="section6" ref="section6" class="piramide-section"></div>
-                </div>
+           <div class="piramide-container2">
+            <center><img src="/static/piramide/piramidi.png" width="70%" alt=""></center>
+            
             </div>
            <div class="caro" ref="ciboContainer">
             <div ref="viewport" >
@@ -30,7 +24,7 @@
             </div>
           </div>
         </div>
-
+      </div>
   </div>
   </div>
 </template>
@@ -105,7 +99,7 @@ export default {
                 console.log(firstDest, secondDest);
                   found.hasMoved = "si";
 
-                  timeline.to(cookie1, 1, { y: -450, x: -30,  scale: 0.5});
+                  timeline.to(cookie1, 1, { y: -450, x: 500,  scale: 0.5});
 
                   var photo = document.getElementById("cookie1");
                   photo.id  = "cookie1moved";
