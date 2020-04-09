@@ -82,8 +82,9 @@ export default {
         let calc = oldPos += itemWidth
 
           this.currentItem -= 1;
-        tl.to(items, 1, {left: -calc}, 0);
-          tl.to(cookies, 1, {left: calc}, 0);
+                  tl.to(items, 1, {left: this.currentPos += itemWidth}, 0); 
+
+          tl.to(cookies, 1, {left: -calc}, 0);
       }
     },
     moveRight() {
@@ -105,9 +106,9 @@ export default {
           let oldPos = this.currentPos;
           let calc = oldPos -= itemWidth
 
-          tl.to(items, 1, {left: calc}, 0);
+          //tl.to(items, 1, {left: calc}, 0);
+          tl.to(items, 1, {left: this.currentPos -= itemWidth}, 0); 
           tl.to(cookies, 1, {left: -calc}, 0);
-          this.currentPos -= itemWidth;
       }
     },
     moveFood(element) {
