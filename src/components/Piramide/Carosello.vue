@@ -19,9 +19,9 @@
               <div class="list-container" ref="listContainer">
                 <ul class="list" ref="list">
                   <div class="list-item" v-for="(cibo, index) in food">
-                      <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" class="fooditem" :ref="cibo.name" :id="cibo.name">
-                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '1'" :id="cibo.name + '1'">
-                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '2'" :id="cibo.name + '2'">
+                      <div v-on:click="moveFood(cibo)" v-bind:key="cibo.name" :class="'fooditem ' + cibo.name + '-container'" :ref="cibo.name" :id="cibo.name">
+                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '1'" :id="cibo.name + '1'" :class="cibo.name">
+                          <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name + '2'" :id="cibo.name + '2'" :class="cibo.name">
                       </div>
                   </div>
                 </ul>
@@ -46,7 +46,6 @@ import { Linear } from 'gsap';
 import Slick from 'vue-slick';
 import jquery from 'jquery';
 
-const timeline = new TimelineLite();
 let dimensions = {section1: {}, section2: {}, section3: {}, section4: {}, section5: {}, section6: {}};
 
 export default {
@@ -67,29 +66,52 @@ export default {
 	},
 	methods: {
     moveLeft() {
-      const items = this.$refs.list.querySelectorAll('.list-item')
+      const items = this.$refs.list.querySelectorAll('.list-item');
+      const cookies = this.$refs.list.querySelectorAll('.cookie-container')
+
       const itemWidth = this.$refs.viewport.clientWidth / 7
       const wrapWidth = this.count * itemWidth;
       console.log("LEFT", this.currentPos);
       console.log("the current item", this.currentItem);
+
+      const tl = new TimelineLite();
      
       
       if (this.currentItem > 1) {
+        let oldPos = this.currentPos;
+        let calc = oldPos += itemWidth
+
           this.currentItem -= 1;
-        TweenMax.to(items, 1, {left: this.currentPos += itemWidth}) 
+        tl.to(items, 1, {left: -calc}, 0);
+          tl.to(cookies, 1, {left: calc}, 0);
       }
     },
     moveRight() {
       const items = this.$refs.list.querySelectorAll('.list-item')
       const itemWidth = this.$refs.viewport.clientWidth / 7;
       const wrapWidth = 2 * itemWidth;
+      const cookies = this.$refs.list.querySelectorAll('.cookie-container')
+
+      console.log(cookies);
+      
+                  const tl = new TimelineLite();
+
+
+
+      console.log(this.currentItem);
       
       if (this.currentItem <= items.length - 7) {
           this.currentItem += 1;
-            TweenMax.to(items, 1, {left: this.currentPos -= itemWidth}); 
+          let oldPos = this.currentPos;
+          let calc = oldPos -= itemWidth
+
+          tl.to(items, 1, {left: calc}, 0);
+          tl.to(cookies, 1, {left: -calc}, 0);
+          this.currentPos -= itemWidth;
       }
     },
     moveFood(element) {
+            const timeline = new TimelineLite();
             console.log("THE ELEMENT CLICKED", element.secondDestination);
 
             let found = this.food.find(x => x.name == "cookie");
@@ -105,14 +127,23 @@ export default {
                 console.log(firstDest, secondDest);
                   found.hasMoved = "si";
 
-                  timeline.to(cookie1, 1, { y: -450, x: -30,  scale: 0.5});
+                  timeline.to(cookie1, 1, { y: -450, x: 200,  scale: 0.5});
 
-                  var photo = document.getElementById("cookie1");
-                  photo.id  = "cookie1moved";
-                  document.getElementById("piramide-container").appendChild(photo);
+                 
 
                   timeline.to(cookie2, 1, { y: -250, x: 50, scale: 0.5 });
+
+
+                  
             }
+        },
+        changeParent() {
+          /*var photo = document.getElementById("cookie1");
+          photo.id  = "cookie1moved";
+          document.getElementById("piramide-container").appendChild(photo);
+          var photo2 = document.getElementById("cookie2");
+          photo2.id  = "cookie2moved";
+          document.getElementById("piramide-container").appendChild(photo2);*/
         },
       getPagePositions() {
             const { section1, section2, section3, section4, section5, section6 } = this.$refs;
