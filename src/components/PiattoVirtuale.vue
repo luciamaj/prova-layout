@@ -171,16 +171,9 @@ export default {
                 }
                 
                 
-                timeline.to(item_ref, 0.01, { y: -6, x: -5})
+                timeline.to(item_ref, 0.001, { y: -6, x: -5});
                     
-                 //dishDiv.appendChild(this.$refs.dish1);
-
-                  /*var photo = document.getElementById("cookie1");
-                  photo.id  = "cookie1moved";
-                  document.getElementById("piramide-container").appendChild(photo);
-
-                  timeline.to(cookie2, 1, { y: -250, x: 50, scale: 0.5 });*/
-           
+                           
         },
       
     }
