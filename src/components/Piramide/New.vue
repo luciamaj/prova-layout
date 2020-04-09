@@ -130,49 +130,66 @@ export default {
                         dimsDish = this.$refs.dish1.getBoundingClientRect();
                         deltax= dimsDish.x-dimItem.x;
                         deltay=dimsDish.y-dimItem.y;
+                        timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                        setTimeout(function(){
+
+                            console.log('#'+element.id);
+                            
+                            let myDiv2Para = $('#'+element.id).detach();
+                            myDiv2Para.appendTo('#dish-1');
+
+                        }, 1000);
                         break;
                 
                     case 2:
                         dimsDish = this.$refs.dish2.getBoundingClientRect();
                         deltax= dimsDish.x-dimItem.x;
                         deltay=dimsDish.y-dimItem.y;
+                        timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                setTimeout(function(){
+
+                    console.log('#'+element.id);
+                    
+                    let myDiv2Para = $('#'+element.id).detach();
+                    myDiv2Para.appendTo('#dish-2');
+
+                }, 1000);
                            
                         break;
                     case 3:
                         dimsDish = this.$refs.dish3.getBoundingClientRect();
                         deltax= dimsDish.x-dimItem.x;
                         deltay=dimsDish.y-dimItem.y;
+                         setTimeout(function(){
+
+                    console.log('#'+element.id);
+                    
+                    let myDiv2Para = $('#'+element.id).detach();
+                    myDiv2Para.appendTo('#dish-3');
+
+                }, 1000);
                         break;
 
                     case 4:
                         dimsDish = this.$refs.dish4.getBoundingClientRect();
                         deltax= dimsDish.x-dimItem.x;
                         deltay=dimsDish.y-dimItem.y;
+                         setTimeout(function(){
+
+                            console.log('#'+element.id);
+                            
+                            let myDiv2Para = $('#'+element.id).detach();
+                            myDiv2Para.appendTo('#dish-4');
+
+                        }, 1000);
                         break;
                 
                     default:
                         break;
                 }
                 
-                timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
-                setTimeout(function(){
-
-                    console.log('#'+element.id);
-                    
-                    let myDiv2Para = $('#'+element.id).detach();
-                    myDiv2Para.appendTo('#dish-1');
-                    //dishDiv.style.transform="translate(50%, 0)";
-
-                }, 1000);
                 
-                    
-                 //dishDiv.appendChild(this.$refs.dish1);
-
-                  /*var photo = document.getElementById("cookie1");
-                  photo.id  = "cookie1moved";
-                  document.getElementById("piramide-container").appendChild(photo);
-
-                  timeline.to(cookie2, 1, { y: -250, x: 50, scale: 0.5 });*/
+                timeline.to(item_ref, 0.001, { y: -6, x: -5 , opacity:0.9});
            
         },
 

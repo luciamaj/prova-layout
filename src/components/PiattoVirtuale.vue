@@ -94,59 +94,84 @@ export default {
             let item=element.id;
             let item_ref=this.$refs[item];
 
-                let dimsDish;
-                let dimOrizz= this.$refs.areaVass.getBoundingClientRect();
-                let dimItem= dishDiv.getBoundingClientRect();
+            let dimsDish;
+            let dimOrizz= this.$refs.areaVass.getBoundingClientRect();
+            let dimItem= dishDiv.getBoundingClientRect();
 
-                let deltax;
-                let deltay;
-               
-                /*console.log("DIMSSS orizz", dimOrizz);*/
-                 //console.log("DIMSSS dish", dimsDish2); 
-                 console.log("DIMSSS divtomove", dimItem);
-                
-                console.log("deltay", deltay); 
+            let deltax;
+            let deltay;
+            
+            /*console.log("DIMSSS orizz", dimOrizz);*/
+                //console.log("DIMSSS dish", dimsDish2); 
+                console.log("DIMSSS divtomove", dimItem);
+            
+            console.log("deltay", deltay); 
 
-                dishDiv.style.backgroundColor="red";
-                switch (this.foodSelected.length) {
-                    case 1:
-                        dimsDish = this.$refs.dish1.getBoundingClientRect();
-                        deltax= dimsDish.x-dimItem.x;
-                        deltay=dimsDish.y-dimItem.y;
-                        break;
-                
-                    case 2:
-                        dimsDish = this.$refs.dish2.getBoundingClientRect();
-                        deltax= dimsDish.x-dimItem.x;
-                        deltay=dimsDish.y-dimItem.y;
-                           
-                        break;
-                    case 3:
-                        dimsDish = this.$refs.dish3.getBoundingClientRect();
-                        deltax= dimsDish.x-dimItem.x;
-                        deltay=dimsDish.y-dimItem.y;
-                        break;
+            dishDiv.style.backgroundColor="red";
+            switch (this.foodSelected.length) {
+                case 1:
+                    dimsDish = this.$refs.dish1.getBoundingClientRect();
+                    deltax= dimsDish.x-dimItem.x;
+                    deltay=dimsDish.y-dimItem.y;
+                     timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                    setTimeout(function(){
+                        
+                        let myDiv2Para = $('#'+element.id).detach();
+                        myDiv2Para.appendTo('#dish-1');
+                        
 
-                    case 4:
-                        dimsDish = this.$refs.dish4.getBoundingClientRect();
-                        deltax= dimsDish.x-dimItem.x;
-                        deltay=dimsDish.y-dimItem.y;
-                        break;
-                
-                    default:
-                        break;
-                }
-                
-                timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
-                setTimeout(function(){
-                    
-                    let myDiv2Para = $('#'+element.id).detach();
-                    myDiv2Para.appendTo('#dish-1');
-                    dishDiv.style.transform="translate(50%, 0)";
+                    }, 1000);
+                    break;
+            
+                case 2:
+                    dimsDish = this.$refs.dish2.getBoundingClientRect();
+                    deltax= dimsDish.x-dimItem.x;
+                    deltay=dimsDish.y-dimItem.y;
+                     timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                    setTimeout(function(){
+                        
+                        let myDiv2Para = $('#'+element.id).detach();
+                        myDiv2Para.appendTo('#dish-2');
+                       
 
-                }, 1000);
-                
-                timeline.to(item_ref, 0.001, { y: -6, x: -5});
+            }, 1000);
+                        
+                    break;
+                case 3:
+                    dimsDish = this.$refs.dish3.getBoundingClientRect();
+                    deltax= dimsDish.x-dimItem.x;
+                    deltay=dimsDish.y-dimItem.y;
+                     timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                    setTimeout(function(){
+                        
+                        let myDiv2Para = $('#'+element.id).detach();
+                        myDiv2Para.appendTo('#dish-3');
+                      
+
+                    }, 1000);
+                    break;
+
+                case 4:
+                    dimsDish = this.$refs.dish4.getBoundingClientRect();
+                    deltax= dimsDish.x-dimItem.x;
+                    deltay=dimsDish.y-dimItem.y;
+                    timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                    setTimeout(function(){
+                        
+                        let myDiv2Para = $('#'+element.id).detach();
+                        myDiv2Para.appendTo('#dish-4');
+                      
+
+                    }, 1000);
+                    break;
+            
+                default:
+                    break;
+            }
+            
+           
+            
+            timeline.to(item_ref, 0.001, { y: -6, x: -5});
                     
                            
         },
