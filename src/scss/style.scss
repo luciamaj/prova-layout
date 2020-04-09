@@ -61,7 +61,7 @@ body {
   }
 
 .main-wrapper {
-    height: 100vh;
+    height: 90vh;
     background-color: cadetblue;
 }
 
@@ -541,6 +541,211 @@ body {
         @keyframes dish-drop {
             from {transform: scale(2); opacity: 0; }
              to {transform: scale(1); opacity: 1;}
+        }
+    }
+
+}
+
+.new {
+    font-family: sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 90vh;
+    .over{
+       
+        position: absolute;
+        top: 0;
+        z-index: 20;
+        visibility:visible;
+        width: 100%;
+        text-align: center;
+        background-color: blanchedalmond;
+        animation-name: curtain;
+        animation-delay: 1s;
+        animation-duration:3s;
+        animation-fill-mode: both;
+       
+        img{
+            width: auto;
+            height: 100vh;
+        }
+
+    }
+    .topPart{
+        margin: 0;
+        img{
+            width: auto;
+            height: 350px;
+        }
+        .over-vassoio{
+            position: absolute;
+            top: 0;
+            height:450px ;
+            width: inherit;
+            //border: solid 1px green;
+
+            .dish-1{
+                width: 180px;
+                height: 180px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-222px, -184px);
+                border: 1px solid green;
+                background-color: green;
+                opacity: 0.3;
+                border-radius: 50%;
+               
+                /*animation-name: none;
+                animation-duration: 2.5s;
+                animation-fill-mode: both;*/
+                
+                img{
+                    border-radius: 50%;
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                }
+                
+            }
+            .dish-2{
+                width: 180px;
+                height: 180px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(13px, -184px);
+                border: 1px solid green;
+                background-color: green;
+                opacity: 0.3;
+                border-radius: 50%;
+            }
+            .dish-3{
+                width: 180px;
+                height: 180px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-222px, 4px);
+                border: 1px solid green;
+                background-color: green;
+                opacity: 0.3;
+                border-radius: 50%;
+            }
+            .dish-4{
+                width: 180px;
+                height: 180px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(13px, 4px);
+                border: 1px solid green;
+                background-color: green;
+                opacity: 0.3;
+                border-radius: 50%;
+            }
+        }
+
+        .btn-control{ 
+            
+            width:70px;
+            height:70px;
+           
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            background-color: transparent;
+            border: 0;
+        }
+        .btn-label{
+            margin-top: 5px;
+            text-transform: uppercase;
+            font-size: 1.05rem;
+           
+        }
+        .cancella{
+            background-image: url("/static/piatto_virtuale/cancella.png");
+        }
+        .fine{
+            background-image: url("/static/piatto_virtuale/fine.png");
+        }
+        h3{
+            font-weight: 700;
+            color: whitesmoke;
+        }
+        
+    }
+
+    .foodList{
+        position: absolute;
+        vertical-align: middle;
+        height: 70vh;
+        width: 100%;
+        border: solid 1px blue;
+
+        .slick-slider{
+            display: inline-flex;
+            z-index: 10;
+        }
+        .slick-arrow{
+            background-color: transparent;
+            border: 0;
+            height: 60px;
+            width: 50px;
+            font-size: 0;
+            margin: 40px auto;
+            position: relative;
+            top: 70vh;
+        }
+        .slick-prev{
+            background-image:url("/static/general/arrow_sx.png") ;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            float: left;
+        }
+        .slick-next{
+            background-image: url("/static/general/arrow_dx.png");
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            float: right;
+        }
+
+        .slick-list{
+            width: 80vw;
+            height: 92vh;
+            margin: auto;
+            top:0;
+        
+        }
+        .slick-track{
+            display: flex;
+            top: 80%;
+        }
+
+        .food-item{
+            height: 100px;
+            max-width: 100px;
+            color: white;
+            font-weight: 700;
+            position: relative;
+            text-transform: uppercase;
+            animation-name: none;
+            animation-duration:3s;
+            animation-fill-mode: both;
+            border: solid 1px red ;
+            border-radius: 50%;
+
+            .mainName{
+                font-size: 1.8rem;
+            }
+            .secondName{
+                font-size: .8rem;
+                // position: relative; */
+                //bottom: 10px;
+            }
         }
     }
 

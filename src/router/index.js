@@ -4,6 +4,7 @@ import Home from './../components/Home.vue'
 import Piramide from './../components/Piramide/Piramide.vue'
 import PiramideHomepage from './../components/Piramide/PiramideHomepage.vue'
 import PiramideBase from './../components/Piramide/PiramideBase.vue'
+import NewPir from './../components/Piramide/New.vue'
 import Cultura from './../components/Cultura.vue'
 import Carosello from './../components/Piramide/Carosello.vue'
 import Piatto from './../components/PiattoVirtuale.vue'
@@ -52,6 +53,11 @@ const router = new Router({
       path: '/carosello',
       name: 'carosello',
       component: Carosello
+    },
+    {
+      path: '/new',
+      name: 'new',
+      component: NewPir
     }
   ]
 })
