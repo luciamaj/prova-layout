@@ -8,7 +8,7 @@
                     <div class="col-lg-md-8 col-sm-10" ref="areaVass"> 
                         <img src="/static/piatto_virtuale/vassoio.png" alt="vassoio">
                         <div class="over-vassoio"> 
-                            <div class="dish-1" id="dish-1" ref="dish1"><img src="../assets/cammello.jpg" alt=""></div>
+                            <div class="dish-1" id="dish-1" ref="dish1"></div>
                             <div class="dish-2" id="dish-2" ref="dish2"></div>
                             <div class="dish-3" id="dish-3" ref="dish3"></div>
                             <div class="dish-4" id="dish-4" ref="dish4"></div>
@@ -93,6 +93,7 @@ export default {
             let dishDiv= document.getElementById(element.id);
             let item=element.id;
             let item_ref=this.$refs[item];
+            let cerchio= document.getElementById("dish-1");
 
                 let dimsDish;
                 let dimOrizz= this.$refs.areaVass.getBoundingClientRect();
@@ -113,39 +114,64 @@ export default {
                         dimsDish = this.$refs.dish1.getBoundingClientRect();
                         deltax= dimsDish.x-dimItem.x;
                         deltay=dimsDish.y-dimItem.y;
+                        timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                        setTimeout(function(){
+                            
+                            let myDiv2Para = $('#'+element.id).detach();
+                            myDiv2Para.appendTo('#dish-1');
+                            
+
+                        }, 1000);
                         break;
                 
                     case 2:
                         dimsDish = this.$refs.dish2.getBoundingClientRect();
                         deltax= dimsDish.x-dimItem.x;
                         deltay=dimsDish.y-dimItem.y;
+                        timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                        setTimeout(function(){
+                            
+                            let myDiv2Para = $('#'+element.id).detach();
+                            myDiv2Para.appendTo('#dish-2');
+                            
+
+                        }, 1000);
                            
                         break;
                     case 3:
                         dimsDish = this.$refs.dish3.getBoundingClientRect();
                         deltax= dimsDish.x-dimItem.x;
                         deltay=dimsDish.y-dimItem.y;
+                        timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                        setTimeout(function(){
+                            
+                            let myDiv2Para = $('#'+element.id).detach();
+                            myDiv2Para.appendTo('#dish-3');
+                            
+
+                        }, 1000);
                         break;
 
                     case 4:
                         dimsDish = this.$refs.dish4.getBoundingClientRect();
                         deltax= dimsDish.x-dimItem.x;
                         deltay=dimsDish.y-dimItem.y;
+                        timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
+                        setTimeout(function(){
+                            
+                            let myDiv2Para = $('#'+element.id).detach();
+                            myDiv2Para.appendTo('#dish-4');
+                            
+
+                        }, 1000);
                         break;
                 
                     default:
                         break;
                 }
                 
-                timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
-                setTimeout(function(){
-                    
-                    let myDiv2Para = $('#'+element.id).detach();
-                    myDiv2Para.appendTo('#dish-1');
-                    dishDiv.style.transform="translate(50%, 0)";
-
-                }, 1000);
                 
+                timeline.to(item_ref, 0.01, { y: -6, x: -5})
                     
                  //dishDiv.appendChild(this.$refs.dish1);
 
