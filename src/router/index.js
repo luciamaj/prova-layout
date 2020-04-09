@@ -5,6 +5,7 @@ import Piramide from './../components/Piramide/Piramide.vue'
 import PiramideHomepage from './../components/Piramide/PiramideHomepage.vue'
 import PiramideBase from './../components/Piramide/PiramideBase.vue'
 import Cultura from './../components/Cultura.vue'
+import Carosello from './../components/Piramide/Carosello.vue'
 import Piatto from './../components/PiattoVirtuale.vue'
 import CiboCitta from './../components/CiboCitta/CiboCitta.vue'
 
@@ -46,6 +47,11 @@ const router = new Router({
       path: '/cibocitta',
       name: 'cibocitta',
       component: CiboCitta
+    },
+    {
+      path: '/carosello',
+      name: 'carosello',
+      component: Carosello
     }
   ]
 })
