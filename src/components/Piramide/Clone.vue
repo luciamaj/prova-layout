@@ -21,12 +21,10 @@
         <div class="carousel"> 
             <div class="left arrow">
                 <button id="left">
-                        LEFT
                 </button>
             </div>
             <div class="right arrow">
                 <button id="right">
-                        RIGHT
                 </button>
             </div>
             <section id="top-bar">
@@ -116,7 +114,7 @@ export default {
                 if (isMoving == false) {
                     isMoving = true;
                     $("#scroll-box").animate({
-                        scrollLeft: '-=120'
+                        scrollLeft: '-=130'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
@@ -131,7 +129,7 @@ export default {
                     isMoving = true;
 
                     $("#scroll-box").animate({
-                        scrollLeft: '+=120'
+                        scrollLeft: '+=130'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
