@@ -545,6 +545,7 @@ body {
         }
     }
     .item-to-move{
+        width: inherit;
         position: absolute;
         top: 0;
         opacity: 0;
