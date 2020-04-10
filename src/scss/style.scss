@@ -883,11 +883,13 @@ body {
             width: 90px;
             height: 90px;
             overflow: hidden;
+            cursor: pointer;
           
             &.clone {
               position: absolute;
               opacity: 0;
               visibility: hidden;
+              cursor: default !important;
             }
           
             &.dropped {
