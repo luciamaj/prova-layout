@@ -1,5 +1,15 @@
 <template>
-    <main>
+    <main class="clone-piramide">
+        <div class="left arrow">
+            <button id="left">
+                    LEFT
+            </button>
+        </div>
+        <div class="right arrow">
+            <button id="right">
+                    RIGHT
+            </button>
+        </div>
         <section id="top-bar">
             <div id="clone-container">
                 <div id="scroll-box">
@@ -85,13 +95,6 @@
                 </div>
             </div>
             </section>
-                <button id="left">
-                    LEFT
-                </button>
-                <button id="right">
-                    RIGHT
-                </button>
-            </section>
     </main>
 </template>
 <script>
@@ -100,6 +103,7 @@ import { TimelineLite } from 'gsap'
 import { TweenLite } from 'gsap'
 import gsap from 'gsap';
 import Draggable from "gsap/Draggable";
+import { ScrollTo } from "gsap";
 import { quiz } from './../../quiz/quiz.js';
 import JQuery from 'jquery';
 let $ = JQuery;
@@ -147,6 +151,8 @@ export default {
     methods: {
         scrollArrows() {
             let content = $("#tile-container");
+            let box = $("#scroll-box");
+
             console.log("W", content.width());
             console.log("H", content.height());
 
@@ -174,6 +180,7 @@ export default {
                 
                 if (isMoving == false) {
                     isMoving = true;
+
                     $("#scroll-box").animate({
                         scrollLeft: '+=80'
                     }, 500, 'swing', function () {
