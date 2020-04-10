@@ -1,6 +1,6 @@
 <template>
     <div class="piatto-clone">
-        <div class="main-wrapper">
+        
             <div class="content">
                 <div class="over"> <img src="../assets/cammello.jpg" alt=""></div>
                 <div class="row topPart">
@@ -17,16 +17,14 @@
                     </div>
                     <div class="col-lg-md-2 col-sm-1"  style="z-index:5;"> <button class="btn-control fine"> </button><div class="btn-label">fine</div></div>
                 </div>
-                <div class="">
+               
                     <div class="carousel"> 
                         <div class="left arrow">
                             <button id="left">
-                                    
                             </button>
                         </div>
                         <div class="right arrow">
                             <button id="right">
-                               
                             </button>
                         </div>
                         <section id="top-bar">
@@ -34,13 +32,12 @@
                                 <div id="scroll-box">
                                     <div id="tile-container">
                                         <template v-for="(piatto,index) in food" >
-                                            <div v-bind:key="(piatto,index)" :id="piatto.id+'F'">
-                                                
-                                                <div class="food-item item-to-move" :ref="piatto.id" :id="piatto.id" > 
+                                             <div class="tile-wrapper" v-bind:key="(piatto,index)" :id="piatto.id+'F'">
+                                                <div class="food-item item-to-move tile" :ref="piatto.id" :id="piatto.id" > 
                                                     <div class="mainName">{{piatto.name}}</div>
                                                     <div class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</div>
                                                 </div>
-                                                <div class="food-item"  :id="piatto.id+'1'"   v-on:click="enlight(piatto)"> 
+                                                <div class="food-item tile"  :id="piatto.id+'1'"   v-on:click="enlight(piatto)"> 
                                                     <div class="mainName">{{piatto.name}}</div>
                                                     <div class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</div>
                                                 </div>
@@ -66,9 +63,9 @@
                             </div>
                         </template>
                     </slick-->
-                </div>
+                
             </div>
-        </div>
+        
     </div>
 </template>
 

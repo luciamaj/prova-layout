@@ -685,52 +685,7 @@ body {
         
     }
 
-    #clone-container {
-              
-        #scroll-box {
-          white-space: nowrap;
-          overflow-x: scroll;
-          -webkit-overflow-scrolling: touch;
-          scroll-snap-type: x mandatory;  
-          scroll-snap-align: start;
-        }
-  
-        #scroll-box::-webkit-scrollbar {
-            display: none;
-        }
-        
-        #tile-container {
-          display: inline-flex;
-        }
-        
-        .tile-wrapper {
-         
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-        }
-        .tile {
-         
-          color: #fafafa;
-          
-          align-items: center;
-         
-        }   
-          
-    }
-  
-    .arrow {
-        padding: 15px;
-    }
-    
-    .left {
-        float: left;
-    }
-    
-    .right {
-        float: right;
-    }
+   
     .carousel {
         // height: 25vh;
  
@@ -754,7 +709,112 @@ body {
              height: 70px;
              width: 70px;
          }
+
+
      }
+     #clone-container {
+        body {
+            background-color: #eee;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+          }
+          
+          * {
+            box-sizing: border-box;
+          }
+          
+          main {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+          }
+          
+          #drop-panel {
+            min-height: 200px;
+            background: white;
+            padding: 10px;
+            margin: 10px;
+          
+            header {
+              padding-left: 10px;
+              font-size: 12px;
+            }
+          }
+          
+          .content-clone {
+            flex: 1;
+          }
+          
+          #scroll-box {
+            white-space: nowrap;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;  
+            scroll-snap-align: start;
+          }
+    
+          #scroll-box::-webkit-scrollbar {
+              display: none;
+          }
+          
+          #tile-container {
+            display: inline-flex;
+          }
+          
+          .tile-wrapper {
+            
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 0 15px;
+          }
+          
+          .tile {
+            background-color: mediumvioletred;
+            color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+           // position: relative;
+          
+           // overflow: hidden;
+          
+            &.clone {
+              position: absolute;
+              opacity: 0;
+              visibility: hidden;
+            }
+          
+            &.dropped {
+              background: cornflowerblue;
+            }
+          }   
+    }
+    
+    .arrow {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 30px;
+        padding-right: 30px;
+        outline: none;
+    }
+    
+    .left {
+        float: left;
+    }
+    
+    .right {
+        float: right;
+    }
 
     .foodList{
         position: relative;
@@ -807,21 +867,6 @@ body {
             top: 68vh;
         }
 
-        
-
-        @keyframes example {
-           from {top: 0px; }
-            to {top: -200px; background-color: white;}
-        }
-        @keyframes curtain {
-            from {top: 0px; }
-             to {top: -100vh; opacity: 0.8;}
-        }
-        
-        @keyframes dish-drop {
-            from {transform: scale(2); opacity: 0; }
-             to {transform: scale(1); opacity: 1;}
-        }
     }
     .container-food-item{
         margin: 0 15px;
@@ -859,7 +904,20 @@ body {
         width: 180px;
        
     }
-
+    
+    @keyframes example {
+        from {top: 0px; }
+         to {top: -200px; background-color: white;}
+     }
+     @keyframes curtain {
+         from {top: 0px; }
+          to {top: -100vh; opacity: 0.8;}
+     }
+     
+     @keyframes dish-drop {
+         from {transform: scale(2); opacity: 0; }
+          to {transform: scale(1); opacity: 1;}
+     }
 }
 
 
