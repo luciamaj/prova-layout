@@ -229,7 +229,7 @@ export default {
 
                     console.log("POS", scope.x, scope.y);
 
-                    TweenLite.to(scope.clone, 1, {left: 60 - scope.x, top: 400});
+                    TweenLite.to(scope.clone, 1, {left: 60 - scope.x, top: -400});
                 });
 
                 scope.clone.click(function() {

@@ -759,9 +759,14 @@ body {
 
 .clone-piramide {
     height: 100vh;
+    background-color: black;
 
     .piramide {
         height: 85vh;
+        background-image: url("/static/piramide/piramidi.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .carousel {
@@ -797,7 +802,6 @@ body {
             background: white;
             padding: 10px;
             margin: 10px;
-            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
           
             header {
               padding-left: 10px;
@@ -844,7 +848,6 @@ body {
             position: relative;
             width: 60px;
             height: 60px;
-            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
             overflow: hidden;
           
             &.clone {
