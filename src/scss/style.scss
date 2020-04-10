@@ -782,6 +782,25 @@ body {
 
     .carousel {
         height: 15vh;
+
+        #left{
+            background-color: transparent;
+            border:0;
+            background-image:url("/static/general/arrow_sx.png") ;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            height: 50px;
+        }
+        #right{
+            background-color: transparent;
+            border:0;
+            background-image:url("/static/general/arrow_dx.png") ;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            height: 50px;
+        }
     }
 
     #clone-container {
@@ -874,7 +893,7 @@ body {
     }
     
     .arrow {
-        padding: 30px;
+        padding: 15px;
     }
     
     .left {
