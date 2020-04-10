@@ -371,8 +371,8 @@ body {
                 top: 50%;
                 left: 50%;
                 transform: translate(-222px, -184px);
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid gray;
+                background-color: gray;
                 opacity: 0.9;
                 border-radius: 50%;
                
@@ -395,8 +395,8 @@ body {
                 top: 50%;
                 left: 50%;
                 transform: translate(13px, -184px);
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid gray;
+                background-color: gray;
                 opacity: 0.9;
                 border-radius: 50%;
             }
@@ -407,8 +407,8 @@ body {
                 top: 50%;
                 left: 50%;
                 transform: translate(-222px, 4px);
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid gray;
+                background-color: gray;
                 opacity: 0.9;
                 border-radius: 50%;
             }
@@ -419,8 +419,8 @@ body {
                 top: 50%;
                 left: 50%;
                 transform: translate(13px, 4px);
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid gray;
+                background-color: gray;
                 opacity: 0.9;
                 border-radius: 50%;
             }
@@ -462,11 +462,11 @@ body {
         padding: 50px 30px;
         height: 100vh;
         width: 100%;
-        border: solid 1px blue;
+        //border: solid 1px blue;
 
         .slick-slider{
             display: inline-flex;
-            z-index: 10;
+           
         }
         .slick-arrow{
             background-color: transparent;
@@ -523,8 +523,8 @@ body {
     }
 
     .food-item{
-        height: 100px;
-        max-width: 100px;
+        height: 180px;
+        max-width: 180px;
         color: white;
         font-weight: 700;
         position: relative;
@@ -544,9 +544,19 @@ body {
             //bottom: 10px;
         }
     }
+    .item-to-move{
+        position: absolute;
+        top: 0;
+        opacity: 0;
+        width: inherit;
+       
+    }
 
 }
 
+
+
+// NEW
 .new {
     font-family: sans-serif;
     background-color: black;
@@ -593,8 +603,8 @@ body {
                 top: 50%;
                 left: 50%;
                 transform: translate(-222px, -184px);
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid gray;
+                background-color: gray;
                 opacity: 0.3;
                 border-radius: 50%;
                
@@ -617,8 +627,8 @@ body {
                 top: 50%;
                 left: 50%;
                 transform: translate(13px, -184px);
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid gray;
+                background-color: gray;
                 opacity: 0.3;
                 border-radius: 50%;
             }
@@ -629,8 +639,8 @@ body {
                 top: 50%;
                 left: 50%;
                 transform: translate(-222px, 4px);
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid gray;
+                background-color: gray;
                 opacity: 0.3;
                 border-radius: 50%;
             }
@@ -641,8 +651,8 @@ body {
                 top: 50%;
                 left: 50%;
                 transform: translate(13px, 4px);
-                border: 1px solid green;
-                background-color: green;
+                border: 1px solid gray;
+                background-color: gray;
                 opacity: 0.3;
                 border-radius: 50%;
             }
