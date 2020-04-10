@@ -1,7 +1,11 @@
 <template>
     <main class="clone-piramide">
-        <div class="piramide">
-            piramideee 
+        <div class="piramide-cont">
+            <div class="section-container">
+                <img src="/static/piramide/piramidi.png" class="img-fluid" alt="Responsive image">
+                <div class="text-block">
+                </div>
+            </div>
         </div>
         <div class="carousel"> 
             <div class="left arrow">
@@ -233,7 +237,6 @@ export default {
                     TweenLite.set(scope.clone2, { x: scope.x, y: scope.y, autoAlpha: 1 });
 
                     console.log("POS", scope.x, scope.y);
-
 
 
                     timeline.to(scope.clone1, 1, {left: 60 - scope.x, top: -400});

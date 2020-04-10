@@ -178,17 +178,20 @@ body {
         flex-grow : 1;
         flex: 1;
     }
+
     .slick-slider{
         display: inline-flex;
     }
-    .slick-arrow{
+
+    .slick-arrow {
         background-color: transparent;
         border: 0;
         height: 50px;
         width: 40px;
         font-size: 0;
     }
-    .slick-prev{
+
+    .slick-prev {
         background-image:url("/static/general/arrow_sx.png") ;
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
@@ -761,12 +764,9 @@ body {
     height: 100vh;
     background-color: black;
 
-    .piramide {
-        height: 85vh;
-        background-image: url("/static/piramide/piramidi.png");
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
+    .piramide-cont {
+        height:85vh;
+        width:100%;
     }
 
     .carousel {
@@ -874,5 +874,27 @@ body {
     .right {
         float: right;
         width: 100px;
+    }
+
+    .piramide-section {
+        width: 100%;
+        height: 16%;
+        background-color: blanchedalmond;
+        opacity: 0.5;
+        margin-bottom: 1px; 
+    }
+
+    .section-container {
+        position: relative;
+    }
+
+    .text-block {
+        position: absolute;
+        width: 10%;
+        height: 10%;
+        bottom: 2%;
+        right: 2%;
+        background-color: red;
+        color: white;
     }
 }
