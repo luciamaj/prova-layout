@@ -2,9 +2,20 @@
     <main class="clone-piramide">
         <div class="piramide-cont">
             <div class="section-container">
-                <img src="/static/piramide/piramidi.png" class="img-fluid" alt="Responsive image">
-                <div class="text-block">
-                </div>
+                <center><img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image"></center>
+                <div ref="right6" class="right6 blocks rightblock"></div>
+                <div ref="right5" class="right5 blocks rightblock"></div>
+                <div ref="right4" class="right4 blocks rightblock"></div>
+                <div ref="right3" class="right3 blocks rightblock"></div>
+                <div ref="right2" class="right2 blocks rightblock"></div>
+                <div ref="right1" class="right1 blocks rightblock"></div>
+
+                <div ref="left1" class="left6 blocks leftblock"></div>
+                <div ref="left2" class="left5 blocks leftblock"></div>
+                <div ref="left3" class="left4 blocks leftblock"></div>
+                <div ref="left4" class="left3 blocks leftblock"></div>
+                <div ref="left5" class="left2 blocks leftblock"></div>
+                <div ref="left6" class="left1 blocks leftblock"></div>
             </div>
         </div>
         <div class="carousel"> 
@@ -146,6 +157,7 @@ export default {
     mounted() {
         this.scrollArrows();
         this.clone();
+        this.getDimensions();
     },
     created() {
     },
@@ -248,6 +260,12 @@ export default {
                 })
             });
         },
+        getDimensions() {
+            const { section1, section2, section3, section4, section5, section6 } = this.$refs;
+            const section1Dimensions = section1.getBoundingClientRect();
+            const section2Dimensions = section2.getBoundingClientRect();
+
+        }
     }
   }
 </script>
