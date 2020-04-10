@@ -684,35 +684,35 @@ body {
         }
         
     }
-
-   
     .carousel {
-        // height: 25vh;
- 
-         #left{
-             background-color: transparent;
-             border:0;
-             background-image:url("/static/general/arrow_sx.png") ;
-             background-position: center; /* Center the image */
-             background-repeat: no-repeat; /* Do not repeat the image */
-             background-size: contain;
-             height: 70px;
-             width: 70px;
-         }
-         #right{
-             background-color: transparent;
-             border:0;
-             background-image:url("/static/general/arrow_dx.png") ;
-             background-position: center; /* Center the image */
-             background-repeat: no-repeat; /* Do not repeat the image */
-             background-size: contain;
-             height: 70px;
-             width: 70px;
-         }
+        margin-top: 8vh;
+        height: 25vh;
 
+        #left{
+            background-color: transparent;
+            border:0;
+            background-image:url("/static/general/arrow_sx.png") ;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            height: 75px;
+            width:8vw;
+            outline: none;
+        }
+        #right{
+            background-color: transparent;
+            border:0;
+            background-image:url("/static/general/arrow_dx.png") ;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            height: 75px;
+            width:8vw;
+            outline: none;
+        }
+    }
 
-     }
-     #clone-container {
+    #clone-container {
         body {
             background-color: #eee;
             height: 100vh;
@@ -769,24 +769,37 @@ body {
           }
           
           .tile-wrapper {
-            
+            width: 250px;
+            height: 190px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            margin: 0 15px;
           }
           
           .tile {
             background-color: mediumvioletred;
             color: #fafafa;
-            display: flex;
+           // display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-           // position: relative;
-          
-           // overflow: hidden;
+            text-transform: uppercase;
+            font-weight: 700;
+            position: relative;
+            width: 180px;
+            height:180px;
+            overflow: hidden;
+            border-radius: 50%;
+
+            .mainName{
+                font-size: 1.8rem;
+            }
+            .secondName{
+                font-size: .8rem;
+                // position: relative; */
+                //bottom: 10px;
+            }
           
             &.clone {
               position: absolute;
@@ -815,7 +828,8 @@ body {
     .right {
         float: right;
     }
-
+   
+    
     .foodList{
         position: relative;
         vertical-align: middle;
@@ -867,6 +881,9 @@ body {
             top: 68vh;
         }
 
+        
+
+        
     }
     .container-food-item{
         margin: 0 15px;
