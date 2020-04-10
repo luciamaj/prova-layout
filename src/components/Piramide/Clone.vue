@@ -16,8 +16,6 @@
                 <div ref="left4" id="left3" class="left3 blocks leftblock"></div>
                 <div ref="left5" id="left2" class="left2 blocks leftblock"></div>
                 <div ref="left6" id="left1" class="left1 blocks leftblock"></div>
-
-                <div class="provacontent" style="color: white;">{{ food }}</div> 
             </div>
         </div>
         <div class="carousel"> 
@@ -35,83 +33,11 @@
                 <div id="clone-container">
                     <div id="scroll-box">
                         <div id="tile-container">
-
-                        <div class="tile-wrapper">
-                            <div class="tile">A</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">B</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">C</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">D</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">E</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">F</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">G</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">H</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">I</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">J</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">K</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">L</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">M</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">N</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">O</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">P</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">Q</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">R</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">S</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">T</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">U</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">W</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">X</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">Y</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">Z</div>
-                        </div>
-
+                            <template v-for="(cibo, index) in food">
+                                <div class="tile-wrapper">
+                                    <div class="tile">A</div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -190,7 +116,7 @@ export default {
                 if (isMoving == false) {
                     isMoving = true;
                     $("#scroll-box").animate({
-                        scrollLeft: '-=80'
+                        scrollLeft: '-=120'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
@@ -205,7 +131,7 @@ export default {
                     isMoving = true;
 
                     $("#scroll-box").animate({
-                        scrollLeft: '+=80'
+                        scrollLeft: '+=120'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
