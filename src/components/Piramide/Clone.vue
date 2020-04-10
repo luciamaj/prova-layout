@@ -3,19 +3,19 @@
         <div class="piramide-cont">
             <div class="section-container">
                 <center><img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image"></center>
-                <div ref="right6" class="right6 blocks rightblock"></div>
-                <div ref="right5" class="right5 blocks rightblock"></div>
-                <div ref="right4" class="right4 blocks rightblock"></div>
-                <div ref="right3" class="right3 blocks rightblock"></div>
-                <div ref="right2" class="right2 blocks rightblock"></div>
-                <div ref="right1" class="right1 blocks rightblock"></div>
+                <div ref="right6" id="right6" class="right6 blocks rightblock"></div>
+                <div ref="right5" id="right5" class="right5 blocks rightblock"></div>
+                <div ref="right4" id="right4" class="right4 blocks rightblock"></div>
+                <div ref="right3" id="right3" class="right3 blocks rightblock"></div>
+                <div ref="right2" id="right2" class="right2 blocks rightblock"></div>
+                <div ref="right1" id="right1" class="right1 blocks rightblock"></div>
 
-                <div ref="left1" class="left6 blocks leftblock"></div>
-                <div ref="left2" class="left5 blocks leftblock"></div>
-                <div ref="left3" class="left4 blocks leftblock"></div>
-                <div ref="left4" class="left3 blocks leftblock"></div>
-                <div ref="left5" class="left2 blocks leftblock"></div>
-                <div ref="left6" class="left1 blocks leftblock"></div>
+                <div ref="left1" id="left6" class="left6 blocks leftblock"></div>
+                <div ref="left2" id="left5" class="left5 blocks leftblock"></div>
+                <div ref="left3" id="left4" class="left4 blocks leftblock"></div>
+                <div ref="left4" id="left3" class="left3 blocks leftblock"></div>
+                <div ref="left5" id="left2" class="left2 blocks leftblock"></div>
+                <div ref="left6" id="left1" class="left1 blocks leftblock"></div>
             </div>
         </div>
         <div class="carousel"> 
@@ -33,83 +33,11 @@
                 <div id="clone-container">
                     <div id="scroll-box">
                         <div id="tile-container">
-
-                        <div class="tile-wrapper">
-                            <div class="tile">A</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">B</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">C</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">D</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">E</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">F</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">G</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">H</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">I</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">J</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">K</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">L</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">M</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">N</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">O</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">P</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">Q</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">R</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">S</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">T</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">U</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">W</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">X</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">Y</div>
-                        </div>
-                        <div class="tile-wrapper">
-                            <div class="tile">Z</div>
-                        </div>
-
+                            <template v-for="(cibo, index) in food">
+                                <div class="tile-wrapper">
+                                    <div class="tile">A</div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -124,9 +52,11 @@ import { TweenLite } from 'gsap'
 import gsap from 'gsap';
 import Draggable from "gsap/Draggable";
 import { ScrollTo } from "gsap";
-import { quiz } from './../../quiz/quiz.js';
+import { data } from './../../data/piramide.js';
 import JQuery from 'jquery';
 let $ = JQuery;
+
+console.log(data);
 
 function getPosition(wrapper, offset, container) {
   var position1 = wrapper.offset();
@@ -141,14 +71,12 @@ function getPosition(wrapper, offset, container) {
 export default {
     components: { },
     data () {
-        return {
-            quiz: quiz,
-                    // Store current question index
+        return {                    // Store current question index
             questionIndex: 0,
             // An array initialized with "false" values for each question
             // It means: "did the user answered correctly to the question n?" "no".
-            userResponses: Array(quiz.questions.length).fill(false),
-            selectedrole: ''
+            selectedrole: '',
+            food: data.food,
         }
     },
     computed: {
@@ -188,7 +116,7 @@ export default {
                 if (isMoving == false) {
                     isMoving = true;
                     $("#scroll-box").animate({
-                        scrollLeft: '-=80'
+                        scrollLeft: '-=120'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
@@ -203,7 +131,7 @@ export default {
                     isMoving = true;
 
                     $("#scroll-box").animate({
-                        scrollLeft: '+=80'
+                        scrollLeft: '+=120'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
@@ -261,10 +189,15 @@ export default {
             });
         },
         getDimensions() {
-            const { section1, section2, section3, section4, section5, section6 } = this.$refs;
-            const section1Dimensions = section1.getBoundingClientRect();
-            const section2Dimensions = section2.getBoundingClientRect();
+            let positions = [];
+            let blocks = $(".blocks");
 
+            for(let block of blocks) {
+                let toPush = {name: block.id, rect: document.getElementById(block.id).getBoundingClientRect()}
+                positions.push(toPush);
+            }
+            
+            console.log(positions);
         }
     }
   }
