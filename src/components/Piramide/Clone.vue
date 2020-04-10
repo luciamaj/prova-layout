@@ -1,100 +1,105 @@
 <template>
     <main class="clone-piramide">
-        <div class="left arrow">
-            <button id="left">
-                    LEFT
-            </button>
+        <div class="piramide">
+            piramideee 
         </div>
-        <div class="right arrow">
-            <button id="right">
-                    RIGHT
-            </button>
-        </div>
-        <section id="top-bar">
-            <div id="clone-container">
-                <div id="scroll-box">
-                    <div id="tile-container">
+        <div class="carousel"> 
+            <div class="left arrow">
+                <button id="left">
+                        LEFT
+                </button>
+            </div>
+            <div class="right arrow">
+                <button id="right">
+                        RIGHT
+                </button>
+            </div>
+            <section id="top-bar">
+                <div id="clone-container">
+                    <div id="scroll-box">
+                        <div id="tile-container">
 
-                    <div class="tile-wrapper">
-                        <div class="tile">A</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">B</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">C</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">D</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">E</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">F</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">G</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">H</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">I</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">J</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">K</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">L</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">M</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">N</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">O</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">P</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">Q</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">R</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">S</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">T</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">U</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">W</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">X</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">Y</div>
-                    </div>
-                    <div class="tile-wrapper">
-                        <div class="tile">Z</div>
-                    </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">A</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">B</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">C</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">D</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">E</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">F</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">G</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">H</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">I</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">J</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">K</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">L</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">M</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">N</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">O</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">P</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">Q</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">R</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">S</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">T</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">U</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">W</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">X</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">Y</div>
+                        </div>
+                        <div class="tile-wrapper">
+                            <div class="tile">Z</div>
+                        </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
             </section>
+        </div>
     </main>
 </template>
 <script>

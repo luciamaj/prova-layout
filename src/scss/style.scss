@@ -28,17 +28,6 @@ body {
     display: flex;
     flex-flow: column;
 }
-
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    color: #fff;
-  }
   
   .list {
     position: relative;
@@ -769,6 +758,16 @@ body {
 }
 
 .clone-piramide {
+    height: 100vh;
+
+    .piramide {
+        height: 85vh;
+    }
+
+    .carousel {
+        height: 15vh;
+    }
+
     #clone-container {
         body {
             background-color: #eee;
