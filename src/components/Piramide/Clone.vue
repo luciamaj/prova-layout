@@ -104,6 +104,16 @@ import { quiz } from './../../quiz/quiz.js';
 import JQuery from 'jquery';
 let $ = JQuery;
 
+function getPosition(wrapper, offset, container) {
+  var position1 = wrapper.offset();
+  var position2 = container.offset();
+
+  return {
+    x: position1.left - position2.left + offset.left,
+    y: position1.top  - position2.top  + offset.top
+  };
+}
+
 export default {
     components: { },
     data () {
@@ -121,38 +131,8 @@ export default {
       //
     },
     mounted() {
-        let content = $("#tile-container");
-        const {top, left} = content.offset();
-        const adjustment = 10;
-        var isMoving = false;
-
-        $('#left').click(function(e) {
-            console.log("click left");
-
-            if (isMoving == false) {
-                isMoving = true;
-                $("#scroll-box").animate({
-                    scrollLeft: '-=50'
-                }, 500, 'swing', function () {
-                    console.log("done");
-                    isMoving = false;
-                });
-            }
-        });
-
-        $('#right').click(function(e) {
-            console.log("clickright");
-            
-            if (isMoving == false) {
-                isMoving = true;
-                $("#scroll-box").animate({
-                    scrollLeft: '+=50'
-                }, 500, 'swing', function () {
-                    console.log("done");
-                    isMoving = false;
-                });
-            }
-        })
+        this.scrollArrows();
+        this.clone();
     },
     created() {
     },
@@ -165,18 +145,74 @@ export default {
       }
     },
     methods: {
-      // Go to next question
-      next: function() {
-        this.questionIndex++;
-      },
-      // Go to previous question
-      prev: function() {
-        this.questionIndex--;
-      },
-      // Return "true" count in userResponses
-      score: function() {
-        return this.userResponses.filter(function(val) { return val }).length;
-      }
+        scrollArrows() {
+            let content = $("#tile-container");
+            const {top, left} = content.offset();
+            const adjustment = 10;
+            var isMoving = false;
+
+            $('#left').click(function(e) {
+                console.log("click left");
+
+                if (isMoving == false) {
+                    isMoving = true;
+                    $("#scroll-box").animate({
+                        scrollLeft: '-=50'
+                    }, 500, 'swing', function () {
+                        console.log("done");
+                        isMoving = false;
+                    });
+                }
+            });
+
+            $('#right').click(function(e) {
+                console.log("clickright");
+                
+                if (isMoving == false) {
+                    isMoving = true;
+                    $("#scroll-box").animate({
+                        scrollLeft: '+=50'
+                    }, 500, 'swing', function () {
+                        console.log("done");
+                        isMoving = false;
+                    });
+                }
+            })
+        },
+        clone() {
+            var container = $("#clone-container");
+            var scrollBox = $("#scroll-box");
+            var dropPanel = $("#drop-panel");
+            var tiles     = $(".tile");
+            var threshold = "50%";
+
+            tiles.each(function() {
+                var element = $(this);
+                var wrapper = element.parent();
+                var offset  = element.position();
+
+                var scope = {
+                    clone   : element.clone().addClass("clone").prependTo(container),
+                    element : element,
+                    wrapper : wrapper,
+                    width   : wrapper.outerWidth(),
+                    dropped : false,
+                    moved   : false,
+                    get x() { return getPosition(wrapper, offset, container).x; },
+                    get y() { return getPosition(wrapper, offset, container).y; }
+                };
+
+                console.log("THE ELEMENT", element);
+
+                //scope.draggable = createDraggable(scope);
+
+                element.click(function() {
+                    console.log("vmkàenvurwVIURnbiuROIR", element.data('num'));
+                    TweenLite.set(scope.element, { autoAlpha: 0.5 });
+                    TweenLite.set(scope.clone, { x: scope.x, y: scope.y, autoAlpha: 1 });
+                });
+            });
+        },
     }
   }
 </script>
