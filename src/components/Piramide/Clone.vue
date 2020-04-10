@@ -208,7 +208,8 @@ export default {
                 var offset  = element.position();
 
                 var scope = {
-                    clone   : element.clone().addClass("clone").prependTo(container),
+                    clone1   : element.clone().addClass("clone").addClass("clone1").prependTo(container),
+                    clone2   : element.clone().addClass("clone").addClass("clone2").prependTo(container),
                     element : element,
                     wrapper : wrapper,
                     width   : wrapper.outerWidth(),
@@ -220,19 +221,26 @@ export default {
 
                 console.log("THE ELEMENT", element);
 
+                const timeline = new TimelineLite();
+
+
                 //scope.draggable = createDraggable(scope);
 
                 element.click(function() {
                     console.log("ho cliccato sugli elementi");
                     TweenLite.set(scope.element, { autoAlpha: 0.5 });
-                    TweenLite.set(scope.clone, { x: scope.x, y: scope.y, autoAlpha: 1 });
+                    TweenLite.set(scope.clone1, { x: scope.x, y: scope.y, autoAlpha: 1 });
+                    TweenLite.set(scope.clone2, { x: scope.x, y: scope.y, autoAlpha: 1 });
 
                     console.log("POS", scope.x, scope.y);
 
-                    TweenLite.to(scope.clone, 1, {left: 60 - scope.x, top: -400});
+
+
+                    timeline.to(scope.clone1, 1, {left: 60 - scope.x, top: -400});
+                    timeline.to(scope.clone2, 1, {left: 180 - scope.x, top: -500});
                 });
 
-                scope.clone.click(function() {
+                scope.clone1.click(function() {
                     console.log("ho cliccato sui cloni");
                 })
             });
