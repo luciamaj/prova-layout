@@ -28,17 +28,6 @@ body {
     display: flex;
     flex-flow: column;
 }
-
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    color: #fff;
-  }
   
   .list {
     position: relative;
@@ -189,17 +178,20 @@ body {
         flex-grow : 1;
         flex: 1;
     }
+
     .slick-slider{
         display: inline-flex;
     }
-    .slick-arrow{
+
+    .slick-arrow {
         background-color: transparent;
         border: 0;
         height: 50px;
         width: 40px;
         font-size: 0;
     }
-    .slick-prev{
+
+    .slick-prev {
         background-image:url("/static/general/arrow_sx.png") ;
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
@@ -579,7 +571,7 @@ body {
         animation-fill-mode: both;
        
         img{
-            width: auto;
+            width: 90vh;
             height: 100vh;
         }
 
@@ -587,7 +579,7 @@ body {
     .topPart{
         margin: 0;
         img{
-            width: auto;
+            width: 100%;
             height: 350px;
         }
         .over-vassoio{
@@ -760,6 +752,217 @@ body {
             // position: relative; */
             //bottom: 10px;
         }
+
+        img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 100px;
+        }
+
+
     }
 
+    .clone {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    
+
+}
+
+.clone-piramide {
+    height: 100vh;
+    background-color: black;
+
+    .piramide-cont {
+        height:85vh;
+        width:100%;
+    }
+
+    .carousel {
+        height: 15vh;
+    }
+
+    #clone-container {
+        body {
+            background-color: #eee;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+          }
+          
+          * {
+            box-sizing: border-box;
+          }
+          
+          main {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+          }
+          
+          #drop-panel {
+            min-height: 200px;
+            background: white;
+            padding: 10px;
+            margin: 10px;
+          
+            header {
+              padding-left: 10px;
+              font-size: 12px;
+            }
+          }
+          
+          .content-clone {
+            flex: 1;
+          }
+          
+          #scroll-box {
+            white-space: nowrap;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;  
+            scroll-snap-align: start;
+          }
+    
+          #scroll-box::-webkit-scrollbar {
+              display: none;
+          }
+          
+          #tile-container {
+            display: inline-flex;
+          }
+          
+          .tile-wrapper {
+            width: 80px;
+            height: 80px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+          }
+          
+          .tile {
+            background-color: mediumvioletred;
+            color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            position: relative;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+          
+            &.clone {
+              position: absolute;
+              opacity: 0;
+              visibility: hidden;
+            }
+          
+            &.dropped {
+              background: cornflowerblue;
+            }
+          }   
+    }
+    
+    .arrow {
+        padding: 30px;
+    }
+    
+    .left {
+        float: left;
+        width: 100px;
+    }
+    
+    .right {
+        float: right;
+        width: 100px;
+    }
+
+    .piramide-section {
+        width: 100%;
+        height: 16%;
+        background-color: blanchedalmond;
+        opacity: 0.5;
+        margin-bottom: 1px; 
+    }
+
+    .section-container {
+        position: relative;
+        vertical-align: middle;
+    }
+
+    #cane {
+        height: auto;
+        width: 70%;
+        padding-top: 5%;
+    }
+
+    // RIGHT BLOCKS
+
+    .right6 {
+        position: absolute;
+        width: 30%;
+        height: 8.5%;
+        bottom: 3.2%;
+        left: 26%;
+        background-color: red;
+        color: white;
+    }
+
+    .right5 {
+        position: absolute;
+        width: 25%;
+        height: 12.5%;
+        bottom: 12.2%;
+        left: 28%;
+        background-color: red;
+        color: white;
+    }
+
+    .right4 {
+        position: absolute;
+        width: 22%;
+        height: 9.7%;
+        bottom: 25.5%;
+        left: 29.5%;
+        background-color: red;
+        color: white;
+    }
+
+    // LEFT BLOCKS
+
+    .left1 {
+        position: absolute;
+        width: 29%;
+        height: 9.7%;
+        top: 15%;
+        right: 25.5%;
+        background-color: red;
+        color: white;
+    }
+
+    .left3 {
+        position: absolute;
+        width: 27%;
+        height: 11.7%;
+        top: 25%;
+        right: 26.5%;
+        background-color: red;
+        color: white;
+    }
+
+    // GENERAL BLOCKS
+    
+    .blocks {
+        opacity: 0.5;
+    }
 }

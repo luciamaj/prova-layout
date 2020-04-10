@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'popper.js';
 import 'jquery';
 import 'vue-slick';
@@ -12,6 +13,8 @@ import CountryFlag from 'vue-country-flag'
 
 Vue.component('country-flag', CountryFlag)
 Vue.config.productionTip = false
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 /* eslint-disable no-new */
 new Vue({

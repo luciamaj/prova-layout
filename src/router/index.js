@@ -7,6 +7,7 @@ import PiramideBase from './../components/Piramide/PiramideBase.vue'
 import NewPir from './../components/Piramide/New.vue'
 import Cultura from './../components/Cultura.vue'
 import Carosello from './../components/Piramide/Carosello.vue'
+import Clone from './../components/Piramide/Clone.vue'
 import Piatto from './../components/PiattoVirtuale.vue'
 import CiboCitta from './../components/CiboCitta/CiboCitta.vue'
 
@@ -58,6 +59,11 @@ const router = new Router({
       path: '/new',
       name: 'new',
       component: NewPir
+    },
+    {
+      path: '/clone',
+      name: 'clone',
+      component: Clone
     }
   ]
 })
