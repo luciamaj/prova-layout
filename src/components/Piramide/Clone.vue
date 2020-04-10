@@ -210,6 +210,7 @@ export default {
                     console.log("vmkàenvurwVIURnbiuROIR", element.data('num'));
                     TweenLite.set(scope.element, { autoAlpha: 0.5 });
                     TweenLite.set(scope.clone, { x: scope.x, y: scope.y, autoAlpha: 1 });
+                    TweenLite.to(scope.clone, 1, {x: scope.x, y: 400});
                 });
             });
         },
