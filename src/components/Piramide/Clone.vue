@@ -207,11 +207,18 @@ export default {
                 //scope.draggable = createDraggable(scope);
 
                 element.click(function() {
-                    console.log("vmkàenvurwVIURnbiuROIR", element.data('num'));
+                    console.log("ho cliccato sugli elementi");
                     TweenLite.set(scope.element, { autoAlpha: 0.5 });
                     TweenLite.set(scope.clone, { x: scope.x, y: scope.y, autoAlpha: 1 });
-                    TweenLite.to(scope.clone, 1, {x: scope.x, y: 400});
+
+                    console.log("POS", scope.x, scope.y);
+
+                    TweenLite.to(scope.clone, 1, {left: 60 - scope.x, top: 400});
                 });
+
+                scope.clone.click(function() {
+                    console.log("ho cliccato sui cloni");
+                })
             });
         },
     }
