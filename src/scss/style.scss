@@ -791,6 +791,8 @@ body {
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: contain;
             height: 50px;
+            width: 50px;
+            outline: none;
         }
         #right{
             background-color: transparent;
@@ -800,6 +802,8 @@ body {
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: contain;
             height: 50px;
+            width: 50px;
+            outline: none;
         }
     }
 
@@ -860,8 +864,8 @@ body {
           }
           
           .tile-wrapper {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -876,8 +880,8 @@ body {
             justify-content: center;
             font-size: 24px;
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             overflow: hidden;
           
             &.clone {
@@ -893,7 +897,11 @@ body {
     }
     
     .arrow {
-        padding: 15px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 30px;
+        padding-right: 30px;
+        outline: none;
     }
     
     .left {
