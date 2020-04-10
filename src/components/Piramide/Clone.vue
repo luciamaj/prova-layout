@@ -147,6 +147,10 @@ export default {
     methods: {
         scrollArrows() {
             let content = $("#tile-container");
+            console.log("W", content.width());
+            console.log("H", content.height());
+
+            let offset = content.width() / $('.tile-wrapper').length;
             const {top, left} = content.offset();
             const adjustment = 10;
             var isMoving = false;
@@ -157,7 +161,7 @@ export default {
                 if (isMoving == false) {
                     isMoving = true;
                     $("#scroll-box").animate({
-                        scrollLeft: '-=50'
+                        scrollLeft: '-=80'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
@@ -171,7 +175,7 @@ export default {
                 if (isMoving == false) {
                     isMoving = true;
                     $("#scroll-box").animate({
-                        scrollLeft: '+=50'
+                        scrollLeft: '+=80'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
