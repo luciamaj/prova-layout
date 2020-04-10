@@ -9,6 +9,7 @@ import Cultura from './../components/Cultura.vue'
 import Carosello from './../components/Piramide/Carosello.vue'
 import Clone from './../components/Piramide/Clone.vue'
 import Piatto from './../components/PiattoVirtuale.vue'
+import PiattoClone from './../components/Piattoclone.vue'
 import CiboCitta from './../components/CiboCitta/CiboCitta.vue'
 
 Vue.use(Router);
@@ -44,6 +45,11 @@ const router = new Router({
       path: '/piatto_virtuale',
       name: 'piattoVirtuale',
       component: Piatto
+    },
+    {
+      path: '/piattoclone',
+      name: 'piattoclone',
+      component: PiattoClone
     },
     {
       path: '/cibocitta',

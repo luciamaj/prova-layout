@@ -456,6 +456,7 @@ body {
         width: 100%;
         //border: solid 1px blue;
 
+       
         .slick-slider{
             display: inline-flex;
            
@@ -547,6 +548,377 @@ body {
 
 }
 
+//APP PIATTO CLONE
+
+.piatto-clone{
+    font-family: sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+    height: 100vh;
+    .over{
+       
+        position: absolute;
+        top: 0;
+        z-index: 20;
+        visibility:visible;
+        width: 100%;
+        text-align: center;
+        background-color: blanchedalmond;
+        animation-name: curtain;
+        animation-delay: 1s;
+        animation-duration:3s;
+        animation-fill-mode: both;
+       
+        img{
+            width: auto;
+            height: 100vh;
+        }
+
+    }
+    .topPart{
+        padding: 25px 0;
+        margin: 0;
+        
+
+        img{
+            width: auto;
+            height: 450px;
+            margin-bottom: 25px;
+        }
+        .over-vassoio{
+            position: absolute;
+            top: 0;
+            height:450px ;
+            width: inherit;
+            //border: solid 1px green;
+
+            .dish-1{
+                width: 180px;
+                height: 180px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-222px, -184px);
+                border: 1px solid gray;
+                background-color: gray;
+                opacity: 0.9;
+                border-radius: 50%;
+               
+                /*animation-name: none;
+                animation-duration: 2.5s;
+                animation-fill-mode: both;*/
+                
+                img{
+                    border-radius: 50%;
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                }
+                
+            }
+            .dish-2{
+                width: 180px;
+                height: 180px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(13px, -184px);
+                border: 1px solid gray;
+                background-color: gray;
+                opacity: 0.9;
+                border-radius: 50%;
+            }
+            .dish-3{
+                width: 180px;
+                height: 180px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-222px, 4px);
+                border: 1px solid gray;
+                background-color: gray;
+                opacity: 0.9;
+                border-radius: 50%;
+            }
+            .dish-4{
+                width: 180px;
+                height: 180px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(13px, 4px);
+                border: 1px solid gray;
+                background-color: gray;
+                opacity: 0.9;
+                border-radius: 50%;
+            }
+        }
+
+        .btn-control{ 
+            
+            width:70px;
+            height:70px;
+           
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            background-color: transparent;
+            border: 0;
+        }
+        .btn-label{
+            margin-top: 5px;
+            text-transform: uppercase;
+            font-size: 1.05rem;
+           
+        }
+        .cancella{
+            background-image: url("/static/piatto_virtuale/cancella.png");
+        }
+        .fine{
+            background-image: url("/static/piatto_virtuale/fine.png");
+        }
+        h3{
+            font-weight: 700;
+            color: whitesmoke;
+        }
+        
+    }
+
+   
+    .carousel {
+        // height: 25vh;
+ 
+         #left{
+             background-color: transparent;
+             border:0;
+             background-image:url("/static/general/arrow_sx.png") ;
+             background-position: center; /* Center the image */
+             background-repeat: no-repeat; /* Do not repeat the image */
+             background-size: contain;
+             height: 70px;
+             width: 70px;
+         }
+         #right{
+             background-color: transparent;
+             border:0;
+             background-image:url("/static/general/arrow_dx.png") ;
+             background-position: center; /* Center the image */
+             background-repeat: no-repeat; /* Do not repeat the image */
+             background-size: contain;
+             height: 70px;
+             width: 70px;
+         }
+
+
+     }
+     #clone-container {
+        body {
+            background-color: #eee;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+          }
+          
+          * {
+            box-sizing: border-box;
+          }
+          
+          main {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+          }
+          
+          #drop-panel {
+            min-height: 200px;
+            background: white;
+            padding: 10px;
+            margin: 10px;
+          
+            header {
+              padding-left: 10px;
+              font-size: 12px;
+            }
+          }
+          
+          .content-clone {
+            flex: 1;
+          }
+          
+          #scroll-box {
+            white-space: nowrap;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;  
+            scroll-snap-align: start;
+          }
+    
+          #scroll-box::-webkit-scrollbar {
+              display: none;
+          }
+          
+          #tile-container {
+            display: inline-flex;
+          }
+          
+          .tile-wrapper {
+            
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 0 15px;
+          }
+          
+          .tile {
+            background-color: mediumvioletred;
+            color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+           // position: relative;
+          
+           // overflow: hidden;
+          
+            &.clone {
+              position: absolute;
+              opacity: 0;
+              visibility: hidden;
+            }
+          
+            &.dropped {
+              background: cornflowerblue;
+            }
+          }   
+    }
+    
+    .arrow {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 30px;
+        padding-right: 30px;
+        outline: none;
+    }
+    
+    .left {
+        float: left;
+    }
+    
+    .right {
+        float: right;
+    }
+
+    .foodList{
+        position: relative;
+        vertical-align: middle;
+        padding: 50px 30px;
+        height: 100vh;
+        width: 100%;
+        //border: solid 1px blue;
+
+       
+        
+        .slick-slider{
+            display: inline-flex;
+           
+        }
+        .slick-arrow{
+            background-color: transparent;
+            border: 0;
+            height: 80px;
+            width: 70px;
+            font-size: 0;
+            margin: 40px auto;
+            position: relative;
+            top: 70vh;
+        }
+        .slick-prev{
+            background-image:url("/static/general/arrow_sx.png") ;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            float: left;
+        }
+        .slick-next{
+            background-image: url("/static/general/arrow_dx.png");
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+            float: right;
+        }
+
+        .slick-list{
+            width: 80vw;
+            height: 92vh;
+            margin: auto;
+            top:0;
+        
+        }
+        .slick-track{
+            display: flex;
+            top: 68vh;
+        }
+
+    }
+    .container-food-item{
+        margin: 0 15px;
+    }
+
+    .food-item{
+        height: 180px;
+        width: 180px;
+        color: white;
+        font-weight: 700;
+        position: relative;
+        text-transform: uppercase;
+        animation-name: none;
+        animation-duration:3s;
+        animation-fill-mode: both;
+        border: solid 1px red ;
+        border-radius: 50%;              
+        
+
+        .mainName{
+            font-size: 1.8rem;
+        }
+        .secondName{
+            font-size: .8rem;
+            // position: relative; */
+            //bottom: 10px;
+        }
+    }
+    .item-to-move{
+        width: inherit;
+        position: absolute;
+        top: 0;
+        opacity: 0.1;
+        background-color: rgb(47, 155, 54);
+        width: 180px;
+       
+    }
+    
+    @keyframes example {
+        from {top: 0px; }
+         to {top: -200px; background-color: white;}
+     }
+     @keyframes curtain {
+         from {top: 0px; }
+          to {top: -100vh; opacity: 0.8;}
+     }
+     
+     @keyframes dish-drop {
+         from {transform: scale(2); opacity: 0; }
+          to {transform: scale(1); opacity: 1;}
+     }
+}
 
 
 // NEW
@@ -771,6 +1143,8 @@ body {
 
 }
 
+
+// clone 
 .clone-piramide {
     height: 100vh;
     background-color: black;
