@@ -1,0 +1,182 @@
+<template>
+    <main>
+        <section id="top-bar">
+            <div id="clone-container">
+                <div id="scroll-box">
+                    <div id="tile-container">
+
+                    <div class="tile-wrapper">
+                        <div class="tile">A</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">B</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">C</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">D</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">E</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">F</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">G</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">H</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">I</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">J</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">K</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">L</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">M</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">N</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">O</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">P</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">Q</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">R</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">S</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">T</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">U</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">W</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">X</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">Y</div>
+                    </div>
+                    <div class="tile-wrapper">
+                        <div class="tile">Z</div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+            </section>
+                <button id="left">
+                    LEFT
+                </button>
+                <button id="right">
+                    RIGHT
+                </button>
+            </section>
+    </main>
+</template>
+<script>
+
+import { TimelineLite } from 'gsap'
+import { TweenLite } from 'gsap'
+import gsap from 'gsap';
+import Draggable from "gsap/Draggable";
+import { quiz } from './../../quiz/quiz.js';
+import JQuery from 'jquery';
+let $ = JQuery;
+
+export default {
+    components: { },
+    data () {
+        return {
+            quiz: quiz,
+                    // Store current question index
+            questionIndex: 0,
+            // An array initialized with "false" values for each question
+            // It means: "did the user answered correctly to the question n?" "no".
+            userResponses: Array(quiz.questions.length).fill(false),
+            selectedrole: ''
+        }
+    },
+    computed: {
+      //
+    },
+    mounted() {
+        let content = $("#tile-container");
+        const {top, left} = content.offset();
+        const adjustment = 10;
+        var isMoving = false;
+
+        $('#left').click(function(e) {
+            console.log("click left");
+
+            if (isMoving == false) {
+                isMoving = true;
+                $("#scroll-box").animate({
+                    scrollLeft: '-=50'
+                }, 500, 'swing', function () {
+                    console.log("done");
+                    isMoving = false;
+                });
+            }
+        });
+
+        $('#right').click(function(e) {
+            console.log("clickright");
+            
+            if (isMoving == false) {
+                isMoving = true;
+                $("#scroll-box").animate({
+                    scrollLeft: '+=50'
+                }, 500, 'swing', function () {
+                    console.log("done");
+                    isMoving = false;
+                });
+            }
+        })
+    },
+    created() {
+    },
+    watch: {
+      selectedrole: function(newRole)
+      {
+        console.log("NEWROLE", newRole);
+        this.selectedrole = newRole;
+        console.log("SELECTED ROLE", this.selectedrole);
+      }
+    },
+    methods: {
+      // Go to next question
+      next: function() {
+        this.questionIndex++;
+      },
+      // Go to previous question
+      prev: function() {
+        this.questionIndex--;
+      },
+      // Return "true" count in userResponses
+      score: function() {
+        return this.userResponses.filter(function(val) { return val }).length;
+      }
+    }
+  }
+</script>
