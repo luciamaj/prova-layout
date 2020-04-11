@@ -25,7 +25,9 @@
                         <div id="tile-container">
                             <template v-for="(cibo, index) in food">
                                 <div class="tile-wrapper">
-                                    <div :id="cibo.name" class="tile">A</div>
+                                    <div :id="cibo.name" class="tile">
+                                        <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name" :id="cibo.name" :class="cibo.name">
+                                    </div>
                                 </div>
                             </template>
                         </div>
@@ -171,16 +173,27 @@ export default {
 
                     let dimElement = this.getBoundingClientRect();
 
+                    console.log(dimRect1);
 
-                    let yDish1 = dimRect1.y - dimElement.y;
-                    let yDish2 = dimRect2.y - dimElement.y;
+                    var centerX = dimRect1.left + dimRect1.width / 2;
+
+                    console.log(dimRect1);
+                    console.log("CENTERX", centerX);
+
+                    var centerY = dimRect1.top + (dimRect1.height / 2);
+
+
+                    let yDish1 = (dimRect1.y - dimRect1.height /2) - dimElement.y;
+                    let yDish2 = (dimRect2.y - dimRect2.height /2)- dimElement.y;
 
                     TweenLite.set(scope.element, { border: "solid 2px white" });
                     TweenLite.set(scope.clone1, { x: scope.x, y: scope.y, autoAlpha: 1});
                     TweenLite.set(scope.clone2, { x: scope.x, y: scope.y, autoAlpha: 1});
 
-                    timeline.to(scope.clone1, 1, {x: dimRect1.x, top: yDish1, scale: 0.5});
-                    timeline.to(scope.clone2, 1, {x: dimRect2.x, top: yDish2, scale: 0.5});
+                    setTimeout(() => {
+                        timeline.to(scope.clone1, 1, {x: dimRect1.x, top: yDish1, scale: 0.3});
+                        timeline.to(scope.clone2, 1, {x: dimRect2.x, top: yDish2, scale: 0.3});
+                    }, 200);
                 });
 
                 scope.clone1.click(function() {

@@ -1264,7 +1264,6 @@ body {
           }
           
           .tile {
-            background-color: mediumvioletred;
             color: #fafafa;
             display: flex;
             align-items: center;
@@ -1275,6 +1274,7 @@ body {
             height: 90px;
             overflow: hidden;
             cursor: pointer;
+            border-radius: 50%;
           
             &.clone {
               position: absolute;
@@ -1285,6 +1285,11 @@ body {
           
             &.dropped {
               background: cornflowerblue;
+            }
+
+            img {
+                width: 50px;
+                height: auto;
             }
           }   
     }
