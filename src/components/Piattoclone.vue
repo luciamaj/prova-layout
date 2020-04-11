@@ -56,6 +56,7 @@
 
 
 import { TimelineLite } from 'gsap'
+import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { TweenLite } from 'gsap'
 import gsap from 'gsap';
 import Draggable from "gsap/Draggable";
@@ -92,55 +93,68 @@ export default {
                 swipe: true
             },*/
             food:data.piatto,
-            foodSelected:[]
+            foodSelected:[],
+            carouselOptions: {
+                slidesToShow: 5,
+                slidesToScroll: 5,
+            }
+
         }
     },
     mounted() {
+        gsap.registerPlugin(ScrollToPlugin);
         this.scrollArrows();
         this.clone();
+        this.setCarousel();
     },
     methods: {
-        
+        setCarousel(){
+            let content = $("#tile-container");
+            let box = $("#scroll-box");
+            let wrapper = $(".tile-wrapper");
+            let page = $(".piatto-clone");
+           // let wrapper = document.getElementsByClassName("tile-wrapper");
+            console.log("W", page.width());
+            let boxW=box.width()
+            let ratio=(boxW)/(this.carouselOptions.slidesToShow);
+             console.log("R ", ratio);
+             wrapper.css("width", ratio + "px")
+            //wrapper.style.width= ratio + "px";
+            
+        },
         scrollArrows() {
             let content = $("#tile-container");
             let box = $("#scroll-box");
+            let wrapper=$('.tile-wrapper');
 
             console.log("W", content.width());
             console.log("H", content.height());
 
             let offset = content.width() / $('.tile-wrapper').length;
-           
             const {top, left} = content.offset();
             const adjustment = 10;
             var isMoving = false;
+            let el = $("#scroll-box");
 
             $('#left').click(function(e) {
                 console.log("click left");
-                console.log("offs", offset);
-
-                if (isMoving == false) {
-                    isMoving = true;
-                    $("#scroll-box").animate({
-                        scrollLeft: '-=1250'
-                    }, 500, 'swing', function () {
-                        console.log("done");
-                        isMoving = false;
-                    });
-                }
+                    if(isMoving == false) {
+                        isMoving = true;
+                        gsap.to(el, 1, {scrollTo: {x: '-='+(wrapper.width())}, onComplete: function() {
+                            console.log("complete");
+                            isMoving = false;
+                        }})
+                    }
             });
 
             $('#right').click(function(e) {
                 console.log("clickright");
-                
                 if (isMoving == false) {
                     isMoving = true;
-
-                    $("#scroll-box").animate({
-                        scrollLeft: '+=1250'
-                    }, 500, 'swing', function () {
-                        console.log("done");
+                    gsap.to(el, 1, {scrollTo: {x: '+='+(wrapper.width())}, onComplete: function() {
+                        console.log("complete");
                         isMoving = false;
-                    });
+                    }})
                 }
             })
         },
