@@ -142,21 +142,20 @@ export default {
             var scrollBox = $("#scroll-box");
             var dropPanel = $("#drop-panel");
             var tiles     = $(".tile");
-            var threshold = "50%";
 
             tiles.each(function() {
                 var element = $(this);
                 var wrapper = element.parent();
                 var offset  = element.position();
 
+                console.log("the offset", offset);
+
                 var scope = {
-                    clone1   : element.clone().addClass("clone").addClass("clone1").prependTo(container),
-                    clone2   : element.clone().addClass("clone").addClass("clone2").prependTo(container),
+                    clone1  : element.clone().addClass("clone").addClass("clone1").prependTo(container),
+                    clone2  : element.clone().addClass("clone").addClass("clone2").prependTo(container),
                     element : element,
                     wrapper : wrapper,
                     width   : wrapper.outerWidth(),
-                    dropped : false,
-                    moved   : false,
                     get x() { return getPosition(wrapper, offset, container).x; },
                     get y() { return getPosition(wrapper, offset, container).y; }
                 };
