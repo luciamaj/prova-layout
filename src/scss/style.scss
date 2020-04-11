@@ -698,6 +698,7 @@ body {
             height: 75px;
             width:8vw;
             outline: none;
+           
         }
         #right{
             background-color: transparent;
@@ -709,6 +710,7 @@ body {
             height: 75px;
             width:8vw;
             outline: none;
+           
         }
     }
 
@@ -769,7 +771,7 @@ body {
           }
           
           .tile-wrapper {
-            width: 250px;
+            width: 0;
             height: 190px;
             display: inline-flex;
             align-items: center;
@@ -816,8 +818,7 @@ body {
     .arrow {
         padding-top: 40px;
         padding-bottom: 40px;
-        padding-left: 30px;
-        padding-right: 30px;
+       
         outline: none;
     }
     
