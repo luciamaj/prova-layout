@@ -24,7 +24,7 @@
                     <div id="scroll-box">
                         <div id="tile-container">
                             <template v-for="(cibo, index) in food">
-                                <div class="tile-wrapper">
+                                <div v-bind:key="(cibo, index)" class="tile-wrapper">
                                     <div :id="cibo.name" class="tile">
                                         <img :src="'/static/piramide/cibo/' +  cibo.name + '.png'" :ref="cibo.name" :id="cibo.name" :class="cibo.name">
                                     </div>
@@ -70,6 +70,10 @@ export default {
             questionIndex: 0,
             selectedrole: '',
             food: data.food,
+            carouselOptions: {
+                slidesToShow: 7,
+                slidesToScroll: 7,
+            }
         }
     },
     computed: {
@@ -80,6 +84,7 @@ export default {
         this.scrollArrows();
         this.clone();
         this.getDimensions();
+        this.setCarousel();
     },
     created() {
     },
@@ -92,6 +97,20 @@ export default {
       }
     },
     methods: {
+         setCarousel(){
+            let content = $("#tile-container");
+            let box = $("#scroll-box");
+            let wrapper = $(".tile-wrapper");
+            let page = $(".piatto-clone");
+           // let wrapper = document.getElementsByClassName("tile-wrapper");
+            console.log("W", page.width());
+            let boxW=box.width()
+            let ratio=(boxW)/(this.carouselOptions.slidesToShow);
+             console.log("R ", ratio);
+             wrapper.css("width", ratio + "px")
+           
+            
+        },
         scrollArrows() {
             let content = $("#tile-container");
             let box = $("#scroll-box");
@@ -185,8 +204,9 @@ export default {
                     let yDish2 = (dimRect2.y - dimRect2.height /2)- dimElement.y;
 
                     TweenLite.set(scope.element, { border: "solid 2px white" });
-                    TweenLite.set(scope.clone1, { x: scope.x, y: scope.y, autoAlpha: 1});
-                    TweenLite.set(scope.clone2, { x: scope.x, y: scope.y, autoAlpha: 1});
+                    TweenLite.set(scope.clone1, { x: scope.x+scope.element.position().left, y: scope.y+1, autoAlpha: 1});
+                    TweenLite.set(scope.clone2, { x: scope.x+scope.element.position().left, y: scope.y+1, autoAlpha: 1});
+
 
                     setTimeout(() => {
                         timeline.to(scope.clone1, 1, {x: dimRect1.x, top: yDish1, scale: 0.3});

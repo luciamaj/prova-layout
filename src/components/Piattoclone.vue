@@ -119,7 +119,7 @@ export default {
             let ratio=(boxW)/(this.carouselOptions.slidesToShow);
              console.log("R ", ratio);
              wrapper.css("width", ratio + "px")
-            //wrapper.style.width= ratio + "px";
+           
             
         },
         scrollArrows() {
@@ -204,7 +204,7 @@ export default {
                     console.log("ho cliccato sugli elementi");
                     TweenLite.set(scope.element, { autoAlpha: 0.9, border: "solid 2px white" });
                     TweenLite.set(scope.clone1, { x: scope.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
-
+                        console.log("offss", offset);
                     console.log("POS", scope.x, scope.y);
                    // this.foodSelected.push(element);
                     // console.log("sel", this.foodSelected);
