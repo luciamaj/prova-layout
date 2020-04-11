@@ -116,6 +116,14 @@ export default {
            // let wrapper = document.getElementsByClassName("tile-wrapper");
             console.log("W", page.width());
             let boxW=box.width()
+             var width = $(window).width();
+            console.log(width);
+            if (width <= 1200) {
+                this.carouselOptions.slidesToShow = 3;
+
+                console.log("STO RISETTANDO", this.carouselOptions.slidesToShow);
+
+            }
             let ratio=(boxW)/(this.carouselOptions.slidesToShow);
              console.log("R ", ratio);
              wrapper.css("width", ratio + "px")
@@ -140,7 +148,7 @@ export default {
                 console.log("click left");
                     if(isMoving == false) {
                         isMoving = true;
-                        gsap.to(el, 1, {scrollTo: {x: '-='+(wrapper.width())}, onComplete: function() {
+                        gsap.to(el, 1, {scrollTo: {x: '-='+(wrapper.width())*2}, onComplete: function() {
                             console.log("complete");
                             isMoving = false;
                         }})
@@ -151,7 +159,7 @@ export default {
                 console.log("clickright");
                 if (isMoving == false) {
                     isMoving = true;
-                    gsap.to(el, 1, {scrollTo: {x: '+='+(wrapper.width())}, onComplete: function() {
+                    gsap.to(el, 1, {scrollTo: {x: '+='+(wrapper.width())*2}, onComplete: function() {
                         console.log("complete");
                         isMoving = false;
                     }})

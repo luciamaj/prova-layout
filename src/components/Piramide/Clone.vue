@@ -203,11 +203,15 @@ export default {
                     let yDish1 = (dimRect1.y - dimRect1.height /2) - dimElement.y;
                     let yDish2 = (dimRect2.y - dimRect2.height /2)- dimElement.y;
 
+                    console.log("el", scope.element.position().left);
+                     console.log("offs", offset.left);
+                    console.log("x", scope.x);
+
                     TweenLite.set(scope.element, { border: "solid 2px white" });
-                    TweenLite.set(scope.clone1, { x: scope.x+scope.element.position().left, y: scope.y+1, autoAlpha: 1});
-                    TweenLite.set(scope.clone2, { x: scope.x+scope.element.position().left, y: scope.y+1, autoAlpha: 1});
+                    TweenLite.set(scope.clone1, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
+                    TweenLite.set(scope.clone2, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
 
-
+                     console.log("cl", scope.clone1.position().left);
                     setTimeout(() => {
                         timeline.to(scope.clone1, 1, {x: dimRect1.x, top: yDish1, scale: 0.3});
                         timeline.to(scope.clone2, 1, {x: dimRect2.x, top: yDish2, scale: 0.3});
@@ -218,6 +222,28 @@ export default {
                     console.log("ho cliccato sui cloni");
                 })
             });
+        },
+        setCarousel(){
+            let content = $("#tile-container");
+            let box = $("#scroll-box");
+            let wrapper = $(".tile-wrapper");
+            let page = $(".piatto-clone");
+           // let wrapper = document.getElementsByClassName("tile-wrapper");
+            console.log("W", page.width());
+            let boxW=box.width()
+
+            var width = $(window).width();
+            console.log(width);
+            if (width <= 1200) {
+                this.carouselOptions.slidesToShow = 3;
+
+                console.log("STO RISETTANDO", this.carouselOptions.slidesToShow);
+
+            }
+            
+            let ratio=(boxW)/(this.carouselOptions.slidesToShow);
+            console.log("R ", ratio);
+            wrapper.css("width", ratio + "px");
         },
         getDimensions() {
             let positions = [];
@@ -231,7 +257,7 @@ export default {
             }
 
             this.positions = positions;            
-        }
+        },
     }
   }
 </script>
