@@ -1185,9 +1185,10 @@ body {
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: contain;
-            height: 50px;
-            width: 50px;
+            height: 75px;
+            width:8vw;
             outline: none;
+           
         }
         #right{
             background-color: transparent;
@@ -1196,9 +1197,10 @@ body {
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: contain;
-            height: 50px;
-            width: 50px;
+            height: 75px;
+            width:8vw;
             outline: none;
+           
         }
     }
 
@@ -1259,8 +1261,8 @@ body {
           }
           
           .tile-wrapper {
-            width: 130px;
-            height: 130px;
+            width: 0;
+            height: 180px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1274,8 +1276,9 @@ body {
             justify-content: center;
             font-size: 24px;
             position: relative;
-            width: 90px;
-            height: 90px;
+            width: 180px;
+            min-width: 180px;
+            height:180px;
             overflow: hidden;
             cursor: pointer;
             border-radius: 50%;
@@ -1292,7 +1295,7 @@ body {
             }
 
             img {
-                width: 50px;
+                width: 100px;
                 height: auto;
             }
           }   

@@ -70,6 +70,10 @@ export default {
             questionIndex: 0,
             selectedrole: '',
             food: data.food,
+            carouselOptions: {
+                slidesToShow: 5,
+                slidesToScroll: 5,
+            }
         }
     },
     computed: {
@@ -80,6 +84,7 @@ export default {
         this.scrollArrows();
         this.clone();
         this.getDimensions();
+        this.setCarousel();
     },
     created() {
     },
@@ -199,6 +204,28 @@ export default {
                 })
             });
         },
+        setCarousel(){
+            let content = $("#tile-container");
+            let box = $("#scroll-box");
+            let wrapper = $(".tile-wrapper");
+            let page = $(".piatto-clone");
+           // let wrapper = document.getElementsByClassName("tile-wrapper");
+            console.log("W", page.width());
+            let boxW=box.width()
+
+            var width = $(window).width();
+            console.log(width);
+            if (width <= 1200) {
+                this.carouselOptions.slidesToShow = 3;
+
+                console.log("STO RISETTANDO", this.carouselOptions.slidesToShow);
+
+            }
+            
+            let ratio=(boxW)/(this.carouselOptions.slidesToShow);
+            console.log("R ", ratio);
+            wrapper.css("width", ratio + "px");
+        },
         getDimensions() {
             let positions = [];
             let blocks = $(".blocks");
@@ -211,7 +238,7 @@ export default {
             }
 
             this.positions = positions;            
-        }
+        },
     }
   }
 </script>
