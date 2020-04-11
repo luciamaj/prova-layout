@@ -6,15 +6,7 @@
                 <div ref="right6" id="right6" class="right6 blocks rightblock"></div>
                 <div ref="right5" id="right5" class="right5 blocks rightblock"></div>
                 <div ref="right4" id="right4" class="right4 blocks rightblock"></div>
-                <div ref="right3" id="right3" class="right3 blocks rightblock"></div>
-                <div ref="right2" id="right2" class="right2 blocks rightblock"></div>
-                <div ref="right1" id="right1" class="right1 blocks rightblock"></div>
 
-                <div ref="left1" id="left6" class="left6 blocks leftblock"></div>
-                <div ref="left2" id="left5" class="left5 blocks leftblock"></div>
-                <div ref="left3" id="left4" class="left4 blocks leftblock"></div>
-                <div ref="left4" id="left3" class="left3 blocks leftblock"></div>
-                <div ref="left5" id="left2" class="left2 blocks leftblock"></div>
                 <div ref="left6" id="left1" class="left1 blocks leftblock"></div>
             </div>
         </div>
@@ -33,7 +25,7 @@
                         <div id="tile-container">
                             <template v-for="(cibo, index) in food">
                                 <div class="tile-wrapper">
-                                    <div class="tile">A</div>
+                                    <div :id="cibo.name" class="tile">A</div>
                                 </div>
                             </template>
                         </div>
@@ -69,10 +61,8 @@ function getPosition(wrapper, offset, container) {
 export default {
     components: { },
     data () {
-        return {                    // Store current question index
+        return {
             questionIndex: 0,
-            // An array initialized with "false" values for each question
-            // It means: "did the user answered correctly to the question n?" "no".
             selectedrole: '',
             food: data.food,
         }
@@ -143,6 +133,8 @@ export default {
             var dropPanel = $("#drop-panel");
             var tiles     = $(".tile");
 
+            let cane = this;
+
             tiles.each(function() {
                 var element = $(this);
                 var wrapper = element.parent();
@@ -160,7 +152,7 @@ export default {
                     get y() { return getPosition(wrapper, offset, container).y; }
                 };
 
-                console.log("THE ELEMENT", element);
+                console.log("THE ELEMENT", element.attr('id'));
 
                 const timeline = new TimelineLite();
 
@@ -168,16 +160,27 @@ export default {
                 //scope.draggable = createDraggable(scope);
 
                 element.click(function() {
-                    console.log("ho cliccato sugli elementi");
-                    TweenLite.set(scope.element, { autoAlpha: 0.5 });
-                    TweenLite.set(scope.clone1, { x: scope.x, y: scope.y, autoAlpha: 1 });
-                    TweenLite.set(scope.clone2, { x: scope.x, y: scope.y, autoAlpha: 1 });
+                    let foodElement = cane.food.find(cibo => cibo.name == element.attr('id'));
+                    let firstDestName = foodElement.destinations[0].dest;
+                    let secondDestName = foodElement.destinations[1].dest;
 
-                    console.log("POS", scope.x, scope.y);
+                    let dimRect1 = document.getElementById(firstDestName).getBoundingClientRect();
+                    console.log(dimRect1);
+                    let dimRect2 = document.getElementById(secondDestName).getBoundingClientRect();
+                    console.log(dimRect2);
+
+                    let dimElement = this.getBoundingClientRect();
 
 
-                    timeline.to(scope.clone1, 1, {left: 60 - scope.x, top: -400});
-                    timeline.to(scope.clone2, 1, {left: 180 - scope.x, top: -500});
+                    let yDish1 = dimRect1.y - dimElement.y;
+                    let yDish2 = dimRect2.y - dimElement.y;
+
+                    TweenLite.set(scope.element, { border: "solid 2px white" });
+                    TweenLite.set(scope.clone1, { x: scope.x, y: scope.y, autoAlpha: 1});
+                    TweenLite.set(scope.clone2, { x: scope.x, y: scope.y, autoAlpha: 1});
+
+                    timeline.to(scope.clone1, 1, {x: dimRect1.x, top: yDish1, scale: 0.5});
+                    timeline.to(scope.clone2, 1, {x: dimRect2.x, top: yDish2, scale: 0.5});
                 });
 
                 scope.clone1.click(function() {
@@ -190,11 +193,13 @@ export default {
             let blocks = $(".blocks");
 
             for(let block of blocks) {
+                console.log("THE IDS", block.id);
                 let toPush = {name: block.id, rect: document.getElementById(block.id).getBoundingClientRect()}
+                console.log("CHECK",  document.getElementById(block.id).getBoundingClientRect());
                 positions.push(toPush);
             }
-            
-            console.log(positions);
+
+            this.positions = positions;            
         }
     }
   }
