@@ -33,11 +33,7 @@
                                     <div id="tile-container">
                                         <template v-for="(piatto,index) in food" >
                                              <div class="tile-wrapper" v-bind:key="(piatto,index)" :id="piatto.id+'F'">
-                                                <div class="food-item item-to-move tile" :ref="piatto.id" :id="piatto.id" > 
-                                                    <div class="mainName">{{piatto.name}}</div>
-                                                    <div class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</div>
-                                                </div>
-                                                <div class="food-item tile"  :id="piatto.id+'1'"   v-on:click="enlight(piatto)"> 
+                                                <div class=" tile" :ref="piatto.id" :id="piatto.id" > 
                                                     <div class="mainName">{{piatto.name}}</div>
                                                     <div class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</div>
                                                 </div>
@@ -47,23 +43,9 @@
                                 </div>
                             </div>
                         </section>
+                        
                     </div>
-                    <!--slick ref="slick" :options="slickOptions" :arrows="true" >
-                        <template v-for="(piatto,index) in food" >
-                            <div v-bind:key="(piatto,index)" :id="piatto.id+'F'">
-                                
-                                <div class="food-item item-to-move" :ref="piatto.id" :id="piatto.id" > 
-                                    <div class="mainName">{{piatto.name}}</div>
-                                    <div class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</div>
-                                </div>
-                                <div class="food-item"  :id="piatto.id+'1'"   v-on:click="enlight(piatto)"> 
-                                    <div class="mainName">{{piatto.name}}</div>
-                                    <div class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</div>
-                                </div>
-                            </div>
-                        </template>
-                    </slick-->
-                
+                               
             </div>
         
     </div>
@@ -74,21 +56,31 @@
 
 
 import { TimelineLite } from 'gsap'
+import { TweenLite } from 'gsap'
 import gsap from 'gsap';
-import { Draggable } from 'gsap';
-import { data } from './../data/piatto.js'
-import Slick from 'vue-slick';
-import jquery from 'jquery';
-let $ = jquery;
+import Draggable from "gsap/Draggable";
+import { ScrollTo } from "gsap";
+import { data } from './../data/piatto.js';
+import JQuery from 'jquery';
+let $ = JQuery;
 
 const timeline = new TimelineLite();
+function getPosition(wrapper, offset, container) {
+  var position1 = wrapper.offset();
+  var position2 = container.offset();
+
+  return {
+    x: position1.left - position2.left + offset.left,
+    y: position1.top  - position2.top  + offset.top
+  };
+}
 
 
 export default {
-    components: { Slick },
+    //components: { Slick },
     data() {
         return {
-            slickOptions: {
+            /*slickOptions: {
                 slidesToShow: 5,
                 slidesToScroll: 5,
                  
@@ -98,14 +90,14 @@ export default {
                 draggable: true,
                 edgeFriction: 0.30,
                 swipe: true
-            },
+            },*/
             food:data.piatto,
             foodSelected:[]
         }
     },
     mounted() {
         this.scrollArrows();
-     
+        this.clone();
     },
     methods: {
         
@@ -117,17 +109,19 @@ export default {
             console.log("H", content.height());
 
             let offset = content.width() / $('.tile-wrapper').length;
+           
             const {top, left} = content.offset();
             const adjustment = 10;
             var isMoving = false;
 
             $('#left').click(function(e) {
                 console.log("click left");
+                console.log("offs", offset);
 
                 if (isMoving == false) {
                     isMoving = true;
                     $("#scroll-box").animate({
-                        scrollLeft: '-=120'
+                        scrollLeft: '-=1250'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
@@ -142,13 +136,72 @@ export default {
                     isMoving = true;
 
                     $("#scroll-box").animate({
-                        scrollLeft: '+=120'
+                        scrollLeft: '+=1250'
                     }, 500, 'swing', function () {
                         console.log("done");
                         isMoving = false;
                     });
                 }
             })
+        },
+
+        clone() {
+            var container = $("#clone-container");
+            var scrollBox = $("#scroll-box");
+            var dropPanel = $("#drop-panel");
+            var tiles     = $(".tile");
+            var threshold = "50%";
+
+           
+            tiles.each(function() {
+                var element = $(this);
+                var wrapper = element.parent();
+                var offset  = element.position();
+
+                var scope = {
+                    clone1   : element.clone().addClass("clone").addClass("clone1").prependTo(container),
+                    element : element,
+                    wrapper : wrapper,
+                    width   : wrapper.outerWidth(),
+                    dropped : false,
+                    moved   : false,
+                    get x() { return getPosition(wrapper, offset, container).x; },
+                    get y() { return getPosition(wrapper, offset, container).y; }
+                };
+
+                console.log("THE ELEMENT", element);
+
+                
+
+
+                //scope.draggable = createDraggable(scope);
+
+                element.click(function() {
+                    let dish=document.getElementById("dish-2");
+                    let dimsDish;
+                    let dimelement;
+                    dimsDish=dish.getBoundingClientRect();
+                    dimelement=this.getBoundingClientRect();
+                    console.log("dimss "+dimsDish.x+" "+ dimsDish.y  );
+                    console.log("dimss me "+dimelement.x+" "+ dimelement.y  );
+                    let xDish=dimsDish.x-scope.x;
+                    let yDish=dimsDish.y-dimelement.y;
+                    console.log("diff "+xDish+" "+yDish);
+                    console.log("ho cliccato sugli elementi");
+                    TweenLite.set(scope.element, { autoAlpha: 0.9, border: "solid 2px white" });
+                    TweenLite.set(scope.clone1, { x: scope.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
+
+                    console.log("POS", scope.x, scope.y);
+                   // this.foodSelected.push(element);
+                    // console.log("sel", this.foodSelected);
+                    timeline.to(scope.clone1, 1, {x:dimsDish.x, top: yDish});
+                   
+                });
+
+                scope.clone1.click(function() {
+                    console.log("ho cliccato sui cloni");
+                })
+            });
         },
         enlight(piatto){
             let divCaro=document.getElementById(piatto.id+'1');
