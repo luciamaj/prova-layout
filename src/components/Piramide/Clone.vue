@@ -40,6 +40,7 @@
 <script>
 
 import { TimelineLite } from 'gsap'
+import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { TweenLite } from 'gsap'
 import gsap from 'gsap';
 import Draggable from "gsap/Draggable";
@@ -49,6 +50,8 @@ import JQuery from 'jquery';
 let $ = JQuery;
 
 console.log(data);
+
+console.log("SCROLLTO", ScrollToPlugin);
 
 function getPosition(wrapper, offset, container) {
   var position1 = wrapper.offset();
@@ -73,6 +76,7 @@ export default {
       //
     },
     mounted() {
+        gsap.registerPlugin(ScrollToPlugin);
         this.scrollArrows();
         this.clone();
         this.getDimensions();
@@ -99,33 +103,27 @@ export default {
             const {top, left} = content.offset();
             const adjustment = 10;
             var isMoving = false;
+            let el = $("#scroll-box");
 
             $('#left').click(function(e) {
                 console.log("click left");
-
-                if (isMoving == false) {
-                    isMoving = true;
-                    $("#scroll-box").animate({
-                        scrollLeft: '-=130'
-                    }, 500, 'swing', function () {
-                        console.log("done");
-                        isMoving = false;
-                    });
-                }
+                    if(isMoving == false) {
+                        isMoving = true;
+                        gsap.to(el, 0.8, {scrollTo: {x: '-= 130'}, onComplete: function() {
+                            console.log("complete");
+                            isMoving = false;
+                        }})
+                    }
             });
 
             $('#right').click(function(e) {
                 console.log("clickright");
-                
                 if (isMoving == false) {
                     isMoving = true;
-
-                    $("#scroll-box").animate({
-                        scrollLeft: '+=130'
-                    }, 500, 'swing', function () {
-                        console.log("done");
+                    gsap.to(el, 0.8, {scrollTo: {x: '+= 130'}, onComplete: function() {
+                        console.log("complete");
                         isMoving = false;
-                    });
+                    }})
                 }
             })
         },
