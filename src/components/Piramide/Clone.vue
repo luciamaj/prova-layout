@@ -73,10 +73,13 @@ export default {
             food: data.food,
             carouselOptions: {
                 slidesToShow: 7,
-                slidesToScroll: 2,
+                slidesToScroll: 1,
             },
             ratio: 0,
-            scopes: []
+            scopes: [],
+            step: 0,
+            leftArrowHidden: false,
+            rightArrowHidden: false
         }
     },
     mounted() {
@@ -188,7 +191,9 @@ export default {
             TweenLite.set(scope.clone1, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
             TweenLite.set(scope.clone2, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
         },
-        setCarousel(){
+        setCarousel() {
+            let leftArrow = $("#left");
+            TweenLite.set(leftArrow, { autoAlpha: 0});
             let content = $("#tile-container");
             let box = $("#scroll-box");
             let wrapper = $(".tile-wrapper");
@@ -225,6 +230,7 @@ export default {
             this.positions = positions;            
         },
         clickedArrow(direction) {
+            console.log("THE STEP:", this.step);
             console.log("CLICKED THE DIRECTION", direction);
             let content = $("#tile-container");
             let tileWrapper = $(".tile-wrapper");
@@ -233,13 +239,37 @@ export default {
             const {top, left} = content.offset();
             var isMoving = false;
             let el = $("#scroll-box");
+            let rightArrow = $("#right");
+            let leftArrow = $("#left");
+
+            let maxStep = this.food.length - this.carouselOptions.slidesToShow;
 
             if(isMoving == false) {
                 isMoving = true;
                 let xMove = '';
                 if (direction == 'left') {
+                    console.log("the stepppppp", this.step);
+                    //this.step -= 1;
+                    if (this.step != 0) {
+                        this.step -= this.carouselOptions.slidesToScroll;
+                        TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
+                        if (this.step <= 0) {
+                            this.leftArrowHidden = true;
+                            TweenLite.to(leftArrow, 0.5, { autoAlpha: 0});
+                        }
+                    }
+                    console.log("MAXSTEP", maxStep, this.step);
                     xMove = '-= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
                 } else {
+                    if (this.step < maxStep) {
+                        this.step += this.carouselOptions.slidesToScroll;
+                        this.leftArrowHidden = false;
+                        TweenLite.to(leftArrow, 0.5, { autoAlpha: 1});
+                        if (this.step >= maxStep) {
+                            TweenLite.to(rightArrow, 0.5, { autoAlpha: 0});
+                        }
+                    }
+                    console.log("MAXSTEP", maxStep, this.step);
                     xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
                 }
                 gsap.to(el, 0.8, {scrollTo: {x: xMove}, onComplete: function() {
