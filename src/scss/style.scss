@@ -172,147 +172,6 @@ body {
         }
     }
 }  
-// APP PIRAMIDE
-.piramide {
-    .sotto {
-        height: 100%;
-        width: 100%;
-        background-color: red;
-        flex-grow : 1;
-        flex: 1;
-    }
-
-    .slick-slider{
-        display: inline-flex;
-    }
-
-    .slick-arrow {
-        background-color: transparent;
-        border: 0;
-        height: 50px;
-        width: 40px;
-        font-size: 0;
-    }
-
-    .slick-prev {
-        background-image:url("/static/general/arrow_sx.png") ;
-        background-position: center; /* Center the image */
-        background-repeat: no-repeat; /* Do not repeat the image */
-        background-size: contain;
-        float: left;
-    }
-
-    .slick-next{
-        background-image: url("/static/general/arrow_dx.png");
-        background-position: center; /* Center the image */
-        background-repeat: no-repeat; /* Do not repeat the image */
-        background-size: contain;
-        float: right;
-    }
-
-    .slick-list{
-        width: 80vw;
-        margin: auto;
-    }
-    .slick-track{
-        display: flex;
-    }
-
-    .button-footer {
-        background-color: blueviolet;
-        height: 100px;
-    }
-    
-    .left {
-        background: grey;  
-      }
-      
-    .right {
-        background: black;  
-    }
-    
-    .piramide-container {
-        background-color: blue;
-        width: 100%;
-        height: 100%;
-        img {
-            width: 60px;
-            height: 60px;
-        }
-    }
-
-    .piramide-sections-container {
-        background-image: url("/static/piramide/piramidi.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        padding: 30px;
-        width: 100%;
-        height: 100%;
-    }
-
-    .piramide-section {
-        width: 100%;
-        height: 16.55%;
-        background-color: blanchedalmond;
-        opacity: 0.5;
-        margin: 1px;
-    }
-    
-    .resetbtn-container {
-        height: 10%;  
-        display: flex;
-        width: 100%;
-        margin: auto;
-        background-color: cornflowerblue;
-        cursor: pointer;
-    }
-
-    #button-reset {
-        text-align: center;
-        width: 100%;
-        vertical-align: middle;
-        margin: auto; /* Important */ 
-        font-size: large;
-        font-weight: 700;
-        color: white;
-    }
-    
-    .fooditem {
-        width: 50px;
-        height: 50px;
-        position: relative;
-        margin-left: 40%;
-        margin-top: 10px;
-
-        img {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 100px;
-        }
-    }
-    
-    .section {
-        height: 100%;  
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .half {
-        background: #f9f9f9;
-        height: 50%;  
-        width: 100%;
-        margin: 15px 0;
-    }
-    
-    h4 {
-        color: white;  
-    }
-}
-
-
 
 //APP PIATTO VIRTUALE
 
@@ -553,7 +412,7 @@ body {
 
 //APP PIATTO CLONE
 
-.piatto-clone{
+.piatto-clone {
     font-family: sans-serif;
     background-color: black;
     color: white;
@@ -914,15 +773,12 @@ body {
 }
 
 
-// NEW
-.new {
-    font-family: sans-serif;
+// clone 
+.clone-piramide {
+    height: 100vh;
     background-color: black;
-    color: white;
-    text-align: center;
-    height: 90vh;
-    .over{
-       
+
+    #over {  
         position: absolute;
         top: 0;
         z-index: 20;
@@ -930,217 +786,63 @@ body {
         width: 100%;
         text-align: center;
         background-color: blanchedalmond;
-        animation-name: curtain;
-        animation-delay: 1s;
-        animation-duration:3s;
-        animation-fill-mode: both;
+
+        #name-game {
+            position: absolute;
+            width: 30%;
+            top: 10%;
+            left: 10%;
+            background-color:#98bc1f;
+            color: white;
+        }
+          
+        #name-game:after {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+
+        #start-game {
+            position: absolute;
+            width: 30%;
+            height: 10%;
+            top: 60%;
+            left: 10%;
+            background-color: #f59d08;
+            color: white;
+            font-size: 5vh;
+            cursor: pointer;
+        }
        
         img{
-            width: 90vh;
+            width: auto;
             height: 100vh;
         }
-
-    }
-    .topPart{
-        margin: 0;
-        img{
-            width: 100%;
-            height: 350px;
-        }
-        .over-vassoio{
-            position: absolute;
-            top: 0;
-            height:450px ;
-            width: inherit;
-            //border: solid 1px green;
-
-            .dish-1{
-                width: 180px;
-                height: 180px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-222px, -184px);
-                border: 1px solid gray;
-                background-color: gray;
-                opacity: 0.3;
-                border-radius: 50%;
-               
-                /*animation-name: none;
-                animation-duration: 2.5s;
-                animation-fill-mode: both;*/
-                
-                img{
-                    border-radius: 50%;
-                    object-fit: cover;
-                    width: 100%;
-                    height: 100%;
-                }
-                
-            }
-            .dish-2{
-                width: 180px;
-                height: 180px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(13px, -184px);
-                border: 1px solid gray;
-                background-color: gray;
-                opacity: 0.3;
-                border-radius: 50%;
-            }
-            .dish-3{
-                width: 180px;
-                height: 180px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-222px, 4px);
-                border: 1px solid gray;
-                background-color: gray;
-                opacity: 0.3;
-                border-radius: 50%;
-            }
-            .dish-4{
-                width: 180px;
-                height: 180px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(13px, 4px);
-                border: 1px solid gray;
-                background-color: gray;
-                opacity: 0.3;
-                border-radius: 50%;
-            }
-        }
-
-        .btn-control{ 
-            
-            width:70px;
-            height:70px;
-           
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
-            background-size: contain;
-            background-color: transparent;
-            border: 0;
-        }
-        .btn-label{
-            margin-top: 5px;
-            text-transform: uppercase;
-            font-size: 1.05rem;
-           
-        }
-        .cancella{
-            background-image: url("/static/piatto_virtuale/cancella.png");
-        }
-        .fine{
-            background-image: url("/static/piatto_virtuale/fine.png");
-        }
-        h3{
-            font-weight: 700;
-            color: whitesmoke;
-        }
-        
     }
 
-    .foodList{
+    #over-ending {  
         position: absolute;
-        vertical-align: middle;
-        height: 70vh;
+        top: 0;
+        opacity: 0;
+        z-index: -2;
+        visibility:visible;
         width: 100%;
-        border: solid 1px blue;
-
-        .slick-slider{
-            display: inline-flex;
-            z-index: 10;
-        }
-        .slick-arrow{
-            background-color: transparent;
-            border: 0;
-            height: 60px;
-            width: 50px;
-            font-size: 0;
-            margin: 40px auto;
-            position: relative;
-            top: 70vh;
-        }
-        .slick-prev{
-            background-image:url("/static/general/arrow_sx.png") ;
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
-            background-size: contain;
-            float: left;
-        }
-        .slick-next{
-            background-image: url("/static/general/arrow_dx.png");
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
-            background-size: contain;
-            float: right;
-        }
-
-        .slick-list{
-            width: 80vw;
-            height: 92vh;
-            margin: auto;
-            top:0;
-        
-        }
-        .slick-track{
-            display: flex;
-            top: 80%;
-        }
-
+        text-align: center;
+        background-color: azure;
+        height: 100%;
     }
 
-    .food-item{
-        height: 100px;
-        max-width: 100px;
-        color: white;
-        font-weight: 700;
-        position: relative;
-        text-transform: uppercase;
-        animation-name: none;
-        animation-duration:3s;
-        animation-fill-mode: both;
-        border: solid 1px red ;
-        border-radius: 50%;
-
-        .mainName{
-            font-size: 1.8rem;
-        }
-        .secondName{
-            font-size: .8rem;
-            // position: relative; */
-            //bottom: 10px;
-        }
-
-        img {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 100px;
-        }
-
-
-    }
-
-    .clone {
+    .topright {
         position: absolute;
-        visibility: hidden;
+        top: 16px;
+        right: 16px;
+        font-size: 18px;
+        width: 100px;
+        height: 100px;
+        background-image: url('/static/piramide/cancella.png');
+        background-size: contain;
+        cursor: pointer;
     }
-
-    
-
-}
-
-
-// clone 
-.clone-piramide {
-    height: 100vh;
-    background-color: black;
 
     .piramide-cont {
         height: 75vh;
@@ -1261,13 +963,9 @@ body {
               visibility: hidden;
               cursor: default !important;
             }
-          
-            &.dropped {
-              background: cornflowerblue;
-            }
 
             img {
-                width: 80px;
+                width: 60px;
                 height: auto;
             }
           }   
