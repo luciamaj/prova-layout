@@ -172,10 +172,8 @@ export default {
 
                         element.addClass("cloned");
 
-
-
-                        timeline.to(scope.clone1, 1, {x: dimRect1.x, top: yDish1, scale: 0.3});
-                        timeline.to(scope.clone2, 1, {x: dimRect2.x, top: yDish2, scale: 0.3});
+                        timeline.to(scope.clone1, 0.8, {x: dimRect1.x, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.3});
+                        timeline.to(scope.clone2, 0.8, {x: dimRect2.x, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.3});
                         scope.clone1.addClass('moved');
                         scope.clone2.addClass('moved');
                     }                   
@@ -251,7 +249,10 @@ export default {
             }
         },
         resetPositions() {
-            //console.log("I CLICKED ON RESET POSITIONS", this.scopes);
+            const timeline = new TimelineLite({onComplete: function() {
+                console.log("COMPLETED TIMELINE");
+            }});
+
             let cloned = $('.moved');
             var container = $("#clone-container");
 
@@ -268,9 +269,11 @@ export default {
                         console.log("SONO QUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII", element);
                         if (this.initial) {
                             console.log("INITIALLLLLLLLL", this.initial);
-                            TweenLite.set(scope.element, { border: "solid 0px black" });
-                            TweenLite.set(scope.clone1, { top: 0, left: 0, autoAlpha: 0, scale: 1});
-                            TweenLite.set(scope.clone2, { top: 0, left: 0, autoAlpha: 0, scale: 1});
+                            timeline.to(scope.clone1, 1, { autoAlpha: 0 }, "alpha")
+                            .to(scope.clone2, 1, { autoAlpha: 0}, "alpha")
+                            .to(scope.element, 1, { border: "solid 0px black" }, "alpha")
+                            .set(scope.clone1, { top: 0, left: 0, scale: 1})
+                            .set(scope.clone2, { top: 0, left: 0, scale: 1});
                         }
                     }
                 }
