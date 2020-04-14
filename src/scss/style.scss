@@ -1166,6 +1166,48 @@ body {
     height: 100vh;
     background-color: black;
 
+    #over {  
+        position: absolute;
+        top: 0;
+        z-index: 20;
+        visibility:visible;
+        width: 100%;
+        text-align: center;
+        background-color: blanchedalmond;
+
+        #name-game {
+            position: absolute;
+            width: 30%;
+            top: 10%;
+            left: 10%;
+            background-color:#98bc1f;
+            color: white;
+        }
+          
+        #name-game:after {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+
+        #start-game {
+            position: absolute;
+            width: 30%;
+            height: 10%;
+            top: 60%;
+            left: 10%;
+            background-color: #f59d08;
+            color: white;
+            font-size: 5vh;
+            cursor: pointer;
+        }
+       
+        img{
+            width: auto;
+            height: 100vh;
+        }
+    }
+
     .topright {
         position: absolute;
         top: 16px;

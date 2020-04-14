@@ -1,23 +1,21 @@
 <template>
   <div class="piramide-homepage">
-    <div class="main-wrapper">
-                    <button v-on:click="move">MOVE</button>
-        <div class="content">
-            <component ref="cane" v-bind:is="homepage"></component>
-            <component ref="gatto" v-bind:is="app"></component>
-        </div>
-    </div>            
+      <div class="content">
+          <h1 style="color: white;">{{ message }}</h1>
+          <child v-on:listenerChild="listenerChild"/>
+          <component @inputPage="changePage()" ref="page" v-bind:is="this.currentPage"></component>
+      </div>
   </div>
 </template>
 
 <script>
 import homepage from './PiramideHomepage';
-import app from './PiramideApp';
+import app from './Clone';
 import gsap from 'gsap';
 import Draggable from "gsap/Draggable";
 import { TimelineLite } from 'gsap';
 import { TweenMax } from 'gsap';
-import { CSSPlugin } from 'gsap/CSSPlugin'
+import { CSSPlugin } from 'gsap/CSSPlugin';
 import JQuery from 'jquery';
 let $ = JQuery;
 
@@ -31,10 +29,21 @@ export default {
         return {
             homepage: homepage,
             app: app,
+            currentPage: homepage,
+            message: "Where are you, my Child?"
         }
+    },
+    components: {
+      app,
+      homepage
     },
     computed: {
       //
+    },
+    methods: {
+      listenerChild(reply) {
+        this.message = reply;
+      }
     },
     mounted() {
         

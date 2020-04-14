@@ -2,10 +2,7 @@
   <div class="piramide-homepage">
     <div class="main-wrapper">
         <div class="content">
-             <div style="background-color: red;  height: 100%;">
-                <a href="#/piramide">pira</a>
-             </div>
-             <div style="background-color: blue; height: 100%; display: none">CONTENT 2</div>
+            <button @click="replyDaddy">Reply Daddy</button>
         </div>
     </div>            
   </div>
@@ -17,7 +14,6 @@ import Draggable from "gsap/Draggable";
 import { TimelineLite } from 'gsap';
 import { TweenMax } from 'gsap';
 import JQuery from 'jquery';
-let $ = JQuery;
 
 let intro = { template: "#intro-template" };
 console.log("THE INTRO", TweenMax);
@@ -40,6 +36,9 @@ export default {
         //
     },
     methods: {
+        replyDaddy() {
+            this.$emit("listenerChild", "I'm here my Daddy!");
+        },
         appear(el, done) {
             this.tweenIn( el, done );
         },

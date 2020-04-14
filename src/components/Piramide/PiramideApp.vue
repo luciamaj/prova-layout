@@ -3,7 +3,7 @@
     <div class="main-wrapper">
         <div class="content">
              <div style="background-color: blue;  height: 100%;">
-                <a href="#/piramide">pira</a>
+                <a href="#/piramide">piramide</a>
              </div>
              <div style="background-color: blue; height: 100%; display: none">CONTENT 2</div>
         </div>
@@ -23,7 +23,6 @@ let intro = { template: "#intro-template" };
 console.log("THE INTRO", TweenMax);
 
 export default {
-    name: 'app',
     components: { },
     data () {
         return {

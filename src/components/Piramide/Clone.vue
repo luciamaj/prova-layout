@@ -1,5 +1,10 @@
 <template>
     <main class="clone-piramide">
+        <div id="over">
+            <div id="name-game"></div>
+            <div v-on:click="hideStart()" id="start-game">START GAME</div>
+            <img src="../../assets/cammello.jpg" alt="">
+        </div>
         <div class="piramide-cont">
             <div class="section-container">
                 <center><img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image"></center>
@@ -65,6 +70,7 @@ function getPosition(wrapper, offset, container) {
 }
 
 export default {
+    name: "app",
     components: { },
     data () {
         return {
@@ -89,6 +95,15 @@ export default {
         this.setCarousel();
     },
     created() {
+    },
+    transition: {
+        enter(el, done) {
+            console.log("SONO QUIIIIhgri oruoire hotoiehyoi");
+            TweenLite.to(el, 1, {
+                opacity: 1,
+                onComplete: done
+            });
+        },
     },
     methods: {
         clone() {
@@ -310,6 +325,12 @@ export default {
             } else {
                 console.log("nothing to reset");
             }
+        },
+        hideStart() {
+            console.log("HIDE START");
+            let startPage = $('#over');
+
+            TweenLite.to(startPage, 1, { autoAlpha: 0 })
         }
     }
   }
