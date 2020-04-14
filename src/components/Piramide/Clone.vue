@@ -5,6 +5,9 @@
             <div v-on:click="hideStart()" id="start-game">START GAME</div>
             <img src="../../assets/cammello.jpg" alt="">
         </div>
+        <div id="over-ending">
+            ENDING!
+        </div>
         <div class="piramide-cont">
             <div class="section-container">
                 <center><img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image"></center>
@@ -84,8 +87,7 @@ export default {
             ratio: 0,
             scopes: [],
             step: 0,
-            leftArrowHidden: false,
-            rightArrowHidden: false
+            foodMoved: 0,
         }
     },
     mounted() {
@@ -141,11 +143,17 @@ export default {
 
                 const timeline = new TimelineLite({onComplete: function() {
                     console.log("COMPLETED TIMELINE");
+                    console.log(that.food.length, that.foodMoved);
+                    if (that.foodMoved == that.food.length) {
+                        console.log("HO FINITOOOOO");
+                        that.showEnding();
+                    }
                 }});
 
                 element.click(function() {
+                    that.foodMoved += 1;
+
                     if (!(element.hasClass('cloned'))) {
-                        console.log("THAT", that);
                         let scopeToChange = that.scopes.find(scope => scope.name == element.attr('id'));
                         if (scopeToChange) {
                             console.log("CHANGING TO TRUEEEEEEEEEEEEEEEE")
@@ -269,7 +277,6 @@ export default {
                         this.step -= this.carouselOptions.slidesToScroll;
                         TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
                         if (this.step <= 0) {
-                            this.leftArrowHidden = true;
                             TweenLite.to(leftArrow, 0.5, { autoAlpha: 0});
                         }
                     }
@@ -278,7 +285,6 @@ export default {
                 } else {
                     if (this.step < maxStep) {
                         this.step += this.carouselOptions.slidesToScroll;
-                        this.leftArrowHidden = false;
                         TweenLite.to(leftArrow, 0.5, { autoAlpha: 1});
                         if (this.step >= maxStep) {
                             TweenLite.to(rightArrow, 0.5, { autoAlpha: 0});
@@ -300,6 +306,7 @@ export default {
 
             let cloned = $('.moved');
             var container = $("#clone-container");
+            this.foodMoved = 0;
 
             if (cloned.length > 0) {
                 console.log("THE CLONED", cloned);
@@ -330,7 +337,14 @@ export default {
             console.log("HIDE START");
             let startPage = $('#over');
 
-            TweenLite.to(startPage, 1, { autoAlpha: 0 })
+            TweenLite.to(startPage, 1, { autoAlpha: 0 });
+        },
+        showEnding() {
+            console.log("SHOW ENDING");
+            let endingPage = $('#over-ending');
+
+            TweenLite.set(endingPage, { zIndex: 35 });
+            TweenLite.to(endingPage, 1, { autoAlpha: 1 });
         }
     }
   }
