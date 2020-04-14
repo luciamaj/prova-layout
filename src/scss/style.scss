@@ -173,7 +173,6 @@ body {
     }
 }  
 
-
 //APP PIATTO VIRTUALE
 
 .piatto{
@@ -993,13 +992,9 @@ body {
               visibility: hidden;
               cursor: default !important;
             }
-          
-            &.dropped {
-              background: cornflowerblue;
-            }
 
             img {
-                width: 80px;
+                width: 60px;
                 height: auto;
             }
           }   
