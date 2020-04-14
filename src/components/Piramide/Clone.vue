@@ -88,18 +88,6 @@ export default {
     created() {
     },
     methods: {
-         setCarousel(){
-            let content = $("#tile-container");
-            let box = $("#scroll-box");
-            let wrapper = $(".tile-wrapper");
-            let page = $(".piatto-clone");
-            console.log("W", page.width());
-            let boxW=box.width()
-            let ratio=(boxW)/(this.carouselOptions.slidesToShow);
-            console.log("R ", ratio);
-            this.ratio = ratio;
-            wrapper.css("width", ratio + "px");
-        },
         clone() {
             var container = $("#clone-container");
             var scrollBox = $("#scroll-box");
