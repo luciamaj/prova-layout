@@ -72,12 +72,10 @@ export default {
             food: data.food,
             carouselOptions: {
                 slidesToShow: 7,
-                slidesToScroll: 7,
-            }
+                slidesToScroll: 2,
+            },
+            ratio: 0
         }
-    },
-    computed: {
-      //
     },
     mounted() {
         gsap.registerPlugin(ScrollToPlugin);
@@ -88,47 +86,37 @@ export default {
     },
     created() {
     },
-    watch: {
-      selectedrole: function(newRole)
-      {
-        console.log("NEWROLE", newRole);
-        this.selectedrole = newRole;
-        console.log("SELECTED ROLE", this.selectedrole);
-      }
-    },
     methods: {
          setCarousel(){
             let content = $("#tile-container");
             let box = $("#scroll-box");
             let wrapper = $(".tile-wrapper");
             let page = $(".piatto-clone");
-           // let wrapper = document.getElementsByClassName("tile-wrapper");
             console.log("W", page.width());
             let boxW=box.width()
             let ratio=(boxW)/(this.carouselOptions.slidesToShow);
-             console.log("R ", ratio);
-             wrapper.css("width", ratio + "px")
-           
-            
+            console.log("R ", ratio);
+            this.ratio = ratio;
+            wrapper.css("width", ratio + "px");
         },
         scrollArrows() {
             let content = $("#tile-container");
             let box = $("#scroll-box");
-
-            console.log("W", content.width());
-            console.log("H", content.height());
-
+            let tileWrapper = $(".tile-wrapper");
+            let widthComponent = tileWrapper[0].getBoundingClientRect().x;
             let offset = content.width() / $('.tile-wrapper').length;
             const {top, left} = content.offset();
             const adjustment = 10;
             var isMoving = false;
             let el = $("#scroll-box");
+            let that = this;
 
             $('#left').click(function(e) {
                 console.log("click left");
                     if(isMoving == false) {
                         isMoving = true;
-                        gsap.to(el, 0.8, {scrollTo: {x: '-= 130'}, onComplete: function() {
+                        let xMove = '-= ' + (that.ratio * that.carouselOptions.slidesToScroll) + '' 
+                        gsap.to(el, 0.8, {scrollTo: {x: xMove}, onComplete: function() {
                             console.log("complete");
                             isMoving = false;
                         }})
@@ -139,7 +127,8 @@ export default {
                 console.log("clickright");
                 if (isMoving == false) {
                     isMoving = true;
-                    gsap.to(el, 0.8, {scrollTo: {x: '+= 130'}, onComplete: function() {
+                    let xMove = '+= ' + (that.ratio * that.carouselOptions.slidesToScroll) + '' 
+                    gsap.to(el, 0.8, {scrollTo: {x: xMove}, onComplete: function() {
                         console.log("complete");
                         isMoving = false;
                     }})
@@ -152,7 +141,7 @@ export default {
             var dropPanel = $("#drop-panel");
             var tiles     = $(".tile");
 
-            let cane = this;
+            let that = this;
 
             tiles.each(function() {
                 var element = $(this);
@@ -175,11 +164,8 @@ export default {
 
                 const timeline = new TimelineLite();
 
-
-                //scope.draggable = createDraggable(scope);
-
                 element.click(function() {
-                    let foodElement = cane.food.find(cibo => cibo.name == element.attr('id'));
+                    let foodElement = that.food.find(cibo => cibo.name == element.attr('id'));
                     let firstDestName = foodElement.destinations[0].dest;
                     let secondDestName = foodElement.destinations[1].dest;
 
@@ -204,14 +190,14 @@ export default {
                     let yDish2 = (dimRect2.y - dimRect2.height /2)- dimElement.y;
 
                     console.log("el", scope.element.position().left);
-                     console.log("offs", offset.left);
+                    console.log("offs", offset.left);
                     console.log("x", scope.x);
 
                     TweenLite.set(scope.element, { border: "solid 2px white" });
                     TweenLite.set(scope.clone1, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
                     TweenLite.set(scope.clone2, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
 
-                     console.log("cl", scope.clone1.position().left);
+                    console.log("cl", scope.clone1.position().left);
                     setTimeout(() => {
                         timeline.to(scope.clone1, 1, {x: dimRect1.x, top: yDish1, scale: 0.3});
                         timeline.to(scope.clone2, 1, {x: dimRect2.x, top: yDish2, scale: 0.3});
@@ -228,7 +214,6 @@ export default {
             let box = $("#scroll-box");
             let wrapper = $(".tile-wrapper");
             let page = $(".piatto-clone");
-           // let wrapper = document.getElementsByClassName("tile-wrapper");
             console.log("W", page.width());
             let boxW=box.width()
 
@@ -242,6 +227,8 @@ export default {
             }
             
             let ratio=(boxW)/(this.carouselOptions.slidesToShow);
+            this.ratio = ratio;
+            console.log("THE RATIOOO VOEGBIUWrbiurwBUiu", this.ratio);
             console.log("R ", ratio);
             wrapper.css("width", ratio + "px");
         },
