@@ -3,6 +3,7 @@
         <div class="piramide-cont">
             <div class="section-container">
                 <center><img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image"></center>
+                <div class="topright"></div>
                 <div ref="right6" id="right6" class="right6 blocks rightblock"></div>
                 <div ref="right5" id="right5" class="right5 blocks rightblock"></div>
                 <div ref="right4" id="right4" class="right4 blocks rightblock"></div>
@@ -12,11 +13,11 @@
         </div>
         <div class="carousel"> 
             <div class="left arrow">
-                <button id="left">
+                <button v-on:click="clickedArrow('left')" id="left">
                 </button>
             </div>
             <div class="right arrow">
-                <button id="right">
+                <button v-on:click="clickedArrow('right')" id="right">
                 </button>
             </div>
             <section id="top-bar">
@@ -79,7 +80,6 @@ export default {
     },
     mounted() {
         gsap.registerPlugin(ScrollToPlugin);
-        this.scrollArrows();
         this.clone();
         this.getDimensions();
         this.setCarousel();
@@ -98,42 +98,6 @@ export default {
             console.log("R ", ratio);
             this.ratio = ratio;
             wrapper.css("width", ratio + "px");
-        },
-        scrollArrows() {
-            let content = $("#tile-container");
-            let box = $("#scroll-box");
-            let tileWrapper = $(".tile-wrapper");
-            let widthComponent = tileWrapper[0].getBoundingClientRect().x;
-            let offset = content.width() / $('.tile-wrapper').length;
-            const {top, left} = content.offset();
-            const adjustment = 10;
-            var isMoving = false;
-            let el = $("#scroll-box");
-            let that = this;
-
-            $('#left').click(function(e) {
-                console.log("click left");
-                    if(isMoving == false) {
-                        isMoving = true;
-                        let xMove = '-= ' + (that.ratio * that.carouselOptions.slidesToScroll) + '' 
-                        gsap.to(el, 0.8, {scrollTo: {x: xMove}, onComplete: function() {
-                            console.log("complete");
-                            isMoving = false;
-                        }})
-                    }
-            });
-
-            $('#right').click(function(e) {
-                console.log("clickright");
-                if (isMoving == false) {
-                    isMoving = true;
-                    let xMove = '+= ' + (that.ratio * that.carouselOptions.slidesToScroll) + '' 
-                    gsap.to(el, 0.8, {scrollTo: {x: xMove}, onComplete: function() {
-                        console.log("complete");
-                        isMoving = false;
-                    }})
-                }
-            })
         },
         clone() {
             var container = $("#clone-container");
@@ -165,43 +129,44 @@ export default {
                 const timeline = new TimelineLite();
 
                 element.click(function() {
-                    let foodElement = that.food.find(cibo => cibo.name == element.attr('id'));
-                    let firstDestName = foodElement.destinations[0].dest;
-                    let secondDestName = foodElement.destinations[1].dest;
+                    if (!(element.hasClass('cloned'))) {
+                        let foodElement = that.food.find(cibo => cibo.name == element.attr('id'));
+                        let firstDestName = foodElement.destinations[0].dest;
+                        let secondDestName = foodElement.destinations[1].dest;
 
-                    let dimRect1 = document.getElementById(firstDestName).getBoundingClientRect();
-                    console.log(dimRect1);
-                    let dimRect2 = document.getElementById(secondDestName).getBoundingClientRect();
-                    console.log(dimRect2);
+                        let dimRect1 = document.getElementById(firstDestName).getBoundingClientRect();
+                        console.log(dimRect1);
+                        let dimRect2 = document.getElementById(secondDestName).getBoundingClientRect();
+                        console.log(dimRect2);
 
-                    let dimElement = this.getBoundingClientRect();
+                        let dimElement = this.getBoundingClientRect();
 
-                    console.log(dimRect1);
+                        console.log(dimRect1);
 
-                    var centerX = dimRect1.left + dimRect1.width / 2;
+                        var centerX = dimRect1.left + dimRect1.width / 2;
 
-                    console.log(dimRect1);
-                    console.log("CENTERX", centerX);
+                        console.log(dimRect1);
+                        console.log("CENTERX", centerX);
 
-                    var centerY = dimRect1.top + (dimRect1.height / 2);
+                        var centerY = dimRect1.top + (dimRect1.height / 2);
 
 
-                    let yDish1 = (dimRect1.y - dimRect1.height /2) - dimElement.y;
-                    let yDish2 = (dimRect2.y - dimRect2.height /2)- dimElement.y;
+                        let yDish1 = (dimRect1.y - dimRect1.height /2) - dimElement.y;
+                        let yDish2 = (dimRect2.y - dimRect2.height /2)- dimElement.y;
 
-                    console.log("el", scope.element.position().left);
-                    console.log("offs", offset.left);
-                    console.log("x", scope.x);
+                        console.log("el", scope.element.position().left);
+                        console.log("offs", offset.left);
+                        console.log("x", scope.x);
 
-                    TweenLite.set(scope.element, { border: "solid 2px white" });
-                    TweenLite.set(scope.clone1, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
-                    TweenLite.set(scope.clone2, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
+                        TweenLite.set(scope.element, { border: "solid 2px white" });
+                        TweenLite.set(scope.clone1, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
+                        TweenLite.set(scope.clone2, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
+                        element.addClass("cloned");
 
-                    console.log("cl", scope.clone1.position().left);
-                    setTimeout(() => {
+                        console.log("cl", scope.clone1.position().left);
                         timeline.to(scope.clone1, 1, {x: dimRect1.x, top: yDish1, scale: 0.3});
                         timeline.to(scope.clone2, 1, {x: dimRect2.x, top: yDish2, scale: 0.3});
-                    }, 200);
+                    }                   
                 });
 
                 scope.clone1.click(function() {
@@ -245,6 +210,30 @@ export default {
 
             this.positions = positions;            
         },
+        clickedArrow(direction) {
+            console.log("CLICKED THE DIRECTION", direction);
+            let content = $("#tile-container");
+            let tileWrapper = $(".tile-wrapper");
+            let widthComponent = tileWrapper[0].getBoundingClientRect().x;
+            let offset = content.width() / $('.tile-wrapper').length;
+            const {top, left} = content.offset();
+            var isMoving = false;
+            let el = $("#scroll-box");
+
+            if(isMoving == false) {
+                isMoving = true;
+                let xMove = '';
+                if (direction == 'left') {
+                    xMove = '-= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
+                } else {
+                    xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
+                }
+                gsap.to(el, 0.8, {scrollTo: {x: xMove}, onComplete: function() {
+                    console.log("complete");
+                    isMoving = false;
+                }});
+            }
+        }
     }
   }
 </script>

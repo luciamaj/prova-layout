@@ -1171,6 +1171,18 @@ body {
     height: 100vh;
     background-color: black;
 
+    .topright {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 18px;
+        width: 100px;
+        height: 100px;
+        background-image: url('/static/piramide/cancella.png');
+        background-size: contain;
+        cursor: pointer;
+    }
+
     .piramide-cont {
         height: 75vh;
         width:100%;
