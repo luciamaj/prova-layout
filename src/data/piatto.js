@@ -8,7 +8,7 @@ var data = {
         {id: "risotto1",name: "risotto",name2:"alla milanese",  commestibile:false},
         {id: "risotto2",name: "risotto", name2:"ai piselli",  commestibile:false},
         {id: "tortelli",name: "tortelli",name2:"alle erbette",  commestibile:false},
-        {id: "zuppa",name: "zuppa",name2:"contadina con leggumi",  commestibile:false},
+        {id: "zuppa",name: "zuppa",name2:"contadina con legumi",  commestibile:false},
         {id: "fagioli",name: "fagioli", name2:"all'uccelletto", commestibile:false},
         {id: "mozzarella",name: "mozzarella",name2:null,  commestibile:false},
         {id: "prosciutto",name: "prsciutto", name2:null, commestibile:false},

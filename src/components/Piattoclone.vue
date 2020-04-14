@@ -8,10 +8,10 @@
                     <div class="col-lg-md-8 col-sm-10" ref="areaVass"> 
                         <img src="/static/piatto_virtuale/vassoio.png" alt="vassoio">
                         <div class="over-vassoio">
-                            <div class="dish-1" id="dish-1" ref="dish1"></div>
-                            <div class="dish-2" id="dish-2" ref="dish2"></div>
-                            <div class="dish-3" id="dish-3" ref="dish3"></div>
-                            <div class="dish-4" id="dish-4" ref="dish4"></div>
+                            <div class="dish" id="dish-1" ref="dish1"></div>
+                            <div class="dish" id="dish-2" ref="dish2"></div>
+                            <div class="dish" id="dish-3" ref="dish3"></div>
+                            <div class="dish" id="dish-4" ref="dish4"></div>
                         </div>
                         <h3>Scegli fra le 25 pietanze proposte</h3>
                     </div>
@@ -34,6 +34,7 @@
                                         <template v-for="(piatto,index) in food" >
                                              <div class="tile-wrapper" v-bind:key="(piatto,index)" :id="piatto.id+'F'">
                                                 <div class=" tile" :ref="piatto.id" :id="piatto.id" > 
+                                                     <img :src="'/static/piatto_virtuale/cibo/'+piatto.id+'.png'" alt="vassoio">
                                                     <div class="mainName">{{piatto.name}}</div>
                                                     <div class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</div>
                                                 </div>
@@ -97,7 +98,9 @@ export default {
             carouselOptions: {
                 slidesToShow: 5,
                 slidesToScroll: 5,
-            }
+            },
+            positions:[]
+        
 
         }
     },
@@ -106,6 +109,7 @@ export default {
         this.scrollArrows();
         this.clone();
         this.setCarousel();
+        this.getPosition();
     },
     methods: {
         setCarousel(){
@@ -120,7 +124,7 @@ export default {
             console.log(width);
             if (width <= 1200) {
                 this.carouselOptions.slidesToShow = 3;
-
+                 this.carouselOptions.slidesToScroll = 3;
                 console.log("STO RISETTANDO", this.carouselOptions.slidesToShow);
 
             }
@@ -174,7 +178,9 @@ export default {
             var tiles     = $(".tile");
             var threshold = "50%";
 
-           
+           var that=this;
+             
+
             tiles.each(function() {
                 var element = $(this);
                 var wrapper = element.parent();
@@ -191,33 +197,13 @@ export default {
                     get y() { return getPosition(wrapper, offset, container).y; }
                 };
 
-                console.log("THE ELEMENT", element);
-
-                
-
-
+          
                 //scope.draggable = createDraggable(scope);
 
                 element.click(function() {
-                    let dish=document.getElementById("dish-2");
-                    let dimsDish;
-                    let dimelement;
-                    dimsDish=dish.getBoundingClientRect();
-                    dimelement=this.getBoundingClientRect();
-                    console.log("dimss "+dimsDish.x+" "+ dimsDish.y  );
-                    console.log("dimss me "+dimelement.x+" "+ dimelement.y  );
-                    let xDish=dimsDish.x-scope.x;
-                    let yDish=dimsDish.y-dimelement.y;
-                    console.log("diff "+xDish+" "+yDish);
-                    console.log("ho cliccato sugli elementi");
-                    TweenLite.set(scope.element, { autoAlpha: 0.9, border: "solid 2px white" });
-                    TweenLite.set(scope.clone1, { x: scope.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
-                        console.log("offss", offset);
-                    console.log("POS", scope.x, scope.y);
-                   // this.foodSelected.push(element);
-                    // console.log("sel", this.foodSelected);
-                    timeline.to(scope.clone1, 1, {x:dimsDish.x, top: yDish});
-                   
+                    let dimelement=this.getBoundingClientRect();
+                    that.enlight(scope.element, scope, dimelement);
+ 
                 });
 
                 scope.clone1.click(function() {
@@ -225,111 +211,45 @@ export default {
                 })
             });
         },
-        enlight(piatto){
-            let divCaro=document.getElementById(piatto.id+'1');
-            let selected= document.getElementById(piatto.id);
-            let dish= document.getElementById("dish-1");
-            console.log("selected "+selected);
-            let found= this.foodSelected.find(food=>food== piatto.id);
-            console.log("found "+found);
+        enlight(element,scope, dimelement){
+
+            console.log("el "+element.position().left+" sc "+scope.x);
+            let dish=document.getElementById("dish-2");
+            let dimsDish;
+            var offset  = element.position();
+            var elementId=element.prop('id');
+            //dimsDish=dish.getBoundingClientRect();
+           
+            dimsDish=this.positions[this.foodSelected.length].pos;
+             console.log("BBbojj "+ dimsDish);
+            //dimelement=element.getBoundingClientRect();
+            // console.log("dimss "+dimsDish.x+" "+ dimsDish.y  );
+            //console.log("dimss me "+dimelement.x+" "+ dimelement.y  );
+            let xDish=dimsDish.x-scope.x;
+            let yDish=dimsDish.y-dimelement.y;
+            let found= this.foodSelected.find(food=>food==elementId);
+            // console.log("diff "+xDish+" "+yDish);
+            // console.log("ho cliccato sugli elementi");
+
             if(this.foodSelected.length<4){
                 if( !found){
-                this.foodSelected.push(piatto.id);
-                divCaro.style.border="solid 3px white";
-                selected.style.border="solid 2px white";
-                 selected.style.opacity="0.9"
-                  //selected.style.animationName="example";
-                this.moveFood(piatto);
+                   
+                    TweenLite.set(scope.element, { autoAlpha: 0.9, border: "solid 2px white" });
+                    TweenLite.set(scope.clone1, { x:dimelement.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
+                    console.log("scope "+scope.x+" offss ", offset.left);
+                    console.log("POS", scope.element.position().left);
+                   // console.log("element", scope.x+(scope.element.position().left)+offset.left);
+                     this.foodSelected.push(elementId);
+                    timeline.to(scope.clone1, 1, {x:dimsDish.x-1, top: yDish-1.2});
+
                 }
             }
-            console.log("lunghezza "+this.foodSelected.length);
-            console.log(this.foodSelected);
-            
-        },
-
-        moveFood(element) {
-            console.log("THE ELEMENT CLICKED", element.id);
-            let dishDiv= document.getElementById(element.id);
-            let item=element.id;
-            let item_ref=this.$refs[item];
-            let myDiv2Para;
-            let dimsDish;
-            let dimOrizz= this.$refs.areaVass.getBoundingClientRect();
-            let dimItem= dishDiv.getBoundingClientRect();
-
-            let deltax;
-            let deltay;
-            
-            /*console.log("DIMSSS orizz", dimOrizz);*/
-                //console.log("DIMSSS dish", dimsDish2); 
-                console.log("DIMSSS divtomove", dimItem);
-            
-            console.log("deltay", deltay); 
-
-            dishDiv.style.backgroundColor="red";
-            switch (this.foodSelected.length) {
-                case 1:
-                    dimsDish = this.$refs.dish1.getBoundingClientRect();
-                    deltax= dimsDish.x-dimItem.x;
-                    deltay=dimsDish.y-dimItem.y;
-                     timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
-                    setTimeout(function(){
-                        
-                        myDiv2Para = $('#'+element.id).detach();
-                        myDiv2Para.appendTo('#dish-1');
-                    
-                    }, 1000);
-                    break;
-            
-                case 2:
-                    dimsDish = this.$refs.dish2.getBoundingClientRect();
-                    deltax= dimsDish.x-dimItem.x;
-                    deltay=dimsDish.y-dimItem.y;
-                     timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
-                    setTimeout(function(){
-                        
-                        myDiv2Para = $('#'+element.id).detach();
-                        myDiv2Para.appendTo('#dish-2');
-                       
-            }, 1000);
-                        
-                    break;
-                case 3:
-                    dimsDish = this.$refs.dish3.getBoundingClientRect();
-                    deltax= dimsDish.x-dimItem.x;
-                    deltay=dimsDish.y-dimItem.y;
-                     timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
-                    setTimeout(function(){
-                        
-                        myDiv2Para = $('#'+element.id).detach();
-                        myDiv2Para.appendTo('#dish-3');
-                       
-
-                    }, 1000);
-                    break;
-
-                case 4:
-                    dimsDish = this.$refs.dish4.getBoundingClientRect();
-                    deltax= dimsDish.x-dimItem.x;
-                    deltay=dimsDish.y-dimItem.y;
-                    timeline.to(item_ref, 1, { y: deltay, x: deltax,  scale: 0.95});
-                    setTimeout(function(){
-                        
-                        myDiv2Para = $('#'+element.id).detach();
-                        myDiv2Para.appendTo('#dish-4');
-                        
-                        
-                    }, 1000);
-                    break;
-            }
-            
-            
-           // dishDiv.setAttribute("onclick","alert('blah');");
-            timeline.set(item_ref, { y: -1, x: -1, scale: 0.95 } );
            
-                    
-                           
+             
+
         },
+
+        
         selected(element){
          // let  dishIn=document.getElementById(element.id);
             console.log("SONO CLiccato");
@@ -356,7 +276,24 @@ export default {
            // piattojq.before(other);
             this.foodSelected.pop();
 
-        }
+        },
+        getPosition() {
+            let positions = [];
+            let dishes = $(".dish");
+            let dishDiv;
+            
+            for(let dish of dishes) {
+                console.log("THE IDS", dish.id);
+                dishDiv= document.getElementById( dish.id).getBoundingClientRect();
+               
+
+                let toPush = {dish:dish.id, pos:dishDiv}
+                console.log("CHECK",  toPush);
+                positions.push(toPush);
+            }
+
+            this.positions = positions;          
+        },
       
     }
 }
