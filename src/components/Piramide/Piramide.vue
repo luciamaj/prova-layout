@@ -159,10 +159,11 @@ export default {
                 }});
 
                 element.click(function() {
-                    that.foodMoved += 1;
-                    that.playSound();
-
                     if (!(element.hasClass('cloned'))) {
+                        that.playSound();
+                        that.foodMoved += 1;
+
+
                         let scopeToChange = that.scopes.find(scope => scope.name == element.attr('id'));
                         if (scopeToChange) {
                             scopeToChange.moved = true;
