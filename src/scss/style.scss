@@ -1166,12 +1166,18 @@ body {
         height: 100%;
         width: auto;
         text-align: center;
+        object-fit: contain;
+        overflow: hidden;
     }
-
+    
     #cane {
         height: 100%;
-        //max-width: 100%;
-        width: auto;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: bottom
+      
+        
     }
 
     // RIGHT BLOCKS

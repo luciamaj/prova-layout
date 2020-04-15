@@ -370,13 +370,12 @@ export default {
             console.log("HIDE START");
             let startPage = $('#over');
 
-            TweenLite.to(startPage, 1, { autoAlpha: 0 , onComplete:this.middlePage()});
-            
+            TweenLite.to(startPage, 1, { autoAlpha: 0 , onComplete:this.middlePage()});  
         },
 
         middlePage(){
             let middlePage = $('.over');
-            TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
+            //TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
         },
         
          showEnding() {
