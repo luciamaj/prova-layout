@@ -61,7 +61,10 @@ import Draggable from "gsap/Draggable";
 import { ScrollTo } from "gsap";
 import { data } from './../../data/piramide.js';
 import JQuery from 'jquery';
+import howler from 'howler';
 let $ = JQuery;
+
+console.log("HOWLER", howler);
 
 function getPosition(wrapper, offset, container) {
   var position1 = wrapper.offset();
@@ -91,6 +94,7 @@ export default {
             scopes: [],
             step: 0,
             foodMoved: 0,
+            sound: null,
         }
     },
     mounted() {
@@ -98,6 +102,7 @@ export default {
         this.clone();
         this.getDimensions();
         this.setCarousel();
+        this.loadSound();
     },
     created() {
     },
@@ -155,6 +160,7 @@ export default {
 
                 element.click(function() {
                     that.foodMoved += 1;
+                    that.playSound();
 
                     if (!(element.hasClass('cloned'))) {
                         let scopeToChange = that.scopes.find(scope => scope.name == element.attr('id'));
@@ -187,8 +193,8 @@ export default {
 
                         element.addClass("cloned");
 
-                        timeline.to(scope.clone1, 0.8, {x: xDish1, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.3});
-                        timeline.to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.3});
+                        timeline.to(scope.clone1, 0.8, {x: xDish1, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.4});
+                        timeline.to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.4});
                         scope.clone1.addClass('moved');
                         scope.clone2.addClass('moved');
                     }                   
@@ -323,6 +329,20 @@ export default {
 
             TweenLite.set(endingPage, { zIndex: 35 });
             TweenLite.to(endingPage, 1, { autoAlpha: 1 });
+        },
+        loadSound() {
+            this.sound = new Howl({
+                src: ['/static/sounds/click.wav'],
+                html5: true,
+                autoplay: false,
+                volume: 1.0,
+                format: 'mp3',
+                onload: function() { console.log('song loaded!')},
+                onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
+            })
+        },
+        playSound() {
+            this.sound.play();
         }
     }
   }
