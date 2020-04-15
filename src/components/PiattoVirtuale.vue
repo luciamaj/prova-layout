@@ -239,10 +239,9 @@ export default {
 
             }
             let ratio=(boxW)/(this.carouselOptions.slidesToShow);
-             console.log("R ", ratio);
-             wrapper.css("width", ratio + "px")
-           
-            
+            this.ratio = ratio;
+            console.log("R ", ratio);
+            wrapper.css("width", ratio + "px");
         },
         clickedArrow(direction) {
             console.log("THE STEP:", this.step);
@@ -263,6 +262,7 @@ export default {
             if(isMoving == false) {
                 isMoving = true;
                 let xMove = '';
+                console.log("sono qui");
                 if (direction == 'left') {
                     if (this.step != 0) {
                         this.step -= this.carouselOptions.slidesToScroll;
