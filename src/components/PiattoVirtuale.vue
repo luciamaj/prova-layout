@@ -198,7 +198,7 @@ export default {
         this.scrollArrows();
         this.clone();
         this.setCarousel();
-        this.getPosition();
+        
          
     },
     methods: {
@@ -308,7 +308,7 @@ export default {
             });
         },
         enlight(element,scope, dimelement){
-
+            this.getPosition();
             console.log("el "+element.position().left+" sc "+scope.x);
             let dish=document.getElementById("dish-1");
             let dimsDish;
@@ -319,9 +319,8 @@ export default {
             let dishhh=$("#dish-1");
 
             if(this.foodSelected.length<4){
-                //dimsDish=this.positions[this.foodSelected.length].pos;
-                dimsDish=dish.getBoundingClientRect();
-                let xDish=dimsDish.x-dimelement.x;
+                dimsDish=this.positions[this.foodSelected.length].pos;
+                let xDish=dimsDish.left;
                 let yDish=dimsDish.y-dimelement.y;
                 if( !found){
                      console.log("offset element "+offset.left +" "+offset.top);
@@ -329,11 +328,14 @@ export default {
                    console.log("un po di dati dim"+ dimsDish.left+ " "+dimsDish.top +" s x "+scope.x+" y " +scope.y+" el "+dimelement.x+" "+dimelement.y);
                     TweenLite.set(scope.element, { autoAlpha: 1, border: "solid 2px white" });
                     TweenLite.set(scope.clone1, { x:dimelement.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
-                    console.log("scope "+scope.x+" offss ", offset.left);
-                    console.log("POS", scope.element.position().left);
+                   
+                    let hdiff=(dimsDish.height-(dimelement.height*0.92))/2;
+                    console.log("height "+ dimsDish.height+" "+dimelement.height +" "+ hdiff);
+                   
                    // console.log("element", scope.x+(scope.element.position().left)+offset.left);
                      this.foodSelected.push(elementId);
-                    timeline.to(scope.clone1, 1, {x:dimsDish.x-1, top: yDish});
+                    timeline.to(scope.clone1, 1, {x:dimsDish.x-scope.clone1.position().top+hdiff, top:-dimelement.y+dimsDish.top-scope.clone1.position().top+hdiff});
+                     console.log("POS", scope.clone1.position().left+" "+scope.clone1.position().top);
                     //timeline.set(scope.clone1, {x:dimsDish.x-1, top: yDish-1.2});
 
 
@@ -374,13 +376,18 @@ export default {
             let dishes = $(".dish");
             let dishDiv;
             
+            console.log("el dish1 "+ document.getElementById("dish-1").getBoundingClientRect().left);
+            console.log("el dish2 "+ document.getElementById("dish-2").getBoundingClientRect().left);
+            console.log("el dish3 "+ document.getElementById("dish-3").getBoundingClientRect().left);
+            console.log("el dish4 "+ document.getElementById("dish-4").getBoundingClientRect().left);
             for(let dish of dishes) {
-                dishDiv= document.getElementById(dish.id).getBoundingClientRect();
+                console.log("el dish "+ document.getElementById( dish.id));
+                dishDiv= document.getElementById( dish.id).getBoundingClientRect();
                 
                 let toPush = {dish:dish.id, pos:dishDiv}
                 positions.push(toPush);
-                console.log("positiondish rect "+dish.id+" "+dishDiv.x +" "+dishDiv.y);
-                console.log("positiondish pos "+dishDiv);
+                console.log("positiondish rect "+dish.id+" "+dishDiv.left +" "+dishDiv.y);
+               
             }
 
             this.positions = positions;          
