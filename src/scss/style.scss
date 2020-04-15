@@ -175,7 +175,7 @@ body {
     }
 }  
 
-//APP PIATTO vecchio
+/*APP PIATTO vecchio
 
 .piatto{
     font-family: sans-serif;
@@ -234,7 +234,7 @@ body {
                
                 /*animation-name: none;
                 animation-duration: 2.5s;
-                animation-fill-mode: both;*/
+                animation-fill-mode: both;
                 
                 img{
                     border-radius: 50%;
@@ -287,8 +287,8 @@ body {
             width:70px;
             height:70px;
            
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
+            background-position: center; 
+            background-repeat: no-repeat; 
             background-size: contain;
             background-color: transparent;
             border: 0;
@@ -337,15 +337,15 @@ body {
         }
         .slick-prev{
             background-image:url("/static/general/arrow_sx.png") ;
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
+            background-position: center;
+            background-repeat: no-repeat; 
             background-size: contain;
             float: left;
         }
         .slick-next{
             background-image: url("/static/general/arrow_dx.png");
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
+            background-position: center; 
+            background-repeat: no-repeat;
             background-size: contain;
             float: right;
         }
@@ -397,8 +397,6 @@ body {
         }
         .secondName{
             font-size: .8rem;
-            // position: relative; */
-            //bottom: 10px;
         }
     }
     .item-to-move{
@@ -411,6 +409,8 @@ body {
     }
 
 }
+*/
+
 
 //APP PIATTO 
 

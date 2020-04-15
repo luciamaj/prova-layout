@@ -366,9 +366,9 @@ export default {
 
         middlePage(){
             let middlePage = $('.over');
-            TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(0.5);
+            TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
         },
-
+        
          showEnding() {
             console.log("SHOW ENDING");
             let endingPage = $('#over-ending');
