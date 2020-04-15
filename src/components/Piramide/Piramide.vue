@@ -10,9 +10,15 @@
             <div>TOCCA LO SCHERMO PER TERMINARE</div>
         </div>
         <div class="piramide-cont">
-            <div class="section-container">
+            <div class="section-container" id="section-container">
                 <div class="p">
+                    <div ref="left6" id="left6" class="left6 blocks leftblock"></div>
+                    <div ref="left5" id="left5" class="left5 blocks leftblock"></div>
+                    <div ref="left4" id="left4" class="left4 blocks leftblock"></div>
+
                     <div ref="right6" id="right6" class="right6 blocks rightblock"></div>
+                    <div ref="right5" id="right5" class="right5 blocks rightblock"></div>
+
                     <img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image">
                 </div>
                 <div v-on:click="resetPositions" class="topright"></div>
@@ -106,9 +112,14 @@ export default {
     methods: {
         clone() {
             var container = $("#clone-container");
+            var sectionContainer = $("#section-container");
             var scrollBox = $("#scroll-box");
             var dropPanel = $("#drop-panel");
             var tiles     = $(".tile");
+
+            let SContainer =  document.getElementById('section-container').getBoundingClientRect()
+            let SContainerHeight = SContainer.height;
+            let containerOffSet = window.innerHeight - SContainerHeight;
 
             let that = this;
 
@@ -176,9 +187,15 @@ export default {
 
                         var centerY = dimRect1.top + (dimRect1.height / 2);
 
+                        console.log("DIMRECT1", dimRect1);
+                        console.log("DIMRECT2", dimRect2);
 
-                        let yDish1 = (dimRect1.y - dimRect1.height /2) - dimElement.y;
-                        let yDish2 = (dimRect2.y - dimRect2.height /2)- dimElement.y;
+
+                        let yDish1 = - SContainerHeight + dimRect1.top - 50;
+                        let yDish2 = - SContainerHeight + dimRect2.top - 50;
+
+                        let xDish1 = dimRect1.x - 50;
+                        let xDish2 = dimRect2.x - 50;
 
                         console.log("el", scope.element.position().left);
                         console.log("offs", offset.left);
@@ -192,8 +209,8 @@ export default {
 
                         element.addClass("cloned");
 
-                        timeline.to(scope.clone1, 0.8, {x: dimRect1.x, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.3});
-                        timeline.to(scope.clone2, 0.8, {x: dimRect2.x, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.3});
+                        timeline.to(scope.clone1, 0.8, {x: xDish1, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.3});
+                        timeline.to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.3});
                         scope.clone1.addClass('moved');
                         scope.clone2.addClass('moved');
                     }                   
