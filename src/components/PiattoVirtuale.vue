@@ -8,7 +8,7 @@
             </div>
            
             <div class="content">
-                <div class="over"> <img src="../assets/cammello.jpg" alt=""></div>
+                <div class="over"> <img class="vassoio" src="/static/piatto_virtuale/vassoio_inizio.png" alt=""></div>
                 <div class="row topPart">
                     <div class="col-lg-md-2 col-sm-1" style="z-index:5;"> <button class="btn-control cancella" v-on:click="cancella()"></button><div  class="btn-label">rimuovi</div></div>
                     <div class="col-lg-md-8 col-sm-10" ref="areaVass"> 
