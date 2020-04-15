@@ -11,7 +11,10 @@
         </div>
         <div class="piramide-cont">
             <div class="section-container">
-                <img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image">
+                <center><div class="p">
+                    <img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image">
+                </div>
+                </center>
                 <div v-on:click="resetPositions" class="topright"></div>
                 <div ref="right6" id="right6" class="right6 blocks rightblock"></div>
                 <div ref="right5" id="right5" class="right5 blocks rightblock"></div>
