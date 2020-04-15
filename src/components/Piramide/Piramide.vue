@@ -197,10 +197,6 @@ export default {
                         let xDish1 = dimRect1.x - 50;
                         let xDish2 = dimRect2.x - 50;
 
-                        console.log("el", scope.element.position().left);
-                        console.log("offs", offset.left);
-                        console.log("x", scope.x);
-
                         that.initial = scope.clone1.offset();
 
                         TweenLite.set(scope.element, { border: "solid 2px white" });
