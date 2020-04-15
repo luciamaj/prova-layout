@@ -223,6 +223,7 @@ export default {
             console.log(width);
             if (width <= 1200) {
                 this.carouselOptions.slidesToShow = 3;
+                this.carouselOptions.slidesToScroll = 3;
 
                 console.log("STO RISETTANDO", this.carouselOptions.slidesToShow);
             }
@@ -333,7 +334,7 @@ export default {
         loadSound() {
             this.sound = new Howl({
                 src: ['/static/sounds/click.wav'],
-                html5: true,
+                html5: false,
                 autoplay: false,
                 volume: 1.0,
                 format: 'mp3',
