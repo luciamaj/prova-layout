@@ -1274,9 +1274,9 @@ body {
         position: relative;
     }
 
-    // RIGHT BLOCKS
+    // LEFT BLOCKS
 
-    .right6 {
+    .left6 {
         width: 5%;
         height: 11%;
         left: 34.5%;
@@ -1286,6 +1286,53 @@ body {
         color: white;
         position: absolute;
     }
+
+    .left5 {
+        width: 13%;
+        height: 22%;
+        left: 30%;
+        top: 32%;
+
+        background-color: red;
+        color: white;
+        position: absolute;
+    }
+
+    .left4 {
+        width: 27%;
+        height: 10%;
+        left: 23%;
+        top: 55%;
+
+        background-color: red;
+        color: white;
+        position: absolute;
+    }
+
+    // LEFT BLOCKS
+
+    .right6 {
+        width: 5%;
+        height: 11%;
+        right: 34.5%;
+        top: 20%;
+
+        background-color: red;
+        color: white;
+        position: absolute;
+    }
+
+    .right5 {
+        width: 13%;
+        height: 22%;
+        right: 30%;
+        top: 32%;
+
+        background-color: red;
+        color: white;
+        position: absolute;
+    }
+
     // GENERAL BLOCKS
     
     .blocks {

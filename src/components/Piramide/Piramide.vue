@@ -10,9 +10,15 @@
             <div>TOCCA LO SCHERMO PER TERMINARE</div>
         </div>
         <div class="piramide-cont">
-            <div class="section-container">
+            <div class="section-container" id="section-container">
                 <div class="p">
+                    <div ref="left6" id="left6" class="left6 blocks leftblock"></div>
+                    <div ref="left5" id="left5" class="left5 blocks leftblock"></div>
+                    <div ref="left4" id="left4" class="left4 blocks leftblock"></div>
+
                     <div ref="right6" id="right6" class="right6 blocks rightblock"></div>
+                    <div ref="right5" id="right5" class="right5 blocks rightblock"></div>
+
                     <img id="cane" src="/static/piramide/piramidi.png" alt="Responsive image">
                 </div>
                 <div v-on:click="resetPositions" class="topright"></div>
@@ -106,9 +112,14 @@ export default {
     methods: {
         clone() {
             var container = $("#clone-container");
+            var sectionContainer = $("#section-container");
             var scrollBox = $("#scroll-box");
             var dropPanel = $("#drop-panel");
             var tiles     = $(".tile");
+
+            let SContainer =  document.getElementById('section-container').getBoundingClientRect()
+            let SContainerHeight = SContainer.height;
+            let containerOffSet = window.innerHeight - SContainerHeight;
 
             let that = this;
 
@@ -135,10 +146,7 @@ export default {
 
                 that.scopes.push(scope);
 
-                console.log("THE ELEMENT", scope.name);
-
                 const timeline = new TimelineLite({onComplete: function() {
-                    console.log("COMPLETED TIMELINE");
                     console.log(that.food.length, that.foodMoved);
                     if (that.foodMoved == that.food.length) {
                         that.showEnding();
@@ -153,36 +161,23 @@ export default {
                         if (scopeToChange) {
                             scopeToChange.moved = true;
                         }
-
-
-                        console.log("THE INITIAL POSITION", scope.clone1)
                         let foodElement = that.food.find(cibo => cibo.name == element.attr('id'));
                         let firstDestName = foodElement.destinations[0].dest;
                         let secondDestName = foodElement.destinations[1].dest;
 
                         let dimRect1 = document.getElementById(firstDestName).getBoundingClientRect();
-                        console.log(dimRect1);
                         let dimRect2 = document.getElementById(secondDestName).getBoundingClientRect();
-                        console.log(dimRect2);
 
                         let dimElement = this.getBoundingClientRect();
 
-                        console.log(dimRect1);
+                        console.log("DIMRECT1", dimRect1);
+                        console.log("DIMRECT2", dimRect2);
 
-                        var centerX = dimRect1.left + dimRect1.width / 2;
+                        let yDish1 = - SContainerHeight + dimRect1.top - 50;
+                        let yDish2 = - SContainerHeight + dimRect2.top - 50;
 
-                        console.log(dimRect1);
-                        console.log("CENTERX", centerX);
-
-                        var centerY = dimRect1.top + (dimRect1.height / 2);
-
-
-                        let yDish1 = (dimRect1.y - dimRect1.height /2) - dimElement.y;
-                        let yDish2 = (dimRect2.y - dimRect2.height /2)- dimElement.y;
-
-                        console.log("el", scope.element.position().left);
-                        console.log("offs", offset.left);
-                        console.log("x", scope.x);
+                        let xDish1 = dimRect1.x - 50;
+                        let xDish2 = dimRect2.x - 50;
 
                         that.initial = scope.clone1.offset();
 
@@ -192,8 +187,8 @@ export default {
 
                         element.addClass("cloned");
 
-                        timeline.to(scope.clone1, 0.8, {x: dimRect1.x, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.3});
-                        timeline.to(scope.clone2, 0.8, {x: dimRect2.x, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.3});
+                        timeline.to(scope.clone1, 0.8, {x: xDish1, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.3});
+                        timeline.to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.3});
                         scope.clone1.addClass('moved');
                         scope.clone2.addClass('moved');
                     }                   
@@ -224,7 +219,6 @@ export default {
                 this.carouselOptions.slidesToShow = 3;
 
                 console.log("STO RISETTANDO", this.carouselOptions.slidesToShow);
-
             }
             
             let ratio=(boxW)/(this.carouselOptions.slidesToShow);
@@ -300,10 +294,7 @@ export default {
             this.foodMoved = 0;
 
             if (cloned.length > 0) {
-                console.log("THE CLONED", cloned);
-
                 for(let scope of this.scopes) {
-                    console.log("THE EL", scope);
                     if (scope.moved == true) {
                         let element = $('#' + scope.name);
                         element.removeClass('cloned')
@@ -323,13 +314,11 @@ export default {
             }
         },
         hideStart() {
-            console.log("HIDE START");
             let startPage = $('#over');
 
             TweenLite.to(startPage, 1, { autoAlpha: 0 });
         },
         showEnding() {
-            console.log("SHOW ENDING");
             let endingPage = $('#over-ending');
 
             TweenLite.set(endingPage, { zIndex: 35 });

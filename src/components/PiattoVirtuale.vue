@@ -157,7 +157,6 @@ function getPosition(wrapper, offset, container) {
   };
 }
 
-//$(window).onresize = this.reportWindowSize();
 export default {
     //components: { Slick },
     data() {
