@@ -87,7 +87,7 @@ export default {
             endingText: data.endingText,
             carouselOptions: {
                 slidesToShow: 7,
-                slidesToScroll: 7,
+                slidesToScroll: 1,
                 scrollVelocity: 1.2,
             },
             ratio: 0,
@@ -188,14 +188,15 @@ export default {
 
                         that.initial = scope.clone1.offset();
 
-                        TweenLite.set(scope.element, { border: "solid 2px white" });
                         TweenLite.set(scope.clone1, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
                         TweenLite.set(scope.clone2, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
-
                         element.addClass("cloned");
 
-                        timeline.to(scope.clone1, 0.8, {x: xDish1, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.4});
-                        timeline.to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.4});
+
+                        timeline.to(scope.element, 0.2, { border: "solid 2px white", backgroundColor: '#abcdef' })
+                        .to(scope.element, 0.2, { backgroundColor: "rgba(0, 0, 0, 0)" })
+                        .to(scope.clone1, 0.8, {x: xDish1, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.4},'-=0.4')
+                        .to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.4})
                         scope.clone1.addClass('moved');
                         scope.clone2.addClass('moved');
                     }                   
