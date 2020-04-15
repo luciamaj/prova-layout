@@ -173,7 +173,7 @@ body {
     }
 }  
 
-//APP PIATTO VIRTUALE
+//APP PIATTO vecchio
 
 .piatto{
     font-family: sans-serif;
@@ -410,10 +410,10 @@ body {
 
 }
 
-//APP PIATTO CLONE
+//APP PIATTO 
 
-.piatto-clone {
-    font-family: sans-serif;
+.piatto-virtuale {
+    font-family: 'Roboto Condensed', sans-serif;
     background-color: black;
     color: white;
     text-align: center;
@@ -482,7 +482,7 @@ body {
     }
     
     #over-ending {  
-        font-family: 'Roboto Condensed', sans-serif;
+       
         color: black;
         position: absolute;
         top: 0;
@@ -544,7 +544,7 @@ body {
     }
 
     #final-ending {  
-        font-family: 'Roboto Condensed', sans-serif;
+      
         color: black;
         position: absolute;
         top: 0;
