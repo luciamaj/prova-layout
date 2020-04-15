@@ -61,7 +61,10 @@ import Draggable from "gsap/Draggable";
 import { ScrollTo } from "gsap";
 import { data } from './../../data/piramide.js';
 import JQuery from 'jquery';
+import howler from 'howler';
 let $ = JQuery;
+
+console.log("HOWLER", howler);
 
 function getPosition(wrapper, offset, container) {
   var position1 = wrapper.offset();
@@ -84,13 +87,14 @@ export default {
             endingText: data.endingText,
             carouselOptions: {
                 slidesToShow: 7,
-                slidesToScroll: 7,
-                scrollVelocity: 1.2,
+                slidesToScroll: 1,
+                scrollVelocity: 0.8,
             },
             ratio: 0,
             scopes: [],
             step: 0,
             foodMoved: 0,
+            sound: null,
         }
     },
     mounted() {
@@ -98,6 +102,7 @@ export default {
         this.clone();
         this.getDimensions();
         this.setCarousel();
+        this.loadSound();
     },
     created() {
     },
@@ -149,14 +154,16 @@ export default {
                 const timeline = new TimelineLite({onComplete: function() {
                     console.log(that.food.length, that.foodMoved);
                     if (that.foodMoved == that.food.length) {
+
                         that.showEnding();
                     }
                 }});
 
                 element.click(function() {
-                    that.foodMoved += 1;
-
                     if (!(element.hasClass('cloned'))) {
+                        that.playSound();
+                        that.foodMoved += 1;
+
                         let scopeToChange = that.scopes.find(scope => scope.name == element.attr('id'));
                         if (scopeToChange) {
                             scopeToChange.moved = true;
@@ -181,14 +188,15 @@ export default {
 
                         that.initial = scope.clone1.offset();
 
-                        TweenLite.set(scope.element, { border: "solid 2px white" });
                         TweenLite.set(scope.clone1, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
                         TweenLite.set(scope.clone2, { x: scope.x+(scope.element.position().left)-offset.left, y: scope.y+1, autoAlpha: 1});
-
                         element.addClass("cloned");
 
-                        timeline.to(scope.clone1, 0.8, {x: xDish1, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.3});
-                        timeline.to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.3});
+
+                        timeline.to(scope.element, 0.2, { border: "solid 2px white", backgroundColor: '#abcdef' })
+                        .to(scope.element, 0.2, { backgroundColor: "rgba(0, 0, 0, 0)" })
+                        .to(scope.clone1, 0.8, {x: xDish1, top: yDish1}).to(scope.clone1, 0.3, {scale: 0.4},'-=0.4')
+                        .to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.4})
                         scope.clone1.addClass('moved');
                         scope.clone2.addClass('moved');
                     }                   
@@ -319,10 +327,27 @@ export default {
             TweenLite.to(startPage, 1, { autoAlpha: 0 });
         },
         showEnding() {
-            let endingPage = $('#over-ending');
+            setTimeout(() => { 
+                this.resetPositions();
+                let endingPage = $('#over-ending');
 
-            TweenLite.set(endingPage, { zIndex: 35 });
-            TweenLite.to(endingPage, 1, { autoAlpha: 1 });
+                TweenLite.set(endingPage, { zIndex: 35 });
+                TweenLite.to(endingPage, 1, { autoAlpha: 1 });
+            }, 1000);
+        },
+        loadSound() {
+            this.sound = new Howl({
+                src: ['/static/sounds/click.wav'],
+                html5: false,
+                autoplay: false,
+                volume: 1.0,
+                format: 'mp3',
+                onload: function() { console.log('song loaded!')},
+                onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
+            })
+        },
+        playSound() {
+            this.sound.play();
         }
     }
   }
