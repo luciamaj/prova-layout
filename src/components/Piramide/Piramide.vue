@@ -156,13 +156,14 @@ export default {
                     if (that.foodMoved == that.food.length) {
 
                         that.showEnding();
+                    } else {
+                        console.log("sono qui");
                     }
                 }});
 
                 element.click(function() {
                     if (!(element.hasClass('cloned'))) {
                         that.playSound();
-                        that.foodMoved += 1;
 
                         let scopeToChange = that.scopes.find(scope => scope.name == element.attr('id'));
                         if (scopeToChange) {
@@ -199,6 +200,7 @@ export default {
                         .to(scope.clone2, 0.8, {x: xDish2, top: yDish2}).to(scope.clone2, 0.3, {scale: 0.4})
                         scope.clone1.addClass('moved');
                         scope.clone2.addClass('moved');
+                        that.foodMoved += 1;
                     }                   
                 });
 
@@ -259,6 +261,7 @@ export default {
             let el = $("#scroll-box");
             let rightArrow = $("#right");
             let leftArrow = $("#left");
+            let tl = new TimelineLite(); 
 
             let maxStep = this.food.length - this.carouselOptions.slidesToShow;
 
@@ -286,10 +289,12 @@ export default {
                     console.log("MAXSTEP", maxStep, this.step);
                     xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
                 }
-                TweenLite.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
+                tl.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
                     console.log("complete");
                     isMoving = false;
+                    //tl.pause(0);
                 }});
+                tl.progress(1).progress(0);
             }
         },
         resetPositions() {
