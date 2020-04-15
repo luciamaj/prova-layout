@@ -88,7 +88,7 @@ export default {
             carouselOptions: {
                 slidesToShow: 7,
                 slidesToScroll: 1,
-                scrollVelocity: 0.8,
+                scrollVelocity: 0.5,
             },
             ratio: 0,
             scopes: [],
