@@ -22,19 +22,22 @@
 
                     </div>
                 </div>
-                <div class="row topPart">
-                    <div class="col-lg-md-2 col-sm-1" style="z-index:5;"> <button class="btn-control cancella" v-on:click="cancella()"></button><div  class="btn-label">rimuovi</div></div>
-                    <div class="col-lg-md-8 col-sm-10" ref="areaVass"> 
-                        <img src="/static/piatto_virtuale/vassoio.png" alt="vassoio">
-                        <div class="over-vassoio">
+                <div class="topPart">
+                    
+                    <div class=" mid-section" ref="areaVass"> 
+                        <div class="area-vass">
                             <div class="dish" id="dish-1" ref="dish1"></div>
                             <div class="dish" id="dish-2" ref="dish2"></div>
                             <div class="dish" id="dish-3" ref="dish3"></div>
                             <div class="dish" id="dish-4" ref="dish4"></div>
+                            <img src="/static/piatto_virtuale/vassoio.png" alt="vassoio">
                         </div>
+                        
+                        
                         <h3>Scegli fra le 25 pietanze proposte</h3>
                     </div>
-                    <div class="col-lg-md-2 col-sm-1"  style="z-index:5;"> <button class="btn-control fine" v-on:click="showEnding()"> </button><div class="btn-label">fine</div></div>
+                    <div class="topleft" style="z-index:5;"> <button class="btn-control cancella" v-on:click="cancella()"></button><div  class="btn-label">rimuovi</div></div>
+                    <div class="topright"  style="z-index:5;"> <button class="btn-control fine" v-on:click="showEnding()"> </button><div class="btn-label">fine</div></div>
                 </div>
                
                     <div class="carousel"> 
@@ -154,7 +157,7 @@ function getPosition(wrapper, offset, container) {
   };
 }
 
-$(window).onresize = this.reportWindowSize();
+//$(window).onresize = this.reportWindowSize();
 export default {
     //components: { Slick },
     data() {
