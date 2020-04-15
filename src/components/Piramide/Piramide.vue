@@ -6,7 +6,9 @@
             <img src="../../assets/cammello.jpg" alt="">
         </div>
         <div id="over-ending">
-            ENDING!
+            <div>Sei ormai giunta/o alla fine di questo percorso. Hai scoperto che ogni tua scelta alimentare ha un peso, per la tua salute e per quella del pianeta.
+            OGNI TUA AZIONE PUÒ FARE LA DIFFERENZA. Basta poco per diventare protagonista del cambiamento!</div>
+            <div>TOCCA LO SCHERMO PER TERMINARE</div>
         </div>
         <div class="piramide-cont">
             <div class="section-container">
@@ -78,7 +80,8 @@ export default {
             food: data.food,
             carouselOptions: {
                 slidesToShow: 7,
-                slidesToScroll: 1,
+                slidesToScroll: 7,
+                scrollVelocity: 1.2,
             },
             ratio: 0,
             scopes: [],
@@ -96,7 +99,6 @@ export default {
     },
     transition: {
         enter(el, done) {
-            console.log("SONO QUIIIIhgri oruoire hotoiehyoi");
             TweenLite.to(el, 1, {
                 opacity: 1,
                 onComplete: done
@@ -141,7 +143,6 @@ export default {
                     console.log("COMPLETED TIMELINE");
                     console.log(that.food.length, that.foodMoved);
                     if (that.foodMoved == that.food.length) {
-                        console.log("HO FINITOOOOO");
                         that.showEnding();
                     }
                 }});
@@ -152,7 +153,6 @@ export default {
                     if (!(element.hasClass('cloned'))) {
                         let scopeToChange = that.scopes.find(scope => scope.name == element.attr('id'));
                         if (scopeToChange) {
-                            console.log("CHANGING TO TRUEEEEEEEEEEEEEEEE")
                             scopeToChange.moved = true;
                         }
 
@@ -231,7 +231,6 @@ export default {
             
             let ratio=(boxW)/(this.carouselOptions.slidesToShow);
             this.ratio = ratio;
-            console.log("THE RATIOOO VOEGBIUWrbiurwBUiu", this.ratio);
             console.log("R ", ratio);
             wrapper.css("width", ratio + "px");
         },
@@ -267,8 +266,6 @@ export default {
                 isMoving = true;
                 let xMove = '';
                 if (direction == 'left') {
-                    console.log("the stepppppp", this.step);
-                    //this.step -= 1;
                     if (this.step != 0) {
                         this.step -= this.carouselOptions.slidesToScroll;
                         TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
@@ -289,7 +286,7 @@ export default {
                     console.log("MAXSTEP", maxStep, this.step);
                     xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
                 }
-                gsap.to(el, 0.8, {scrollTo: {x: xMove}, onComplete: function() {
+                TweenLite.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
                     console.log("complete");
                     isMoving = false;
                 }});
@@ -314,9 +311,7 @@ export default {
                         element.removeClass('cloned')
                         var offset  = element.position();
 
-                        console.log("SONO QUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII", element);
                         if (this.initial) {
-                            console.log("INITIALLLLLLLLL", this.initial);
                             timeline.to(scope.clone1, 1, { autoAlpha: 0 }, "alpha")
                             .to(scope.clone2, 1, { autoAlpha: 0}, "alpha")
                             .to(scope.element, 1, { border: "solid 0px black" }, "alpha")
