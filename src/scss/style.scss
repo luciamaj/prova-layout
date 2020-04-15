@@ -420,16 +420,17 @@ body {
     color: white;
     text-align: center;
     height: 100vh;
+    overflow: hidden;
     .over{
        
         position: absolute;
         top: 0;
-        z-index: 20;
+        z-index: 15;
         visibility:visible;
         width: 100%;
         text-align: center;
         background-color: blanchedalmond;
-        animation-name: curtain;
+       // animation-name: curtain;
         animation-delay: 1s;
         animation-duration:3s;
         animation-fill-mode: both;
@@ -440,6 +441,162 @@ body {
         }
 
     }
+    #over {  
+        position: absolute;
+        top: 0;
+        z-index: 20;
+        visibility:visible;
+        width: 100%;
+        text-align: center;
+        background-color: blanchedalmond;
+
+        #name-game {
+            position: absolute;
+            width: 30%;
+            top: 10%;
+            left: 10%;
+            background-color:#98bc1f;
+            color: white;
+        }
+          
+        #name-game:after {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+
+        #start-game {
+            position: absolute;
+            width: 30%;
+            height: 10%;
+            top: 60%;
+            left: 10%;
+            background-color: #f59d08;
+            color: white;
+            font-size: 5vh;
+            cursor: pointer;
+        }
+       
+        img{
+            width: auto;
+            height: 100vh;
+        }
+    }
+    
+    #over-ending {  
+        font-family: 'Roboto Condensed', sans-serif;
+        color: black;
+        position: absolute;
+        top: 0;
+        opacity: 0;
+        z-index: -2;
+        visibility:visible;
+        width: 100vw;
+        height: 100vw;
+        background-color: azure;
+        height: 100%;
+        padding:10vh;
+        font-size: 1.6rem;
+
+        .heading{
+            margin-bottom:5vh;
+            text-align: center;
+
+            h3{ 
+                
+                font-weight: 700;
+                margin-bottom: 2%;
+            }  
+        }
+        .sum{
+            
+            text-align: left;
+            height: 50vh;
+        }
+        .check{
+            margin-right: 5%;
+            text-transform: initial;
+
+            .title{
+                margin: 30px 0 25px;
+
+            }
+
+            .totale{
+                margin-top: 20px;
+                font-weight: bold;
+            }
+            .item{
+                text-transform: capitalize;
+            }
+            .amount{
+                text-align: end;
+            }
+        }
+        .mondoImg{
+            height: 38vh;
+            margin-bottom: 2%;
+            background-image: url("/static/piatto_virtuale/mondo.jpg");
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: contain;
+
+        }
+        
+    }
+
+    #final-ending {  
+        font-family: 'Roboto Condensed', sans-serif;
+        color: black;
+        position: absolute;
+        top: 0;
+        opacity: 0;
+        z-index: -2;
+        visibility:visible;
+        width: 100vw;
+        height: 100vw;
+        background-color: azure;
+        height: 100%;
+        padding:10vh;
+        font-size: 1.75rem;
+        text-align: initial;
+        .top{
+            height: 60vh;
+            max-height: 65vh;
+            display: flex;
+            .img{
+                width: 80%;
+                height: 100%;
+                background-image: url("/static/piatto_virtuale/mondo.jpg");
+                background-position: center bottom; /* Center the image */
+                background-repeat: no-repeat; /* Do not repeat the image */
+                background-size: contain;
+            }
+            .side{
+                margin: 0 2vw;
+                h3{
+                    margin-bottom: 20px;
+                    font-size: 1.9rem;
+                    font-weight: 700;
+                }
+
+                .text{
+                    text-align: justify;
+                    margin:40px 20px 0 0;
+                     div{
+                         margin-top: 20px;
+                     }
+                }
+            }
+        }
+        .bottom{
+            width: 100%;
+            margin-top: 10vh;
+           font-style: italic;
+        }
+      
+    }
+
     .topPart{
         padding: 25px 0;
         margin: 0;

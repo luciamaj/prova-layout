@@ -1,6 +1,12 @@
 <template>
     <div class="piatto-clone">
-        
+
+            <div id="over">
+                <div id="name-game"></div>
+                <div v-on:click="hideStart()" id="start-game">START GAME</div>
+                <img src="../assets/cammello.jpg" alt="">
+            </div>
+           
             <div class="content">
                 <div class="over"> <img src="../assets/cammello.jpg" alt=""></div>
                 <div class="row topPart">
@@ -15,7 +21,7 @@
                         </div>
                         <h3>Scegli fra le 25 pietanze proposte</h3>
                     </div>
-                    <div class="col-lg-md-2 col-sm-1"  style="z-index:5;"> <button class="btn-control fine"> </button><div class="btn-label">fine</div></div>
+                    <div class="col-lg-md-2 col-sm-1"  style="z-index:5;"> <button class="btn-control fine" v-on:click="showEnding()"> </button><div class="btn-label">fine</div></div>
                 </div>
                
                     <div class="carousel"> 
@@ -47,6 +53,64 @@
                         
                     </div>
                                
+            </div>
+             <div id="over-ending"  >
+                <div class="heading"> 
+                    <h3>Hai fatto la tua scelta. Ora controlla il “conto”. <br> È troppo sbilanciato? Oppure il tuo modo di nutrirti è sano e sostenibile?</h3>
+                    <h3>Ogni nostra decisione ha un impatto sulla nostra salute e su quella dell’ambiente,  <br> per questo è importante scegliere consapevolmente</h3>
+                </div>
+                
+                <div class="row sum ">
+                    <div class="col-lg-5 check" v-bind="total" >
+                        <div class="title">Le tue pietanze “costano”<br> in termini di CO2 prodotta: {{Math.round(total.co2 * 100) / 100}} kg</div>
+                        <template v-for="cibo in food" >
+                            <template v-bind="foodSelected">
+                            <div class="row" v-if="foodSelected.find(el=> el==cibo.id)"  :key="cibo" >
+                                <div class="col-7 item">{{cibo.name}} <template  v-if="cibo.name2!=null">{{cibo.name2}}</template></div>
+                                <div class="col-5 amount" >{{ Math.round(cibo.CO2* 100) / 100}} kg di CO2</div>
+                            </div>
+                            </template>
+                        </template>
+                        <div class="row totale">
+                            <div class="col-7" >Totale</div>
+                            <div class="col-5 amount" ><div>{{Math.round(total.co2 * 100) / 100}} kg di CO2</div></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="mondoImg" alt="mondo"></div>
+                        <div> Il tuo risultato genera CO2 equivalente a quella <br> prodotta da un viaggio in automobile da Parma a XXXX</div>
+                    </div>
+                    <div><button v-on:click="finalEnding" >Altro</button></div>
+                </div>
+                
+            </div>
+            <div id="final-ending">
+                <div class="top">
+                    <div class="img"></div>
+                    <div class="side">
+                        <h3>Il pasto che hai composto ha totalizzato</h3>
+                        <div class="row" v-bind="total">
+                            <div class="col-6">
+                                <div>{{Math.round(total.carb * 100) / 100}} carboidrati (g)</div>
+                                <div>{{Math.round(total.fat * 100) / 100}} grassi (g)</div>
+                                <div>{{Math.round(total.fibr * 100) / 100}} fibra (g)</div>
+                            </div>
+                            <div class="col-6">
+                                <div>{{Math.round(total.prot * 100) / 100}} proteine (g)</div>
+                                <div>{{Math.round(total.sat * 100) / 100}} di cui saturi (g)</div>
+                                <div>{{Math.round(total.kcal * 100) / 100}} calorie (Kcal)</div>
+                            </div>
+                        </div>
+                        <div class="text">
+                        <div class="">I grassi saturi non dovrebbero superare il 10% delle calorie giornaliere. Questi si trovano principalmente nei formaggi,
+                        burro, olio di palma e di cocco, latticini, salumi, insaccati.</div>
+                        <div class="">La fibra svolge un ruolo benefico per la salute. Cerca di assumerne 15 g per ogni 1000 Kcal.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom">Per aumentare la fibra nella tua alimentazione, scegli cereali integrali e i derivati a base di farina integrale, e
+                    aumenta il consumo di legumi, frutta e verdura.</div>
             </div>
         
     </div>
@@ -99,7 +163,17 @@ export default {
                 slidesToShow: 5,
                 slidesToScroll: 5,
             },
-            positions:[]
+            positions:[],
+            scopes: [],
+            total:{
+                co2:0,
+                carb:0,
+                fat:0,
+                sat:0,
+                fibr:0,
+                prot:0,
+                kcal:0
+            }
         
 
         }
@@ -187,6 +261,7 @@ export default {
                 var offset  = element.position();
 
                 var scope = {
+                    name    : element.attr('id'),
                     clone1   : element.clone().addClass("clone").addClass("clone1").prependTo(container),
                     element : element,
                     wrapper : wrapper,
@@ -197,8 +272,8 @@ export default {
                     get y() { return getPosition(wrapper, offset, container).y; }
                 };
 
-          
-                //scope.draggable = createDraggable(scope);
+                 that.scopes.push(scope);
+                console.log("THE ELEMENT", scope.name);
 
                 element.click(function() {
                     let dimelement=this.getBoundingClientRect();
@@ -218,23 +293,17 @@ export default {
             let dimsDish;
             var offset  = element.position();
             var elementId=element.prop('id');
-            //dimsDish=dish.getBoundingClientRect();
-           
-            dimsDish=this.positions[this.foodSelected.length].pos;
-             console.log("BBbojj "+ dimsDish);
-            //dimelement=element.getBoundingClientRect();
-            // console.log("dimss "+dimsDish.x+" "+ dimsDish.y  );
-            //console.log("dimss me "+dimelement.x+" "+ dimelement.y  );
-            let xDish=dimsDish.x-scope.x;
-            let yDish=dimsDish.y-dimelement.y;
+          
             let found= this.foodSelected.find(food=>food==elementId);
-            // console.log("diff "+xDish+" "+yDish);
-            // console.log("ho cliccato sugli elementi");
+         
 
             if(this.foodSelected.length<4){
+                dimsDish=this.positions[this.foodSelected.length].pos;
+                let xDish=dimsDish.x-scope.x;
+                let yDish=dimsDish.y-dimelement.y;
                 if( !found){
                    
-                    TweenLite.set(scope.element, { autoAlpha: 0.9, border: "solid 2px white" });
+                    TweenLite.set(scope.element, { autoAlpha: 1, border: "solid 2px white" });
                     TweenLite.set(scope.clone1, { x:dimelement.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
                     console.log("scope "+scope.x+" offss ", offset.left);
                     console.log("POS", scope.element.position().left);
@@ -260,20 +329,17 @@ export default {
         cancella(){
             let ultimoPiatto;
             let ultimoDiv;
-            let ultimoDiv1;
             ultimoPiatto=this.foodSelected[this.foodSelected.length-1];
            console.log("ultimo "+ ultimoPiatto);
            
             ultimoDiv=document.getElementById(ultimoPiatto);
-            ultimoDiv.style="";
-                 
-            ultimoDiv1=document.getElementById(ultimoPiatto+"1");
-            ultimoDiv1.style="";
-            let piattojq = $('#'+ultimoPiatto).detach(); 
-           
-            piattojq.insertBefore($('#'+ultimoPiatto+'F'));
-
-           // piattojq.before(other);
+           // ultimoDiv.style.border="3px solid green";
+            
+            let scope=this.scopes.find(el=> el.name==ultimoPiatto);
+            console.log("ultimo "+ scope.name);
+            TweenLite.to(scope.element, 0.8, { border: "solid 0px black" }, "alpha")
+            TweenLite.set(scope.clone1, { top: 0, left: 0, scale: 1, autoAlpha:0})
+            
             this.foodSelected.pop();
 
         },
@@ -283,17 +349,64 @@ export default {
             let dishDiv;
             
             for(let dish of dishes) {
-                console.log("THE IDS", dish.id);
                 dishDiv= document.getElementById( dish.id).getBoundingClientRect();
-               
-
                 let toPush = {dish:dish.id, pos:dishDiv}
-                console.log("CHECK",  toPush);
                 positions.push(toPush);
             }
 
             this.positions = positions;          
         },
+        hideStart() {
+            console.log("HIDE START");
+            let startPage = $('#over');
+
+            TweenLite.to(startPage, 1, { autoAlpha: 0 , onComplete:this.middlePage()});
+            
+        },
+
+        middlePage(){
+            let middlePage = $('.over');
+            TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(0.5);
+        },
+
+         showEnding() {
+            console.log("SHOW ENDING");
+            let endingPage = $('#over-ending');
+
+            TweenLite.set(endingPage, { zIndex: 35 });
+            TweenLite.to(endingPage, 1, { autoAlpha: 1 });
+            this.check();
+
+        },
+        finalEnding(){
+            let endingPage = $('#over-ending');
+            let finalEnding= $('#final-ending');
+            TweenLite.set(finalEnding, {autoAlpha: 1 , zIndex: 33 });
+
+            TweenLite.to(endingPage, 1, { y:-500, autoAlpha: 0 });
+            
+           ;
+        },
+        check(){
+
+            for(let food of this.food){
+                //console.log("food " + food.id+" " + food.name);
+                if(this.foodSelected.find(el=> el==food.id)){
+                    
+                    this.total.co2+=Number(food.CO2);
+                    this.total.carb+=Number(food.Carboidrati);
+                    this.total.fat+=Number(food.Lipidi);
+                    this.total.sat+=Number(food.Saturi);
+                    this.total.fibr+=Number(food.Fibra);
+                    this.total.prot+=Number(food.Proteine);
+                    this.total.kcal+=Number(food.KCal);
+                    
+                    
+
+                }
+            }
+            console.log("total" +  this.total.co2);
+        }
       
     }
 }
