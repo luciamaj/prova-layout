@@ -428,16 +428,21 @@ body {
         z-index: 15;
         visibility:visible;
         width: 100%;
+        height: 100vh;
         text-align: center;
         background-color: black;
-       // animation-name: curtain;
-        animation-delay: 1s;
-        animation-duration:3s;
-        animation-fill-mode: both;
+       
        
         .vassoio{
             width: auto;
             height: 80vh;
+            transform: translateY(-50%);
+            top: 50%;
+            position: relative;
+            
+            img{
+                height: 100%;
+            }
         }
 
     }

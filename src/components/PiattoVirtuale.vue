@@ -8,7 +8,11 @@
             </div>
            
             <div class="content">
-                <div class="over"> <img class="vassoio" src="/static/piatto_virtuale/vassoio_inizio.png" alt=""></div>
+                <div class="over"> 
+                    <div class="vassoio" alt="">
+                        <img  src="/static/piatto_virtuale/vassoio_inizio.png" alt="vassoioIntro">
+                    </div>
+                </div>
                 <div class="row topPart">
                     <div class="col-lg-md-2 col-sm-1" style="z-index:5;"> <button class="btn-control cancella" v-on:click="cancella()"></button><div  class="btn-label">rimuovi</div></div>
                     <div class="col-lg-md-8 col-sm-10" ref="areaVass"> 
@@ -366,7 +370,7 @@ export default {
 
         middlePage(){
             let middlePage = $('.over');
-            TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
+           // TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
         },
         
          showEnding() {
