@@ -421,6 +421,7 @@ body {
     text-align: center;
     height: 100vh;
     overflow: hidden;
+    
     .over{
        
         position: absolute;
@@ -435,13 +436,36 @@ body {
        
         .vassoio{
             width: auto;
-            height: 80vh;
+            height: 75vh;
             transform: translateY(-50%);
             top: 50%;
             position: relative;
             
             img{
                 height: 100%;
+            }
+            .istruzioni{
+                
+                
+                
+                color: black;
+                height: 70%;
+                width: 50%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                .title-instr{
+                    font-size:2.5rem;
+                    margin-bottom: 5% ;
+                    font-weight: 900;
+                }
+                .text-instr{
+                    padding: 0 10%;
+                    font-weight: 700;
+                    font-size:2.4rem;
+                    line-height:3rem;
+                }
             }
         }
 
