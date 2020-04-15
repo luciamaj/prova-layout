@@ -42,11 +42,11 @@
                
                     <div class="carousel"> 
                         <div class="left arrow">
-                            <button id="left">
+                            <button v-on:click="clickedArrow('left')" id="left">
                             </button>
                         </div>
                         <div class="right arrow">
-                            <button id="right">
+                            <button v-on:click="clickedArrow('right')" id="right">
                             </button>
                         </div>
                         <section id="top-bar">
@@ -144,6 +144,7 @@ import Draggable from "gsap/Draggable";
 import { ScrollTo } from "gsap";
 import { data } from './../data/piatto.js';
 import JQuery from 'jquery';
+import howler from 'howler';
 let $ = JQuery;
 
 const timeline = new TimelineLite();
@@ -177,7 +178,13 @@ export default {
             carouselOptions: {
                 slidesToShow: 5,
                 slidesToScroll: 5,
+                scrollVelocity:1.2
+
             },
+            ratio: 0,
+            step: 0,
+            foodMoved: 0,
+            sound: null,
             positions:[],
             scopes: [],
             total:{
@@ -195,23 +202,34 @@ export default {
     },
     mounted() {
         gsap.registerPlugin(ScrollToPlugin);
-        this.scrollArrows();
         this.clone();
         this.setCarousel();
-        this.getPosition();
+        this.loadSound();
+        
          
+    },
+     transition: {
+        enter(el, done) {
+            TweenLite.to(el, 1, {
+                opacity: 1,
+                onComplete: done
+            });
+        },
     },
     methods: {
        
 
         setCarousel(){
+           let leftArrow = $("#left");
+            TweenLite.set(leftArrow, { autoAlpha: 0});
             let content = $("#tile-container");
             let box = $("#scroll-box");
             let wrapper = $(".tile-wrapper");
             let page = $(".piatto-clone");
-           // let wrapper = document.getElementsByClassName("tile-wrapper");
             console.log("W", page.width());
             let boxW=box.width()
+           // let wrapper = document.getElementsByClassName("tile-wrapper");
+            console.log("W", page.width()); 
              var width = $(window).width();
             console.log(width);
             if (width <= 1200) {
@@ -226,41 +244,53 @@ export default {
            
             
         },
-        scrollArrows() {
+        clickedArrow(direction) {
+            console.log("THE STEP:", this.step);
+            console.log("CLICKED THE DIRECTION", direction);
             let content = $("#tile-container");
-            let box = $("#scroll-box");
-            let wrapper=$('.tile-wrapper');
-
-            console.log("W", content.width());
-            console.log("H", content.height());
-
+            let tileWrapper = $(".tile-wrapper");
+            let widthComponent = tileWrapper[0].getBoundingClientRect().x;
             let offset = content.width() / $('.tile-wrapper').length;
             const {top, left} = content.offset();
-            const adjustment = 10;
             var isMoving = false;
             let el = $("#scroll-box");
-            var that=this;
-            $('#left').click(function(e) {
-                console.log("click left");
-                    if(isMoving == false) {
-                        isMoving = true;
-                        gsap.to(el, 1, {scrollTo: {x: '-='+(wrapper.width())*that.carouselOptions.slidesToScroll}, onComplete: function() {
-                            console.log("complete");
-                            isMoving = false;
-                        }})
-                    }
-            });
+            let rightArrow = $("#right");
+            let leftArrow = $("#left");
+            let tl = new TimelineLite(); 
 
-            $('#right').click(function(e) {
-                console.log("clickright");
-                if (isMoving == false) {
-                    isMoving = true;
-                    gsap.to(el, 1, {scrollTo: {x: '+='+(wrapper.width())*that.carouselOptions.slidesToScroll}, onComplete: function() {
-                        console.log("complete");
-                        isMoving = false;
-                    }})
+            let maxStep = 25 - this.carouselOptions.slidesToShow;
+
+            if(isMoving == false) {
+                isMoving = true;
+                let xMove = '';
+                if (direction == 'left') {
+                    if (this.step != 0) {
+                        this.step -= this.carouselOptions.slidesToScroll;
+                        TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
+                        if (this.step <= 0) {
+                            TweenLite.to(leftArrow, 0.5, { autoAlpha: 0});
+                        }
+                    }
+                    console.log("MAXSTEP", maxStep, this.step);
+                    xMove = '-= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
+                } else {
+                    if (this.step < maxStep) {
+                        this.step += this.carouselOptions.slidesToScroll;
+                        TweenLite.to(leftArrow, 0.5, { autoAlpha: 1});
+                        if (this.step >= maxStep) {
+                            TweenLite.to(rightArrow, 0.5, { autoAlpha: 0});
+                        }
+                    }
+                    console.log("MAXSTEP", maxStep, this.step);
+                    xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
                 }
-            })
+                tl.to(el, 1, {scrollTo: {x: xMove}, onComplete: function() {
+                    console.log("complete");
+                    isMoving = false;
+                    //tl.pause(0);
+                }});
+                tl.progress(1).progress(0);
+            }
         },
         reportWindowSize(){
             console.log("resize!")
@@ -308,7 +338,7 @@ export default {
             });
         },
         enlight(element,scope, dimelement){
-
+            this.getPosition();
             console.log("el "+element.position().left+" sc "+scope.x);
             let dish=document.getElementById("dish-1");
             let dimsDish;
@@ -319,9 +349,8 @@ export default {
             let dishhh=$("#dish-1");
 
             if(this.foodSelected.length<4){
-                //dimsDish=this.positions[this.foodSelected.length].pos;
-                dimsDish=dish.getBoundingClientRect();
-                let xDish=dimsDish.x-dimelement.x;
+                dimsDish=this.positions[this.foodSelected.length].pos;
+                let xDish=dimsDish.left;
                 let yDish=dimsDish.y-dimelement.y;
                 if( !found){
                      console.log("offset element "+offset.left +" "+offset.top);
@@ -329,11 +358,14 @@ export default {
                    console.log("un po di dati dim"+ dimsDish.left+ " "+dimsDish.top +" s x "+scope.x+" y " +scope.y+" el "+dimelement.x+" "+dimelement.y);
                     TweenLite.set(scope.element, { autoAlpha: 1, border: "solid 2px white" });
                     TweenLite.set(scope.clone1, { x:dimelement.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
-                    console.log("scope "+scope.x+" offss ", offset.left);
-                    console.log("POS", scope.element.position().left);
+                   
+                    let hdiff=(dimsDish.height-(dimelement.height*0.92))/2;
+                    console.log("height "+ dimsDish.height+" "+dimelement.height +" "+ hdiff);
+                   
                    // console.log("element", scope.x+(scope.element.position().left)+offset.left);
                      this.foodSelected.push(elementId);
-                    timeline.to(scope.clone1, 1, {x:dimsDish.x-1, top: yDish});
+                    timeline.to(scope.clone1, 1, {x:dimsDish.x-scope.clone1.position().top+hdiff, top:-dimelement.y+dimsDish.top-scope.clone1.position().top+hdiff});
+                     console.log("POS", scope.clone1.position().left+" "+scope.clone1.position().top);
                     //timeline.set(scope.clone1, {x:dimsDish.x-1, top: yDish-1.2});
 
 
@@ -374,13 +406,18 @@ export default {
             let dishes = $(".dish");
             let dishDiv;
             
+            console.log("el dish1 "+ document.getElementById("dish-1").getBoundingClientRect().left);
+            console.log("el dish2 "+ document.getElementById("dish-2").getBoundingClientRect().left);
+            console.log("el dish3 "+ document.getElementById("dish-3").getBoundingClientRect().left);
+            console.log("el dish4 "+ document.getElementById("dish-4").getBoundingClientRect().left);
             for(let dish of dishes) {
-                dishDiv= document.getElementById(dish.id).getBoundingClientRect();
+                console.log("el dish "+ document.getElementById( dish.id));
+                dishDiv= document.getElementById( dish.id).getBoundingClientRect();
                 
                 let toPush = {dish:dish.id, pos:dishDiv}
                 positions.push(toPush);
-                console.log("positiondish rect "+dish.id+" "+dishDiv.x +" "+dishDiv.y);
-                console.log("positiondish pos "+dishDiv);
+                console.log("positiondish rect "+dish.id+" "+dishDiv.left +" "+dishDiv.y);
+               
             }
 
             this.positions = positions;          
@@ -434,6 +471,20 @@ export default {
                 }
             }
             console.log("total" +  this.total.co2);
+        },
+         loadSound() {
+            this.sound = new Howl({
+                src: ['/static/sounds/click.wav'],
+                html5: false,
+                autoplay: false,
+                volume: 1.0,
+                format: 'mp3',
+                onload: function() { console.log('song loaded!')},
+                onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
+            })
+        },
+        playSound() {
+            this.sound.play();
         }
       
     }
