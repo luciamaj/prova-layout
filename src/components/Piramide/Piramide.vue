@@ -154,6 +154,7 @@ export default {
                 const timeline = new TimelineLite({onComplete: function() {
                     console.log(that.food.length, that.foodMoved);
                     if (that.foodMoved == that.food.length) {
+
                         that.showEnding();
                     }
                 }});
@@ -162,7 +163,6 @@ export default {
                     if (!(element.hasClass('cloned'))) {
                         that.playSound();
                         that.foodMoved += 1;
-
 
                         let scopeToChange = that.scopes.find(scope => scope.name == element.attr('id'));
                         if (scopeToChange) {
@@ -327,10 +327,12 @@ export default {
             TweenLite.to(startPage, 1, { autoAlpha: 0 });
         },
         showEnding() {
-            let endingPage = $('#over-ending');
+            setTimeout(() => { 
+                let endingPage = $('#over-ending');
 
-            TweenLite.set(endingPage, { zIndex: 35 });
-            TweenLite.to(endingPage, 1, { autoAlpha: 1 });
+                TweenLite.set(endingPage, { zIndex: 35 });
+                TweenLite.to(endingPage, 1, { autoAlpha: 1 });
+            }, 1000);
         },
         loadSound() {
             this.sound = new Howl({
