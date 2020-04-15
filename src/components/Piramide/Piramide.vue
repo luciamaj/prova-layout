@@ -1,5 +1,5 @@
 <template>
-    <main class="clone-piramide">
+    <div class="clone-piramide">
         <div id="over">
             <div id="name-game"></div>
             <div v-on:click="hideStart()" id="start-game">START GAME</div>
@@ -44,7 +44,7 @@
                 </div>
             </section>
         </div>
-    </main>
+    </div>
 </template>
 <script>
 

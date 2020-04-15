@@ -421,7 +421,6 @@ body {
     text-align: center;
     height: 100vh;
     overflow: hidden;
-    
     .over{
        
         position: absolute;
@@ -436,36 +435,13 @@ body {
        
         .vassoio{
             width: auto;
-            height: 75vh;
+            height: 80vh;
             transform: translateY(-50%);
             top: 50%;
             position: relative;
             
             img{
                 height: 100%;
-            }
-            .istruzioni{
-                
-                
-                
-                color: black;
-                height: 70%;
-                width: 50%;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                .title-instr{
-                    font-size:2.5rem;
-                    margin-bottom: 5% ;
-                    font-weight: 900;
-                }
-                .text-instr{
-                    padding: 0 10%;
-                    font-weight: 700;
-                    font-size:2.4rem;
-                    line-height:3rem;
-                }
             }
         }
 
@@ -1041,7 +1017,7 @@ body {
     }
 
     .carousel {
-        height: 15vh;
+        height: 10vh;
 
         #left{
             background-color: transparent;
@@ -1050,7 +1026,7 @@ body {
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: contain;
-            height: 75px;
+            height: 2vw;
             width:8vw;
             outline: none;
            
@@ -1062,7 +1038,7 @@ body {
             background-position: center; /* Center the image */
             background-repeat: no-repeat; /* Do not repeat the image */
             background-size: contain;
-            height: 75px;
+            height: 2vw;
             width:8vw;
             outline: none;
            
@@ -1127,7 +1103,6 @@ body {
           
           .tile-wrapper {
             width: 0;
-            height: 130px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1194,28 +1169,10 @@ body {
     }
 
     #cane {
-        width: auto;
-        max-height: 100%;
-    ///    height: 110%;
-    }
-
-    /* 
-    
-        .section-container {
-        position: relative;
         height: 100%;
+        //max-width: 100%;
         width: auto;
-        text-align:center ;
-
-        #cane {
-            height: 110%;
-            max-width: 90%;
-        }    
     }
-    
-    */
-
-
 
     // RIGHT BLOCKS
 
