@@ -239,12 +239,12 @@ export default {
             const adjustment = 10;
             var isMoving = false;
             let el = $("#scroll-box");
-
+            var that=this;
             $('#left').click(function(e) {
                 console.log("click left");
                     if(isMoving == false) {
                         isMoving = true;
-                        gsap.to(el, 1, {scrollTo: {x: '-='+(wrapper.width())*2}, onComplete: function() {
+                        gsap.to(el, 1, {scrollTo: {x: '-='+(wrapper.width())*that.carouselOptions.slidesToScroll}, onComplete: function() {
                             console.log("complete");
                             isMoving = false;
                         }})
@@ -255,7 +255,7 @@ export default {
                 console.log("clickright");
                 if (isMoving == false) {
                     isMoving = true;
-                    gsap.to(el, 1, {scrollTo: {x: '+='+(wrapper.width())*2}, onComplete: function() {
+                    gsap.to(el, 1, {scrollTo: {x: '+='+(wrapper.width())*that.carouselOptions.slidesToScroll}, onComplete: function() {
                         console.log("complete");
                         isMoving = false;
                     }})
@@ -310,28 +310,32 @@ export default {
         enlight(element,scope, dimelement){
 
             console.log("el "+element.position().left+" sc "+scope.x);
-            let dish=document.getElementById("dish-2");
+            let dish=document.getElementById("dish-1");
             let dimsDish;
             var offset  = element.position();
             var elementId=element.prop('id');
           
             let found= this.foodSelected.find(food=>food==elementId);
-         
+            let dishhh=$("#dish-1");
 
             if(this.foodSelected.length<4){
-                dimsDish=this.positions[this.foodSelected.length].pos;
-                let xDish=dimsDish.x-scope.x;
+                //dimsDish=this.positions[this.foodSelected.length].pos;
+                dimsDish=dish.getBoundingClientRect();
+                let xDish=dimsDish.x-dimelement.x;
                 let yDish=dimsDish.y-dimelement.y;
                 if( !found){
-                   
+                     console.log("offset element "+offset.left +" "+offset.top);
+
+                   console.log("un po di dati dim"+ dimsDish.left+ " "+dimsDish.top +" s x "+scope.x+" y " +scope.y+" el "+dimelement.x+" "+dimelement.y);
                     TweenLite.set(scope.element, { autoAlpha: 1, border: "solid 2px white" });
                     TweenLite.set(scope.clone1, { x:dimelement.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
                     console.log("scope "+scope.x+" offss ", offset.left);
                     console.log("POS", scope.element.position().left);
                    // console.log("element", scope.x+(scope.element.position().left)+offset.left);
                      this.foodSelected.push(elementId);
-                    timeline.to(scope.clone1, 1, {x:dimsDish.x-1, top: yDish-1.2});
-                    timeline.set(scope.clone1, {x:dimsDish.x-1, top: yDish-1.2});
+                    timeline.to(scope.clone1, 1, {x:dimsDish.x-1, top: yDish});
+                    //timeline.set(scope.clone1, {x:dimsDish.x-1, top: yDish-1.2});
+
 
                 }
             }
@@ -371,9 +375,12 @@ export default {
             let dishDiv;
             
             for(let dish of dishes) {
-                dishDiv= document.getElementById( dish.id).getBoundingClientRect();
+                dishDiv= document.getElementById(dish.id).getBoundingClientRect();
+                
                 let toPush = {dish:dish.id, pos:dishDiv}
                 positions.push(toPush);
+                console.log("positiondish rect "+dish.id+" "+dishDiv.x +" "+dishDiv.y);
+                console.log("positiondish pos "+dishDiv);
             }
 
             this.positions = positions;          
