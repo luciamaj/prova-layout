@@ -1190,62 +1190,21 @@ body {
         text-align: center;
         max-height: 100%;
         display: inline-block;
+        position: relative;
     }
 
     // RIGHT BLOCKS
 
     .right6 {
-        position: absolute;
-        width: 30%;
-        height: 8.5%;
-        bottom: 3.2%;
-        left: 26%;
+        width: 5%;
+        height: 11%;
+        left: 34.5%;
+        top: 20%;
+
         background-color: red;
         color: white;
-    }
-
-    .right5 {
         position: absolute;
-        width: 25%;
-        height: 12.5%;
-        bottom: 12.2%;
-        left: 28%;
-        background-color: red;
-        color: white;
     }
-
-    .right4 {
-        position: absolute;
-        width: 22%;
-        height: 9.7%;
-        bottom: 25.5%;
-        left: 29.5%;
-        background-color: red;
-        color: white;
-    }
-
-    // LEFT BLOCKS
-
-    .left1 {
-        position: absolute;
-        width: 29%;
-        height: 9.7%;
-        top: 15%;
-        right: 25.5%;
-        background-color: red;
-        color: white;
-    }
-
-    .left3 {
-        position: absolute;
-        width: 27%;
-        height: 11.7%;
-        top: 25%;
-        right: 26.5%;
-        background-color: red;
-        color: white;
-    }
-
     // GENERAL BLOCKS
     
     .blocks {
