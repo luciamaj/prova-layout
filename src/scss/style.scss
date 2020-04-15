@@ -797,7 +797,7 @@ body {
           
           .tile-wrapper {
             width: 0;
-            height: 100%;
+            height: 165px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -1150,8 +1150,8 @@ body {
             font-size: 24px;
             position: relative;
             width: 120px;
-            min-width: 100%;
-            height: 100%;
+            min-width: 120px;
+            height:120px;
             overflow: hidden;
             cursor: pointer;
             border-radius: 50%;
