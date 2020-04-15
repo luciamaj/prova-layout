@@ -6,8 +6,7 @@
             <img src="../../assets/cammello.jpg" alt="">
         </div>
         <div id="over-ending">
-            <div>Sei ormai giunta/o alla fine di questo percorso. Hai scoperto che ogni tua scelta alimentare ha un peso, per la tua salute e per quella del pianeta.
-            OGNI TUA AZIONE PUÒ FARE LA DIFFERENZA. Basta poco per diventare protagonista del cambiamento!</div>
+            <div div="text-ending">{{ endingText }}</div>
             <div>TOCCA LO SCHERMO PER TERMINARE</div>
         </div>
         <div class="piramide-cont">
@@ -77,6 +76,7 @@ export default {
             questionIndex: 0,
             selectedrole: '',
             food: data.food,
+            endingText: data.endingText,
             carouselOptions: {
                 slidesToShow: 7,
                 slidesToScroll: 7,
