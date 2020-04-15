@@ -146,10 +146,7 @@ export default {
 
                 that.scopes.push(scope);
 
-                console.log("THE ELEMENT", scope.name);
-
                 const timeline = new TimelineLite({onComplete: function() {
-                    console.log("COMPLETED TIMELINE");
                     console.log(that.food.length, that.foodMoved);
                     if (that.foodMoved == that.food.length) {
                         that.showEnding();
@@ -164,32 +161,17 @@ export default {
                         if (scopeToChange) {
                             scopeToChange.moved = true;
                         }
-
-
-                        console.log("THE INITIAL POSITION", scope.clone1)
                         let foodElement = that.food.find(cibo => cibo.name == element.attr('id'));
                         let firstDestName = foodElement.destinations[0].dest;
                         let secondDestName = foodElement.destinations[1].dest;
 
                         let dimRect1 = document.getElementById(firstDestName).getBoundingClientRect();
-                        console.log(dimRect1);
                         let dimRect2 = document.getElementById(secondDestName).getBoundingClientRect();
-                        console.log(dimRect2);
 
                         let dimElement = this.getBoundingClientRect();
 
-                        console.log(dimRect1);
-
-                        var centerX = dimRect1.left + dimRect1.width / 2;
-
-                        console.log(dimRect1);
-                        console.log("CENTERX", centerX);
-
-                        var centerY = dimRect1.top + (dimRect1.height / 2);
-
                         console.log("DIMRECT1", dimRect1);
                         console.log("DIMRECT2", dimRect2);
-
 
                         let yDish1 = - SContainerHeight + dimRect1.top - 50;
                         let yDish2 = - SContainerHeight + dimRect2.top - 50;
@@ -237,7 +219,6 @@ export default {
                 this.carouselOptions.slidesToShow = 3;
 
                 console.log("STO RISETTANDO", this.carouselOptions.slidesToShow);
-
             }
             
             let ratio=(boxW)/(this.carouselOptions.slidesToShow);
@@ -313,10 +294,7 @@ export default {
             this.foodMoved = 0;
 
             if (cloned.length > 0) {
-                console.log("THE CLONED", cloned);
-
                 for(let scope of this.scopes) {
-                    console.log("THE EL", scope);
                     if (scope.moved == true) {
                         let element = $('#' + scope.name);
                         element.removeClass('cloned')
@@ -336,13 +314,11 @@ export default {
             }
         },
         hideStart() {
-            console.log("HIDE START");
             let startPage = $('#over');
 
             TweenLite.to(startPage, 1, { autoAlpha: 0 });
         },
         showEnding() {
-            console.log("SHOW ENDING");
             let endingPage = $('#over-ending');
 
             TweenLite.set(endingPage, { zIndex: 35 });
