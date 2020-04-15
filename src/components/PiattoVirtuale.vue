@@ -11,6 +11,12 @@
                 <div class="over"> 
                     <div class="vassoio" alt="">
                         <img  src="/static/piatto_virtuale/vassoio_inizio.png" alt="vassoioIntro">
+                        <div class="istruzioni"> 
+                            <div class="title-instr">Benvenuti al Sustainable Restaurant!</div>
+                            <div class="text-instr">Metti sul vassoio <br> quello che vorresti mangiare per un pasto.<br>
+                                Alla fine scoprirai se la tua dieta <br> è equilibrata per te e per il pianeta.</div>
+                            
+                        </div>
                     </div>
                 </div>
                 <div class="row topPart">
@@ -370,7 +376,7 @@ export default {
 
         middlePage(){
             let middlePage = $('.over');
-           // TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
+            TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
         },
         
          showEnding() {
