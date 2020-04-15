@@ -674,7 +674,7 @@ body {
     }
     .carousel {
         margin-top: 4vh;
-        height: 25vh;
+        height: 20vh;
 
         #left{
             background-color: transparent;
@@ -1008,12 +1008,12 @@ body {
     }
 
     .piramide-cont {
-        height: 75vh;
+        height: 80vh;
         width:100%;
     }
 
     .carousel {
-        height: 25vh;
+        height: 20vh;
 
         #left{
             background-color: transparent;
@@ -1164,9 +1164,9 @@ body {
     }
 
     #cane {
+        width: 100%;
         height: auto;
-        width: 60%;
-        padding-top: 5%;
+        max-width: 100%;
     }
 
     // RIGHT BLOCKS
