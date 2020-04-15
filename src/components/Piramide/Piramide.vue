@@ -328,6 +328,7 @@ export default {
         },
         showEnding() {
             setTimeout(() => { 
+                this.resetPositions();
                 let endingPage = $('#over-ending');
 
                 TweenLite.set(endingPage, { zIndex: 35 });
