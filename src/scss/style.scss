@@ -427,15 +427,16 @@ body {
         top: 0;
         z-index: 15;
         visibility:visible;
-        width: 100%;
+        width: 100vw;
         height: 100vh;
         text-align: center;
         background-color: black;
        
        
         .vassoio{
+            color: black;
             width: auto;
-            height: 80vh;
+            height: 75vh;
             transform: translateY(-50%);
             top: 50%;
             position: relative;
@@ -443,6 +444,37 @@ body {
             img{
                 height: 100%;
             }
+            .istruzioni{
+                height: 90%;
+                width: 60%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50% , -50%);
+                padding: 5% 2%;
+                .title-instr{
+                    font-size: 2.4em;
+                    font-weight: 800;
+                    margin-bottom: 4%;
+                }
+                .text-instr{
+                    padding: 0 3%;
+                    font-weight: 600;
+                    line-height: 1.8em;
+                    font-size: 2.1em;
+                }
+            }
+        }
+        .imgMondo-intro{
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 3vh;
+            background-image: url("/static/piatto_virtuale/mondo.png");
+            background-position: left bottom; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover;
+            min-height: 55vh;
+            width:40% ;
         }
 
     }
@@ -603,7 +635,7 @@ body {
     }
 
     .topPart{
-        padding: 25px 0;
+        padding: 40px 0;
         margin: 0;
         
 

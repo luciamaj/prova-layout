@@ -9,14 +9,17 @@
            
             <div class="content">
                 <div class="over"> 
-                    <div class="vassoio" alt="">
+                    <div class="vassoio">
                         <img  src="/static/piatto_virtuale/vassoio_inizio.png" alt="vassoioIntro">
                         <div class="istruzioni"> 
                             <div class="title-instr">Benvenuti al Sustainable Restaurant!</div>
                             <div class="text-instr">Metti sul vassoio <br> quello che vorresti mangiare per un pasto.<br>
-                                Alla fine scoprirai se la tua dieta <br> è equilibrata per te e per il pianeta.</div>
+                                Alla fine scoprirai <br>se la tua dieta <br> è equilibrata per te e per il pianeta.</div>
                             
                         </div>
+                    </div>
+                    <div class="imgMondo-intro">
+
                     </div>
                 </div>
                 <div class="row topPart">
@@ -151,7 +154,7 @@ function getPosition(wrapper, offset, container) {
   };
 }
 
-
+$(window).onresize = this.reportWindowSize();
 export default {
     //components: { Slick },
     data() {
@@ -194,8 +197,11 @@ export default {
         this.clone();
         this.setCarousel();
         this.getPosition();
+         
     },
     methods: {
+       
+
         setCarousel(){
             let content = $("#tile-container");
             let box = $("#scroll-box");
@@ -253,6 +259,9 @@ export default {
                     }})
                 }
             })
+        },
+        reportWindowSize(){
+            console.log("resize!")
         },
 
         clone() {
@@ -320,6 +329,7 @@ export default {
                    // console.log("element", scope.x+(scope.element.position().left)+offset.left);
                      this.foodSelected.push(elementId);
                     timeline.to(scope.clone1, 1, {x:dimsDish.x-1, top: yDish-1.2});
+                    timeline.set(scope.clone1, {x:dimsDish.x-1, top: yDish-1.2});
 
                 }
             }
@@ -375,7 +385,7 @@ export default {
 
         middlePage(){
             let middlePage = $('.over');
-            //TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
+            TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
         },
         
          showEnding() {
