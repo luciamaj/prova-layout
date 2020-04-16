@@ -61,6 +61,18 @@ body {
         overflow: hidden !important;
     }
 
+    .thumb {
+        width: 30vh;
+        height: 30vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        opacity: 0;
+        z-index: 99;
+    }
+
     height: 100vh;
     background-color: black;
     font-family: 'Roboto Condensed', sans-serif;
@@ -138,9 +150,6 @@ body {
               font-size: 0.8em;
               vertical-align: middle;
               line-height: 5.2vh;
-              // background-image: url(../images/bullet-example@2x.png);
-              // background-repeat: no-repeat;
-              // background-size: contain
             }
           
             .text {
@@ -153,44 +162,7 @@ body {
               margin: 0;
             }
           
-          }
-
-        /*.risposte {
-            margin: 0 auto;
-            top: 50%;
-            font-size: 2rem;
-            -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-            position: relative;
-            //text-align: center;
-
-            .bullet {
-                display: block;
-                height: 30px;
-                width: 30px;
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                background-color: red;
-                border-radius: 50%;
-                // background-image: url(../images/bullet-example@2x.png);
-                // background-repeat: no-repeat;
-                // background-size: contain
-            }
-
-            .li {
-                display: block;
-                position: relative;
-                margin-bottom: 40px;
-            }
-
-            .risposta {
-                display: inline-block;
-                white-space: pre-line;
-                display: block;
-                padding-left: 50px;
-            }
-        }*/
+        }
     }
 
     #modalita {

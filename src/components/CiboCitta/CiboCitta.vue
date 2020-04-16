@@ -24,6 +24,9 @@
         </div>
     </div>
     <div id="cibocitta-cont">
+        <img class="thumb" id="up" src="/static/cibocitta/up.png" alt="thumbup">
+        <img class="thumb" id="down" src="/static/cibocitta/down.png" alt="thumbdown">
+
         <div v-if="modeChosen != undefined">
             <div class="domanda-cont">
                 DOMANDA {{currentStep + 1}}/5
@@ -68,14 +71,13 @@ export default {
             modeChosen: undefined,
             currentStep: 0,
             myQuestions: [],
-            indexes: ["A", "B", "C"]
+            indexes: ["A", "B", "C"],
+            upTimeline: {},
+            downTimeline: {}
         }
     },
-    computed: {
-      //
-    },
     mounted() {
-        //
+        this.createThumbsTimelines();
     },
     created() {
         //
@@ -116,8 +118,25 @@ export default {
         chooseAnswer(answer) {
             if (this.currentStep < 4) {
                 this.currentStep += 1;
-                alert(answer.corretta);
+                this.animateThumb(answer.corretta);
             }
+        },
+        animateThumb(correct) {
+            if (correct) {
+                this.upTimeline.play(0);
+            } else {
+                this.downTimeline.play(0);
+            }
+        },
+        createThumbsTimelines() {
+            let up = $('#up');
+            let down = $('#down');
+
+            this.upTimeline = new TimelineLite({paused: true, onComplete: function() { console.log("THUMB UP COMPLETED"); }});
+            this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.4, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.2, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
+
+            this.downTimeline = new TimelineLite({paused: true, onComplete: function() { console.log("THUMB UP COMPLETED"); }});
+            this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.4, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.2, {autoAlpha: 0}, "+=1").set(down, {display: 'none'});
         }
     }
   }
