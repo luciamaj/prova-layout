@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
 
 $success: rgb(47, 155, 54);
 $warning:  rgb(255, 147, 24);
@@ -22,7 +22,6 @@ body {
     -ms-user-select: none;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
-    
 }
 
 // SCSS GENERALE I COLORI SOLO SOLO DI PROVA
@@ -1126,13 +1125,15 @@ body {
         }
     }
 
+    overflow: hidden !important;
+
     #clone-container {
+
         body {
             background-color: #eee;
             height: 100vh;
             margin: 0;
             position: relative;
-            overflow: hidden;
           }
           
           * {
@@ -1189,18 +1190,16 @@ body {
             justify-content: center;
             position: relative;
           }
+        
           
           .tile {
             color: #fafafa;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
             position: relative;
-            width:6.5vw;
-            //min-width: 50px;
-            height:6.5vw;
-            overflow: hidden;
+            width: 12vh;
+            height: 12vh;
             cursor: pointer;
             border-radius: 50%;
           

@@ -287,7 +287,6 @@ export default {
                 tl.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
                     console.log("complete");
                     isMoving = false;
-                    //tl.pause(0);
                 }});
                 tl.progress(1).progress(0);
             }
