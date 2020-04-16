@@ -328,13 +328,11 @@ export default {
             TweenLite.to(startPage, 1, { autoAlpha: 0 });
         },
         showEnding() {
-            setTimeout(() => { 
-                this.resetPositions();
-                let endingPage = $('#over-ending');
+            let endingPage = $('#over-ending');
 
-                TweenLite.set(endingPage, { zIndex: 35 });
-                TweenLite.to(endingPage, 1, { autoAlpha: 1 });
-            }, 1000);
+            TweenLite.set(endingPage, { zIndex: 35 });
+            TweenLite.to(endingPage, 1, { delay: 2, autoAlpha: 1 });
+            this.resetPositions();
         },
         loadSound() {
             this.sound = new Howl({
