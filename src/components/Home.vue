@@ -21,9 +21,6 @@ let $ = JQuery;
 
 export default {
     components: { },
-    data () {
-      //
-    },
     computed: {
       //
     },

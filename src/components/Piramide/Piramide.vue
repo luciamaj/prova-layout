@@ -250,6 +250,7 @@ export default {
             this.positions = positions;            
         },
         clickedArrow(direction) {
+            console.log("THE STEP:", this.step);
             let content = $("#tile-container");
             let tileWrapper = $(".tile-wrapper");
             var isMoving = false;
@@ -287,6 +288,7 @@ export default {
                 tl.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
                     console.log("complete");
                     isMoving = false;
+                    //tl.pause(0);
                 }});
                 tl.progress(1).progress(0);
             }
