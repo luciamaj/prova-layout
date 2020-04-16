@@ -149,6 +149,8 @@ import howler from 'howler';
 let $ = JQuery;
 
 const timeline = new TimelineLite();
+let tl = new TimelineLite(); 
+
 function getPosition(wrapper, offset, container) {
   var position1 = wrapper.offset();
   var position2 = container.offset();
@@ -247,18 +249,12 @@ export default {
             wrapper.css("width", ratio + "px");
         },
         clickedArrow(direction) {
-            console.log("THE STEP:", this.step);
-            console.log("CLICKED THE DIRECTION", direction);
             let content = $("#tile-container");
-            let tileWrapper = $(".tile-wrapper");
-            let widthComponent = tileWrapper[0].getBoundingClientRect().x;
-            let offset = content.width() / $('.tile-wrapper').length;
-            const {top, left} = content.offset();
+            let offset = content.width() / this.food.length;
             var isMoving = false;
             let el = $("#scroll-box");
             let rightArrow = $("#right");
             let leftArrow = $("#left");
-            let tl = new TimelineLite(); 
 
             let maxStep = 25 - this.carouselOptions.slidesToShow;
 
@@ -295,7 +291,6 @@ export default {
                     isMoving = false;
                     //tl.pause(0);
                 }});
-                tl.progress(1).progress(0);
             }
         },
         reportWindowSize(){
@@ -395,7 +390,7 @@ export default {
             let ultimoPiatto;
             let ultimoDiv;
             ultimoPiatto=this.foodSelected[this.foodSelected.length-1];
-           console.log("ultimo "+ ultimoPiatto);
+            console.log("ultimo "+ ultimoPiatto);
            
             ultimoDiv=document.getElementById(ultimoPiatto);
            // ultimoDiv.style.border="3px solid green";
@@ -456,8 +451,6 @@ export default {
             TweenLite.set(finalEnding, {autoAlpha: 1 , zIndex: 33 });
 
             TweenLite.to(endingPage, 1, { y:-500, autoAlpha: 0 });
-            
-           ;
         },
         check(){
 
