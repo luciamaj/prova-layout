@@ -23,6 +23,9 @@
             </div>
         </div>
     </div>
+    <div id="end-quiz">
+        FINITO!
+    </div>
     <div id="cibocitta-cont">
         <img class="thumb" id="up" src="/static/cibocitta/up.png" alt="thumbup">
         <img class="thumb" id="down" src="/static/cibocitta/down.png" alt="thumbdown">
@@ -46,7 +49,6 @@
                         </div>
                     </li>
                 </ul>
-                <div v-if="currentStep == 4">TEST COMPLETATO!</div>
                 </div>
             </div>
         </div>
@@ -131,12 +133,30 @@ export default {
         createThumbsTimelines() {
             let up = $('#up');
             let down = $('#down');
+            let that = this;
 
-            this.upTimeline = new TimelineLite({paused: true, onComplete: function() { console.log("THUMB UP COMPLETED"); }});
+            this.upTimeline = new TimelineLite({paused: true, onComplete: function() { 
+                console.log("THUMB UP COMPLETED");
+
+                if (that.currentStep == 4) {
+                    that.showEndQuiz();
+                } 
+            }});
             this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.4, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.2, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
 
-            this.downTimeline = new TimelineLite({paused: true, onComplete: function() { console.log("THUMB UP COMPLETED"); }});
+            this.downTimeline = new TimelineLite({paused: true, onComplete: function() { 
+                console.log("THUMB DOWN COMPLETED"); 
+                if (that.currentStep == 4) {
+                    that.showEndQuiz();
+                }
+            }});
             this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.4, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.2, {autoAlpha: 0}, "+=1").set(down, {display: 'none'});
+        },
+        showEndQuiz() {
+            let endPage = $('#end-quiz');
+            TweenLite.set(endPage, {zIndex: 20})
+            TweenLite.to(endPage, 1, { autoAlpha: 1 });
+            console.log("I MUST SHOW THE END OF THE QUI");
         }
     }
   }
