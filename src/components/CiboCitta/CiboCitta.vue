@@ -1,38 +1,69 @@
 <template>
   <div class="cibocitta">
-    <div class="main-wrapper">
-        <div class="container-fluid">
-           <div class="mode" id="easy" v-on:click="choice('easy')">EASY</div>
-           <div class="mode" id="hard" v-on:click="choice('hard')">HARD</div>
-
-            <div v-if="modeChosen != undefined">
-                Modalità {{ modeChosen }}
-
-                <div class="domanda">
-                    La domanda: {{ myQuestions[currentStep].domanda }}
+    <div id="over">
+        <div id="name-game"></div>
+        <div v-on:click="hideStart()" id="start-game">START GAME</div>
+        <img src="../../assets/cammello.jpg" alt="">
+    </div>
+     <div id="modalita">
+        <div class="tophalf">
+            <div class="block"><div class="labelMode">MODALITÀ <br> AVANZATA</div></div>
+            <div class="block">
+                <div class="mode" id="hard" v-on:click="choice('hard')">
+                    <div class="mode-txt">CLICCA QUI</div>
                 </div>
-                Le risposte:
-                <div v-for="(question, idxquestion) in myQuestions[currentStep].risposte">
-                    <div v-on:click="chooseAnswer(question)" v-bind:key="idxquestion" class="risposta">{{ question.testo }}</div>
-                </div>
-
-                <div>
-                    Counter {{currentStep + 1}}/5
-                </div>
-
-                <div v-if="currentStep == 4">TEST COMPLETATO!</div>
             </div>
-            <!-- non scrivere nulla al di fuori del container -->
+        </div>
+        <div class="bottomhalf">
+            <div class="block"><div class="labelMode">MODALITÀ <br> SEMPLICE</div></div>
+            <div class="block">
+                <div class="mode" id="easy" v-on:click="choice('easy')">
+                    <div class="mode-txt">CLICCA QUI</div>
+                </div>
+            </div>
         </div>
     </div>
-  </div>
+    <div id="end-quiz">
+        FINITO!
+    </div>
+    <div id="cibocitta-cont">
+        <img class="thumb" id="up" src="/static/cibocitta/up.png" alt="thumbup">
+        <img class="thumb" id="down" src="/static/cibocitta/down.png" alt="thumbdown">
+
+        <div v-if="modeChosen != undefined">
+            <div class="domanda-cont">
+                DOMANDA {{currentStep + 1}}/5
+            </div>
+            <div class="leftHalf">
+                <div class="domanda">
+                    <!--Modalità {{ modeChosen }} -->
+                    {{ myQuestions[currentStep].domanda }}
+                </div>
+            </div>
+            <div class="rightHalf">
+                <ul class="bulleted">
+                    <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep].risposte">                   
+                        <span class="bullet">{{ indexes[idxquestion] }}</span>
+                        <div v-on:click="chooseAnswer(question)" class="text">
+                            <p>{{ question.testo }}</p>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 
 import gsap from 'gsap';
 import { TimelineLite } from 'gsap';
+import { TweenLite } from 'gsap'
 import data from '../../data/cibocitta.js';
+import JQuery from 'jquery';
+import howler from 'howler';
+let $ = JQuery;
 
 export default {
     components: { },
@@ -42,13 +73,13 @@ export default {
             modeChosen: undefined,
             currentStep: 0,
             myQuestions: [],
+            indexes: ["A", "B", "C"],
+            upTimeline: {},
+            downTimeline: {}
         }
     },
-    computed: {
-      //
-    },
     mounted() {
-        //
+        this.createThumbsTimelines();
     },
     created() {
         //
@@ -57,7 +88,17 @@ export default {
         //
     },
     methods: {
+        hideStart() {
+            let startPage = $('#over');
+            TweenLite.to(startPage, 1, { autoAlpha: 0 });
+        },
+        hideMode() {
+            let modePage = $('#modalita');
+            TweenLite.to(modePage, 1, { autoAlpha: 0 });
+        },
         choice(type) {
+            this.hideMode();
+
             this.myQuestions = [];
             this.modeChosen = type;
             let domande = this.dataApp.data[type];
@@ -79,8 +120,42 @@ export default {
         chooseAnswer(answer) {
             if (this.currentStep < 4) {
                 this.currentStep += 1;
-                alert(answer.corretta);
+                this.animateThumb(answer.corretta);
             }
+        },
+        animateThumb(correct) {
+            if (correct) {
+                this.upTimeline.play(0);
+            } else {
+                this.downTimeline.play(0);
+            }
+        },
+        createThumbsTimelines() {
+            let up = $('#up');
+            let down = $('#down');
+            let that = this;
+
+            this.upTimeline = new TimelineLite({paused: true, onComplete: function() { 
+                console.log("THUMB UP COMPLETED");
+
+                if (that.currentStep == 4) {
+                    that.showEndQuiz();
+                } 
+            }});
+            this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.4, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.2, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
+
+            this.downTimeline = new TimelineLite({paused: true, onComplete: function() { 
+                console.log("THUMB DOWN COMPLETED"); 
+                if (that.currentStep == 4) {
+                    that.showEndQuiz();
+                }
+            }});
+            this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.4, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.2, {autoAlpha: 0}, "+=1").set(down, {display: 'none'});
+        },
+        showEndQuiz() {
+            let endPage = $('#end-quiz');
+            TweenLite.set(endPage, {zIndex: 20})
+            TweenLite.to(endPage, 1, { delay: 2, autoAlpha: 1 });
         }
     }
   }

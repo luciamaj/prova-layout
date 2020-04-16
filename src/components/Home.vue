@@ -9,6 +9,9 @@
           <li>
             <a href="#/piatto_virtuale">PIATTO VIRTUALE</a> 
           </li>
+          <li>
+            <a href="#/cibocitta">CIBO E CIITA'</a> 
+          </li>
         </ul>
       </div>
   </div>
