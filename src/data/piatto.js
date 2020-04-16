@@ -8,7 +8,7 @@ var data = {
         {id: "risotto1",name: "risotto",name2:"alla milanese",  CO2:"0.395", Proteine:"8.99", Lipidi:"11.37" ,Carboidrati:"65.57" ,KCal:"384", Saturi:"6.814", Fibra:"1"},
         {id: "risotto2",name: "risotto", name2:"ai piselli",   CO2:"0.234", Proteine:"16.41", Lipidi:"11.21", Carboidrati:"89.56", KCal:"502", Saturi:"1.53", Fibra:"8.85"},
         {id: "tortelli",name: "tortelli",name2:"alle erbette",  CO2:"0.649", Proteine:"20.28", Lipidi:"19.17", Carboidrati:"65.98", KCal:"501", Saturi:"10.414", Fibra:"3.51"},
-        {id: "zuppa",name: "zuppa",name2:"contadina con legumi", CO2:"0.051", Proteine:"10.16", Lipidi:"6.065", Carboidrati:"36.97", KCal:"234", Saturi:"0.81", Fibra:"8.52"},
+        {id: "zuppa",name: "zuppa",name2:"di legumi", CO2:"0.051", Proteine:"10.16", Lipidi:"6.065", Carboidrati:"36.97", KCal:"234", Saturi:"0.81", Fibra:"8.52"},
         {id: "fagioli",name: "fagioli", name2:"all'uccelletto", CO2:"0.166", Proteine:"15", Lipidi:"12", Carboidrati:"36", KCal:"304", Saturi:"1.45", Fibra:"13.01"},
         {id: "mozzarella",name: "mozzarella",name2:null, CO2:"0.82", Proteine:"18.7", Lipidi:"19.5", Carboidrati:"0.7", KCal:"178", Saturi:"11.43", Fibra:"0"},
         {id: "prosciutto",name: "prsciutto", name2:null, CO2:"0.794", Proteine:"12.75", Lipidi:"9.2", Carboidrati:"0", KCal:"134", Saturi:"6.15", Fibra:"0"},
