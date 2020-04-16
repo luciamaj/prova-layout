@@ -250,13 +250,8 @@ export default {
             this.positions = positions;            
         },
         clickedArrow(direction) {
-            console.log("THE STEP:", this.step);
-            console.log("CLICKED THE DIRECTION", direction);
             let content = $("#tile-container");
             let tileWrapper = $(".tile-wrapper");
-            let widthComponent = tileWrapper[0].getBoundingClientRect().x;
-            let offset = content.width() / $('.tile-wrapper').length;
-            const {top, left} = content.offset();
             var isMoving = false;
             let el = $("#scroll-box");
             let rightArrow = $("#right");
