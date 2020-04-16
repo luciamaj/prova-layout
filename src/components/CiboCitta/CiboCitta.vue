@@ -156,7 +156,6 @@ export default {
             let endPage = $('#end-quiz');
             TweenLite.set(endPage, {zIndex: 20})
             TweenLite.to(endPage, 1, { delay: 2, autoAlpha: 1 });
-            console.log("I MUST SHOW THE END OF THE QUI");
         }
     }
   }
