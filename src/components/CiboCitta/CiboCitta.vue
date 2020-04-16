@@ -23,21 +23,29 @@
             </div>
         </div>
     </div>
-    <div class="cibocitta-cont">
+    <div id="cibocitta-cont">
         <div v-if="modeChosen != undefined">
-            Modalità {{ modeChosen }}
-
-            <div class="domanda">
-                La domanda: {{ myQuestions[currentStep].domanda }}
+            <div class="domanda-cont">
+                DOMANDA {{currentStep + 1}}/5
             </div>
-            Le risposte:
-            <div v-for="(question, idxquestion) in myQuestions[currentStep].risposte">
-                <div v-on:click="chooseAnswer(question)" v-bind:key="idxquestion" class="risposta">{{ question.testo }}</div>
+            <div class="leftHalf">
+                <div class="domanda">
+                    <!--Modalità {{ modeChosen }} -->
+                    {{ myQuestions[currentStep].domanda }}
+                </div>
             </div>
-            <div>
-                Counter {{currentStep + 1}}/5
+            <div class="rightHalf">
+                <ul class="bulleted">
+                    <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep].risposte">                   
+                        <span class="bullet"></span>
+                        <div v-on:click="chooseAnswer(question)" class="text">
+                            <p>{{ question.testo }}</p>
+                        </div>
+                    </li>
+                </ul>
+                <div v-if="currentStep == 4">TEST COMPLETATO!</div>
+                </div>
             </div>
-            <div v-if="currentStep == 4">TEST COMPLETATO!</div>
         </div>
     </div>
   </div>
@@ -80,7 +88,13 @@ export default {
             let startPage = $('#over');
             TweenLite.to(startPage, 1, { autoAlpha: 0 });
         },
+        hideMode() {
+            let modePage = $('#modalita');
+            TweenLite.to(modePage, 1, { autoAlpha: 0 });
+        },
         choice(type) {
+            this.hideMode();
+
             this.myQuestions = [];
             this.modeChosen = type;
             let domande = this.dataApp.data[type];
