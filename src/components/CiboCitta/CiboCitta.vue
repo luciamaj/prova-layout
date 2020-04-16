@@ -37,7 +37,7 @@
             <div class="rightHalf">
                 <ul class="bulleted">
                     <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep].risposte">                   
-                        <span class="bullet"></span>
+                        <span class="bullet">{{ indexes[idxquestion] }}</span>
                         <div v-on:click="chooseAnswer(question)" class="text">
                             <p>{{ question.testo }}</p>
                         </div>
@@ -48,7 +48,6 @@
             </div>
         </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -69,6 +68,7 @@ export default {
             modeChosen: undefined,
             currentStep: 0,
             myQuestions: [],
+            indexes: ["A", "B", "C"]
         }
     },
     computed: {
