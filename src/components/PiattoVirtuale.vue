@@ -250,6 +250,8 @@ export default {
             let offset = content.width() / this.food.length;
             var isMoving = false;
             let el = $("#scroll-box");
+            let rightArrow = $("#right");
+            let leftArrow = $("#left");
 
             let maxStep = 25 - this.carouselOptions.slidesToShow;
 
@@ -283,7 +285,6 @@ export default {
                     isMoving = false;
                     //tl.pause(0);
                 }});
-                tl.progress(1).progress(0);
             }
         },
         reportWindowSize(){
