@@ -58,7 +58,7 @@
                                                 <div class=" tile" :ref="piatto.id" :id="piatto.id" > 
                                                      <img :src="'/static/piatto_virtuale/cibo/'+piatto.id+'.png'" alt="vassoio">
                                                     <div class="mainName">{{piatto.name}}</div>
-                                                    <div class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</div>
+                                                    <p class="secondName" v-if="piatto.name2!=null">{{piatto.name2}}</p>
                                                 </div>
                                             </div>
                                         </template>
@@ -77,27 +77,28 @@
                 </div>
                 
                 <div class="row sum ">
-                    <div class="col-lg-5 check" v-bind="total" >
+                    <div class="col-lg-6 check col-md-6" >
                         <div class="title">Le tue pietanze “costano”<br> in termini di CO2 prodotta: {{Math.round(total.co2 * 100) / 100}} kg</div>
-                        <template v-for="cibo in food" >
+                        <template v-for="(cibo, index) in food" >
                             <template v-bind="foodSelected">
-                            <div class="row" v-if="foodSelected.find(el=> el==cibo.id)"  :key="cibo" >
-                                <div class="col-7 item">{{cibo.name}} <template  v-if="cibo.name2!=null">{{cibo.name2}}</template></div>
-                                <div class="col-5 amount" >{{ Math.round(cibo.CO2* 100) / 100}} kg di CO2</div>
+                            <div class="row" v-if="foodSelected.find(el=> el==cibo.id)"  :key="(cibo, index)" >
+                                <div class="col-lg-7  col-md-6 item">{{cibo.name}} <template  v-if="cibo.name2!=null">{{cibo.name2}}</template></div>
+                                <div class="col-lg-5 col-md-6 amount" >{{ Math.round(cibo.CO2* 100) / 100}} kg di CO2</div>
                             </div>
                             </template>
                         </template>
                         <div class="row totale">
-                            <div class="col-7" >Totale</div>
-                            <div class="col-5 amount" ><div>{{Math.round(total.co2 * 100) / 100}} kg di CO2</div></div>
+                            <div class="col-lg-7  col-md-6" >Totale</div>
+                            <div class="col-lg-5 col-md-6 amount" ><div>{{Math.round(total.co2 * 100) / 100}} kg di CO2</div></div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6 checkSide">
                         <div class="mondoImg" alt="mondo"></div>
-                        <div> Il tuo risultato genera CO2 equivalente a quella <br> prodotta da un viaggio in automobile da Parma a XXXX</div>
+                        <div> Il tuo risultato genera CO2 equivalente a quella prodotta da un viaggio in automobile da Parma a XXXX</div>
+                         <div><button v-on:click="finalEnding" >Altro</button></div>
                     </div>
-                    <div><button v-on:click="finalEnding" >Altro</button></div>
+                   
                 </div>
                 
             </div>
@@ -180,13 +181,15 @@ export default {
             carouselOptions: {
                 slidesToShow: 5,
                 slidesToScroll: 5,
-                scrollVelocity:1.2
+                scrollVelocity:1.8
 
             },
             ratio: 0,
             step: 0,
             foodMoved: 0,
-            sound: null,
+            sound: {
+                click:null,
+                bip:null},
             positions:[],
             scopes: [],
             total:{
@@ -222,8 +225,8 @@ export default {
        
 
         setCarousel(){
-           let leftArrow = $("#left");
-            TweenLite.set(leftArrow, { autoAlpha: 0});
+            let leftArrow = $("#left");
+            TweenLite.set(leftArrow, { autoAlpha: 0.3});
             let content = $("#tile-container");
             let box = $("#scroll-box");
             let wrapper = $(".tile-wrapper");
@@ -263,8 +266,9 @@ export default {
                     if (this.step != 0) {
                         this.step -= this.carouselOptions.slidesToScroll;
                         TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
+                       
                         if (this.step <= 0) {
-                            TweenLite.to(leftArrow, 0.5, { autoAlpha: 0});
+                            TweenLite.to(leftArrow, 0.5, { autoAlpha: 0.3});
                         }
                     }
                     console.log("MAXSTEP", maxStep, this.step);
@@ -273,14 +277,16 @@ export default {
                     if (this.step < maxStep) {
                         this.step += this.carouselOptions.slidesToScroll;
                         TweenLite.to(leftArrow, 0.5, { autoAlpha: 1});
+                       
                         if (this.step >= maxStep) {
-                            TweenLite.to(rightArrow, 0.5, { autoAlpha: 0});
+                            TweenLite.to(rightArrow, 0.5, { autoAlpha: 0.3});
                         }
                     }
                     console.log("MAXSTEP", maxStep, this.step);
                     xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
                 }
-                tl.to(el, 1, {scrollTo: {x: xMove}, onComplete: function() {
+               
+                tl.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
                     console.log("complete");
                     isMoving = false;
                     //tl.pause(0);
@@ -348,19 +354,20 @@ export default {
                 let xDish=dimsDish.left;
                 let yDish=dimsDish.y-dimelement.y;
                 if( !found){
+                     this.playSoundclick();
                      console.log("offset element "+offset.left +" "+offset.top);
 
                    console.log("un po di dati dim"+ dimsDish.left+ " "+dimsDish.top +" s x "+scope.x+" y " +scope.y+" el "+dimelement.x+" "+dimelement.y);
                     TweenLite.set(scope.element, { autoAlpha: 1, border: "solid 2px white" });
-                    TweenLite.set(scope.clone1, { x:dimelement.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 });
+                    TweenLite.set(scope.clone1, { x:dimelement.x, y: scope.y, autoAlpha: 0.9, scale: 0.92 , backgroundColor:"violet"});
                    
                     let hdiff=(dimsDish.height-(dimelement.height*0.92))/2;
                     console.log("height "+ dimsDish.height+" "+dimelement.height +" "+ hdiff);
                    
                    // console.log("element", scope.x+(scope.element.position().left)+offset.left);
-                     this.foodSelected.push(elementId);
-                    timeline.to(scope.clone1, 1, {x:dimsDish.x-scope.clone1.position().top+hdiff, top:-dimelement.y+dimsDish.top-scope.clone1.position().top+hdiff});
-                     console.log("POS", scope.clone1.position().left+" "+scope.clone1.position().top);
+                    this.foodSelected.push(elementId);
+                    timeline.to(scope.clone1, 1, {x:dimsDish.x-scope.clone1.position().top+hdiff+1, top:-dimelement.y+dimsDish.top-scope.clone1.position().top+hdiff+1});
+                     //console.log("POS", scope.clone1.position().left+" "+scope.clone1.position().top);
                     //timeline.set(scope.clone1, {x:dimsDish.x-1, top: yDish-1.2});
 
 
@@ -466,7 +473,7 @@ export default {
             console.log("total" +  this.total.co2);
         },
          loadSound() {
-            this.sound = new Howl({
+            this.sound.click = new Howl({
                 src: ['/static/sounds/click.wav'],
                 html5: false,
                 autoplay: false,
@@ -474,11 +481,21 @@ export default {
                 format: 'mp3',
                 onload: function() { console.log('song loaded!')},
                 onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
-            })
+            });
+            this.sound.bip = new Howl({
+                src: ['/static/sounds/blip.wav'],
+                html5: false,
+                autoplay: false,
+                volume: 1.0,
+                format: 'mp3',
+                onload: function() { console.log('song loaded!')},
+                onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
+            });
         },
-        playSound() {
-            this.sound.play();
-        }
+        playSoundclick() {
+            this.sound.click.play();
+        },
+
       
     }
 }
