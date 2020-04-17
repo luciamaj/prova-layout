@@ -183,8 +183,8 @@ body {
           
             .bullet {
               display: inline-block;
-              height: 6vh;
-              width: 6vh;
+              height: 5.5vh;
+              width: 5.5vh;
               position: absolute;
               top: 50%;
               border-style: solid;
@@ -196,13 +196,16 @@ body {
               color: black;
               font-size: 0.8em;
               vertical-align: middle;
-              line-height: 5.2vh;
+              line-height: 4.9vh;
+              cursor: pointer;
+              margin-left: 2%;
             }
           
             .text {
               display: inline-block;
-              padding-left: 100px;
+              padding-left: 110px;
               white-space: pre-line;
+              cursor: pointer;
             }
           
             h3, p {

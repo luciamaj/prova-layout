@@ -47,9 +47,9 @@
             </div>
             <div class="rightHalf">
                 <ul class="bulleted">
-                    <li v-on:click="chooseAnswer(question)" v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep].risposte">                   
-                        <span class="bullet">{{ indexes[idxquestion] }}</span>
-                        <div  class="text">
+                    <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep].risposte">                   
+                        <span v-on:mouseover="playFocusAnimation($event, true)" v-on:mouseleave="playFocusAnimation($event, false)" :id='idxquestion + "span"' v-on:click="chooseAnswer(question, idxquestion)" class="bullet">{{ indexes[idxquestion] }}</span>
+                        <div v-on:click="chooseAnswer(question, idxquestion)" class="text">
                             <p>{{ question.testo }}</p>
                         </div>
                     </li>
@@ -75,7 +75,7 @@ let $ = JQuery;
 
 export default {
     components: { },
-    data () {
+    data() {
         return {
             dataApp: data,
             modeChosen: undefined,
@@ -86,6 +86,7 @@ export default {
             downTimeline: {},
             explanationTimeline: {},
             revExplanationTimeline: {},
+            choiceTimeline: {},
             punteggio: 0,
         }
     },
@@ -93,11 +94,9 @@ export default {
         this.createThumbsTimelines();
         this.createExplanationTimeline();
         this.createRevExplanationTimeline();
+        this.createChoiceTimeline();
     },
     created() {
-        //
-    },
-    watch: {
         //
     },
     methods: {
@@ -130,10 +129,15 @@ export default {
 
             return randomArr;
         },
-        chooseAnswer(answer) {
-            if (this.currentStep < 4) {
-                this.animateThumb(answer.corretta);
-            }
+        chooseAnswer(answer, idx) {
+            console.log(idx);
+            let span = $('#' + idx + 'span');
+            let that = this;
+            let timeLine = new TimelineLite({ onComplete: function() {
+                that.animateThumb(answer.corretta);
+            }});
+
+            timeLine.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white'});
         },
         animateThumb(correct) {
             if (correct) {
@@ -142,16 +146,14 @@ export default {
                 this.downTimeline.play(0);
             }
         },
-        showExplanation() {
-            TweenLite.set(explanationPage, {zIndex: 20})
-            TweenLite.to(explanationPage, 1, { autoAlpha: 1 });
-        },
         createExplanationTimeline() {
             let explanationPage = $('#explanation');
             let that = this;
 
             this.explanationTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("EXPLANATION COMPLETED");
+                var spans = $('.bullet');
+                TweenLite.to(spans, 0.15, {scale: 1.0, lineHeight: '4.9vh', backgroundColor: 'white', color: 'black'});
             }});
 
             this.explanationTimeline.set(explanationPage, {zIndex: 20}).to(explanationPage, 1, { autoAlpha: 1 });
@@ -161,9 +163,6 @@ export default {
             let that = this;
 
             this.revExplanationTimeline = new TimelineLite({paused: true, onComplete: function() { 
-                /*if (that.currentStep == 4) {
-                    that.showEndQuiz();
-                }*/
                 console.log("EXPLANATION TIMELINE HIDDEN");
             }});
 
@@ -199,6 +198,15 @@ export default {
             } else {
                 this.revExplanationTimeline.play(0);
             }
+        },
+        createChoiceTimeline() {
+            //
+        },
+        playFocusAnimation(event, toggle) {
+            console.log("THE ID", $(event.target).attr('id'));
+            let idBullet = $(event.target).attr('id');
+            let bullet = $('#' + idBullet + 'span');
+            console.log(bullet);
         }
     }
   }
