@@ -10,6 +10,8 @@ $area:rgba(231, 231, 231, 0.925);
 
 $viola: #3D072D;
 $violaChiaro: #9e3e7e;
+$arancione: #E65A10;
+$giallo: #F4D203;
 
 $spacer-width: 40px;
 
@@ -78,6 +80,28 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
 
+    #explanation {
+        position: absolute;
+        top: 0;
+        z-index: -10;
+        visibility: visible;
+        width: 100vw;
+        height: 100vh;
+        text-align: center;
+        background-color: $viola;
+        opacity: 0;
+        font-size: 2rem;
+        padding: 3vw;
+
+        #continue-btn {
+            background-color: $arancione;
+            display: inline-block;
+            cursor: pointer;
+            margin: 2vw;
+            padding: 2vh;
+        }
+    }                                                        
+
     #end-quiz {
         position: absolute;
         top: 0;
@@ -86,9 +110,32 @@ body {
         width: 100vw;
         height: 100vh;
         text-align: center;
-        background-color: black;
+        background-color: $viola;
         opacity: 0;
         font-size: 3.5rem;
+
+        .finale-cont {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            .punti-cont-finale {
+                color: white;
+                font-size: 2rem;
+                background-color: $arancione;
+                display: inline-block;
+                padding: 1vw;
+                margin: 2vw;
+            }
+
+            .title {
+                font-size: 4rem;
+                font-weight: bold;
+                color: $giallo;
+                margin: 2vw;
+            }
+        }
     }
 
     #cibocitta-cont {
@@ -105,6 +152,18 @@ body {
             background-color: $violaChiaro;
             display: inline-block;
             padding: 1vw;
+        }
+
+        .punti-cont {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            background-color: $arancione;
+            display: inline-block;
+            padding: 1vw;
+            z-index: 99;
         }
 
         .rightHalf {
@@ -149,8 +208,8 @@ body {
           
             .bullet {
               display: inline-block;
-              height: 6vh;
-              width: 6vh;
+              height: 5.5vh;
+              width: 5.5vh;
               position: absolute;
               top: 50%;
               border-style: solid;
@@ -162,13 +221,16 @@ body {
               color: black;
               font-size: 0.8em;
               vertical-align: middle;
-              line-height: 5.2vh;
+              line-height: 4.9vh;
+              cursor: pointer;
+              margin-left: 2%;
             }
           
             .text {
               display: inline-block;
-              padding-left: 100px;
+              padding-left: 110px;
               white-space: pre-line;
+              cursor: pointer;
             }
           
             h3, p {
