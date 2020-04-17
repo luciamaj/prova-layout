@@ -11,6 +11,7 @@ $area:rgba(231, 231, 231, 0.925);
 $viola: #3D072D;
 $violaChiaro: #9e3e7e;
 $arancione: #E65A10;
+$giallo: #F4D203;
 
 $spacer-width: 40px;
 
@@ -112,6 +113,29 @@ body {
         background-color: $viola;
         opacity: 0;
         font-size: 3.5rem;
+
+        .finale-cont {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            .punti-cont-finale {
+                color: white;
+                font-size: 2rem;
+                background-color: $arancione;
+                display: inline-block;
+                padding: 1vw;
+                margin: 2vw;
+            }
+
+            .title {
+                font-size: 4rem;
+                font-weight: bold;
+                color: $giallo;
+                margin: 2vw;
+            }
+        }
     }
 
     #cibocitta-cont {

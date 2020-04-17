@@ -30,7 +30,20 @@
         <div id="continue-btn" class="button" v-on:click="nextQuestion()">CLICCA QUI PER CONTINUARE</div>
     </div>
     <div id="end-quiz">
-        FINITO!
+        <div class="finale-cont">
+            <div class="title">
+                {{ this.getResult().title }}
+            </div>
+            <div class="description">
+                {{ this.getResult().description }}
+            </div>
+            <div class="punti-cont-finale">
+                PUNTEGGIO {{this.punteggio}}
+            </div>
+            <div class="punti-cont-finale" v-on:click="resetGame()">
+                CLICCA PER TERMINARE
+            </div>
+        </div>
     </div>
     <div id="cibocitta-cont">
         <img class="thumb" id="up" src="/static/cibocitta/up.png" alt="thumbup">
@@ -89,6 +102,7 @@ export default {
             choiceTimeline: {},
             punteggio: 0,
             clickedAnswer: false,
+            results: [{"title": "OTTIMO RISULTATO!", "description": "Sei un cittadino ben informato!"}, {"title": "DECENTE RISULTATO!", "description": "Sei un cittadino ben informato!"}, {"title": "PESSIMO RISULTATO!", "description": "Sei un cittadino ben informato!"}]
         }
     },
     mounted() {
@@ -213,6 +227,37 @@ export default {
             let idBullet = $(event.target).attr('id');
             let bullet = $('#' + idBullet + 'span');
             console.log(bullet);
+        },
+        getResult() {
+            if (this.punteggio <= 20) {
+                return this.results[2];
+            } else if (this.punteggio > 20 && this.punteggio <= 30) {
+                return this.results[1];
+            } else {
+                return this.results[0];
+            }
+        },
+        resetGame() {
+            //VARIABLES
+            this.modeChosen = undefined;
+            this.currentStep = 1;
+            this.myQuestions = [];
+            this.punteggio = 0;
+            this.clickedAnswer = false;
+
+            let startPage = $('#over');
+            TweenLite.set(startPage, { autoAlpha: 1, visibility: 'visible' });
+            let modePage = $('#modalita');
+            TweenLite.set(modePage, { autoAlpha: 1, visibility: 'visible' });
+
+            //PAGES POSITIONS
+            let endPage = $('#end-quiz');
+            TweenLite.set(endPage, { zIndex: -99 });
+            TweenLite.set(endPage, { autoAlpha: 0 });
+
+            let explanationPage = $('#explanation');
+            TweenLite.set(explanationPage, { zIndex: -99 });
+            TweenLite.set(explanationPage, { autoAlpha: 0 });
         }
     }
   }
