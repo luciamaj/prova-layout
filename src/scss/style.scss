@@ -1673,16 +1673,20 @@ and (-webkit-min-device-pixel-ratio: 2) {
             padding: 0;
             top: 50%;
             transform: translatey( -50%);
+            margin: 5px 0;
         }
         .first-tile{ 
             cursor: default !important;
-            position: relative;
-            font-size: 115%;
-            text-align: center;
-            top: 50%;
-            transform: translate(0px, -50%);
-            height: fit-content;
-            max-height: 100%;
+            
+            div{
+                position: relative;
+                font-size: 115%;
+                text-align: center;
+                top: 50%;
+                transform: translate(0px, -50%);
+                height: fit-content;
+                max-height: 100%;
+            }
         }
           
         .square:after {
@@ -1691,7 +1695,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
             padding-bottom: 100%;
         }
           
-        .inner {
+        .innerSq {
             box-shadow: 0px 1px 12px 1px #abaaaaba;
             cursor: pointer;
             position: absolute;

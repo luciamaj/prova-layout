@@ -408,12 +408,8 @@ export default {
             let dishes = $(".dish");
             let dishDiv;
             
-            console.log("el dish1 "+ document.getElementById("dish-1").getBoundingClientRect().left);
-            console.log("el dish2 "+ document.getElementById("dish-2").getBoundingClientRect().left);
-            console.log("el dish3 "+ document.getElementById("dish-3").getBoundingClientRect().left);
-            console.log("el dish4 "+ document.getElementById("dish-4").getBoundingClientRect().left);
             for(let dish of dishes) {
-                console.log("el dish "+ document.getElementById( dish.id));
+               
                 dishDiv= document.getElementById( dish.id).getBoundingClientRect();
                 
                 let toPush = {dish:dish.id, pos:dishDiv}

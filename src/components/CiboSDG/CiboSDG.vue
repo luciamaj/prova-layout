@@ -9,14 +9,20 @@
         
         <div class="content">
             <div class="row tiles">
-                <div class="col-lg-2 col-md-3">
-                    <div class="square"><div class="inner" style=" box-shadow:none"> <div class="first-tile">scegli il tuo obiettivo</div></div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="square">
+                        <div class="innerSq first-tile fall" style=" box-shadow:none" id="first"> <div class="">scegli il tuo obiettivo</div></div>
                     </div>
                 </div>
                 <template v-for="(obs,index) in punti ">
-                    <div class="col-lg-2 col-md-3 ">
+                    <div class="col-lg-2 col-md-3 col-sm-6" :key=(obs,index)>
                         <div class="square">
-                            <div class="inner" :style="'background-color:'+obs.color+';'" v-on:click="selectedCard(obs)" :id="obs.id"> <div class="up"><div class="number">{{obs.id}}</div> <div class="name">{{obs.name}}</div></div></div>
+                            <div class="innerSq fall" :style="'background-color:'+obs.color+';'" v-on:click="selectedCard(obs)" :id="obs.id"> 
+                                <div class="up"><div class="number">{{obs.id}}</div> 
+                                    <div class="name">{{obs.name}}</div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </template>
@@ -26,15 +32,15 @@
         </div>
          <div id="text1">
             <div>{{slide.text1}}</div>
-            <div class="comandi"><button v-on:click="control('text1','indietro')"> < indietro </button> <button v-on:click="control('text1','avanti')"> avanti ></button></div>
+            <div class="comandi"><button v-on:click="control('text1','indietro')"> > indietro </button> <button v-on:click="control('text1','avanti')"> avanti ></button></div>
         </div>
         <div id="img">
             <div>{{slide.text1}} IMG</div>
-            <div class="comandi"><button v-on:click="control('img','indietro')"> < indietro </button> <button v-on:click="control('img','avanti')"> avanti ></button></div>
+            <div class="comandi"><button v-on:click="control('img','indietro')"> > indietro </button> <button v-on:click="control('img','avanti')"> avanti ></button></div>
         </div>
         <div id="text2">
             <div>{{slide.text1}} TEXT2</div>
-            <div class="comandi"><button v-on:click="control('text2','indietro')"> < indietro </button> <button v-on:click="control('text2','avanti')"> avanti ></button></div>
+            <div class="comandi"><button v-on:click="control('text2','indietro')"> > indietro </button> <button v-on:click="control('text2','avanti')"> avanti ></button></div>
         </div>
           
     </div>
@@ -55,8 +61,7 @@ import JQuery from 'jquery';
 import howler from 'howler';
 let $ = JQuery;
 
-const timeline = new TimelineLite();
-let tl = new TimelineLite(); 
+ let tl = new TimelineLite(); 
 
 function getPosition(wrapper, offset, container) {
   var position1 = wrapper.offset();
@@ -74,7 +79,7 @@ export default {
         return {
            
             punti:data.obiettivi,
-          
+            position:[],
             ratio: 0,
          
             sound: {
@@ -91,39 +96,90 @@ export default {
     },
     mounted() {
         this.loadSound();    
+        //this.getTilePos();
     },
     
     methods: {
-       
+        getTilePos(){
+            var positions=[];
+            var tiles = $('.innerSq');
+            //console.log("tiles "+ tiles);
+            for(let tile of tiles){
+                console.log("ids "+tile.id);
+                let tilele= document.getElementById(tile.id).getBoundingClientRect();
+                console.log("Tiles position "+tilele.x, tilele.y);
+                let toPush = {tile:tile.id, pos:tilele}
+                positions.push(toPush); 
+            }
+
+            this.position=positions;
+          
+           
+        },
         hideStart() {
             console.log("HIDE START");
             let startPage = $('#over');
             let button = $('#start-game');
             this.sound.bip.play();
+            var that=this;
             TweenLite.to(button, 0.2, { scale: 0.7 ,  onComplete:function(){
                 TweenLite.to(startPage,1, { autoAlpha: 0});
                 TweenLite.to(button, 0.6, { scale: 1});
-             
+               
             } });  
+             this.initalComposition();
+        },
+
+        initalComposition(){
+            var tiles = $('.innerSq');
+           
+            var that=this;
+            
+             tl.from(tiles, 0.5,{  y:1000, stagger:{ each:0.05, ease:"circ"} });
+           
+            
         },
 
         selectedCard(element){
             this.slide.text1=element.name;
             this.slide.text2=element.name;
-            let card=$('#'+element.id);
+            let card=$('#'+element.id); 
             let slide1=$('#text1');
             let slide2=$('#img');
             let slide3=$('#text2');
             this.sound.bip.play();
+            card.removeClass("fall");
+            var that=this;
             TweenLite.set(slide1, { backgroundColor:element.color,zIndex:5});
             TweenLite.set(slide2, { backgroundColor:element.color});
             TweenLite.set(slide3, { backgroundColor:element.color});
-            TweenLite.to(card, 0.3, { scale: 0.7 , onComplete:function(){
-            TweenLite.to(slide1, 1, { autoAlpha:1 });
-            TweenLite.to(card, 0.4, { scale: 1,  autoAlpha:0.7});
-             
+            TweenLite.to(card, 0.2, { scale: 0.7 , onComplete:function(){
+                
+                  
+                TweenLite.to(card, 0.4, { scale: 1});
+               
+              
             } });
+            
+           var boxC =$(".fall");
+            var fall=TweenLite.to(boxC ,{scale: 0.01, autoAlpha:0.1, duration:0.5, stagger: { each: 0.1, from:"start",ease:"exp"}, });
+            var anim=TweenLite.to(card, 0.6, { autoAlpha:0,delay:2, ease:"power2.in"});
+            TweenLite.to(slide1, 0.8,{autoAlpha:1, delay:2.5, onComplete:function () {
+                anim.reverse();
+                fall.reverse();
+            }},'-=2');
+            //TweenLite.to(boxC,1, {autoAlpha:1,scale:1});
+            
+            card.addClass("fall");
+            
              
+        },
+        fall(){
+            console.log("ho iniziato");
+            var boxC =$(".fall");
+            TweenLite.to(boxC, 1.5 ,{
+                scale: 0.1, autoAlpha:0, stagger: { each: 0.15, from:"start",ease:"sine.i"}
+            });
         },
         control(position, direction){
             let slide1=$('#text1');
@@ -135,6 +191,7 @@ export default {
                     if(direction=="indietro"){
                        
                         TweenLite.set(slide1, {autoAlpha:0, zIndex:-2});
+                        this.initalComposition();
                     }else{
                         TweenLite.set(slide1, { zIndex:-2});
                         TweenLite.set(slide2, {autoAlpha:1, zIndex:5});
