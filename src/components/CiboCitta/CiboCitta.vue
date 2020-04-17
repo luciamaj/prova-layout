@@ -24,8 +24,8 @@
         </div>
     </div>
     <div id="explanation">
-        <div v-if="myQuestions[currentStep] != null">
-            {{ myQuestions[currentStep].spiegazione }}
+        <div v-if="myQuestions[currentStep - 1] != null">
+            {{ myQuestions[currentStep - 1].spiegazione }}
         </div>
         <div id="continue-btn" class="button" v-on:click="nextQuestion()">CLICCA QUI PER CONTINUARE</div>
     </div>
@@ -36,18 +36,18 @@
         <img class="thumb" id="up" src="/static/cibocitta/up.png" alt="thumbup">
         <img class="thumb" id="down" src="/static/cibocitta/down.png" alt="thumbdown">
 
-        <div v-if="modeChosen != undefined">
+        <div v-if="modeChosen != undefined && myQuestions.length == 5">
             <div class="domanda-cont">
-                DOMANDA {{currentStep + 1}}/5
+                DOMANDA {{currentStep}}/5
             </div>
             <div class="leftHalf">
-                <div class="domanda">
-                    {{ myQuestions[currentStep].domanda }}
+                <div class="domanda" v-if="myQuestions[currentStep - 1] != null">
+                    {{ myQuestions[currentStep - 1].domanda }}
                 </div>
             </div>
             <div class="rightHalf">
-                <ul class="bulleted">
-                    <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep].risposte">                   
+                <ul class="bulleted" v-if="myQuestions[currentStep - 1] != null">
+                    <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep - 1].risposte">                   
                         <span v-on:mouseover="playFocusAnimation($event, true)" v-on:mouseleave="playFocusAnimation($event, false)" :id='idxquestion + "span"' v-on:click="chooseAnswer(question, idxquestion)" class="bullet">{{ indexes[idxquestion] }}</span>
                         <div v-on:click="chooseAnswer(question, idxquestion)" class="text">
                             <p>{{ question.testo }}</p>
@@ -79,7 +79,7 @@ export default {
         return {
             dataApp: data,
             modeChosen: undefined,
-            currentStep: 0,
+            currentStep: 1,
             myQuestions: [],
             indexes: ["A", "B", "C"],
             upTimeline: {},
@@ -167,7 +167,7 @@ export default {
                 console.log("EXPLANATION TIMELINE HIDDEN");
             }});
 
-            this.revExplanationTimeline.to(explanationPage, 1, { autoAlpha: 0 }).set(explanationPage, {zIndex: -20});
+            this.revExplanationTimeline.to(explanationPage, 1, { autoAlpha: 0 }).set(explanationPage, {zIndex: -220});
         },
         createThumbsTimelines() {
             let up = $('#up');
@@ -177,26 +177,26 @@ export default {
             this.upTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("THUMB UP COMPLETED");
                 that.explanationTimeline.play(0);
-                that.currentStep += 1;
             }});
             this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.4, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.2, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
 
             this.downTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("THUMB DOWN COMPLETED"); 
                 that.explanationTimeline.play(0);
-                that.currentStep += 1;
             }});
             this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.4, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.2, {autoAlpha: 0}, "+=1").set(down, {display: 'none'});
         },
         showEndQuiz() {
             let endPage = $('#end-quiz');
-            TweenLite.set(endPage, { zIndex: 100 });
+            TweenLite.set(endPage, { zIndex: 110 });
             TweenLite.to(endPage, 1, { autoAlpha: 1 });
         },
         nextQuestion() {
+            console.log("THE CURRENT STEPPPPPP" , this.currentStep);
             if (this.currentStep == 5) {
                 this.showEndQuiz();
             } else {
+                this.currentStep += 1;
                 this.revExplanationTimeline.play(0);
             }
         },
