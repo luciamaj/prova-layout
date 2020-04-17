@@ -27,7 +27,7 @@
         <div v-if="myQuestions[currentStep] != null">
             {{ myQuestions[currentStep].spiegazione }}
         </div>
-        <div class="button" v-on:click="nextQuestion()">CLICCA QUI PER CONTINUARE</div>
+        <div id="continue-btn" class="button" v-on:click="nextQuestion()">CLICCA QUI PER CONTINUARE</div>
     </div>
     <div id="end-quiz">
         FINITO!
@@ -47,16 +47,19 @@
             </div>
             <div class="rightHalf">
                 <ul class="bulleted">
-                    <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep].risposte">                   
+                    <li v-on:click="chooseAnswer(question)" v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep].risposte">                   
                         <span class="bullet">{{ indexes[idxquestion] }}</span>
-                        <div v-on:click="chooseAnswer(question)" class="text">
+                        <div  class="text">
                             <p>{{ question.testo }}</p>
                         </div>
                     </li>
                 </ul>
-                </div>
             </div>
-        </div>
+            <div class="punti-cont">
+                PUNTEGGIO {{this.punteggio}}
+            </div>
+          </div>
+       </div>
     </div>
 </template>
 
@@ -82,7 +85,8 @@ export default {
             upTimeline: {},
             downTimeline: {},
             explanationTimeline: {},
-            revExplanationTimeline: {} 
+            revExplanationTimeline: {},
+            punteggio: 0,
         }
     },
     mounted() {
@@ -148,8 +152,6 @@ export default {
 
             this.explanationTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("EXPLANATION COMPLETED");
-                that.currentStep += 1;
-                console.log("THE CURRENT STEP", that.currentStep);
             }});
 
             this.explanationTimeline.set(explanationPage, {zIndex: 20}).to(explanationPage, 1, { autoAlpha: 1 });
@@ -175,12 +177,14 @@ export default {
             this.upTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("THUMB UP COMPLETED");
                 that.explanationTimeline.play(0);
+                that.currentStep += 1;
             }});
             this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.4, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.2, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
 
             this.downTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("THUMB DOWN COMPLETED"); 
                 that.explanationTimeline.play(0);
+                that.currentStep += 1;
             }});
             this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.4, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.2, {autoAlpha: 0}, "+=1").set(down, {display: 'none'});
         },
