@@ -23,6 +23,12 @@
             </div>
         </div>
     </div>
+    <div id="explanation">
+        <div v-if="myQuestions[currentStep] != null">
+            {{ myQuestions[currentStep].spiegazione }}
+        </div>
+        <div class="button" v-on:click="nextQuestion()">CLICCA QUI PER CONTINUARE</div>
+    </div>
     <div id="end-quiz">
         FINITO!
     </div>
@@ -36,7 +42,6 @@
             </div>
             <div class="leftHalf">
                 <div class="domanda">
-                    <!--Modalità {{ modeChosen }} -->
                     {{ myQuestions[currentStep].domanda }}
                 </div>
             </div>
@@ -75,11 +80,15 @@ export default {
             myQuestions: [],
             indexes: ["A", "B", "C"],
             upTimeline: {},
-            downTimeline: {}
+            downTimeline: {},
+            explanationTimeline: {},
+            revExplanationTimeline: {} 
         }
     },
     mounted() {
         this.createThumbsTimelines();
+        this.createExplanationTimeline();
+        this.createRevExplanationTimeline();
     },
     created() {
         //
@@ -119,7 +128,6 @@ export default {
         },
         chooseAnswer(answer) {
             if (this.currentStep < 4) {
-                this.currentStep += 1;
                 this.animateThumb(answer.corretta);
             }
         },
@@ -130,6 +138,35 @@ export default {
                 this.downTimeline.play(0);
             }
         },
+        showExplanation() {
+            TweenLite.set(explanationPage, {zIndex: 20})
+            TweenLite.to(explanationPage, 1, { autoAlpha: 1 });
+        },
+        createExplanationTimeline() {
+            let explanationPage = $('#explanation');
+            let that = this;
+
+            this.explanationTimeline = new TimelineLite({paused: true, onComplete: function() { 
+                console.log("EXPLANATION COMPLETED");
+                that.currentStep += 1;
+                console.log("THE CURRENT STEP", that.currentStep);
+            }});
+
+            this.explanationTimeline.set(explanationPage, {zIndex: 20}).to(explanationPage, 1, { autoAlpha: 1 });
+        },
+        createRevExplanationTimeline() {
+            let explanationPage = $('#explanation');
+            let that = this;
+
+            this.revExplanationTimeline = new TimelineLite({paused: true, onComplete: function() { 
+                /*if (that.currentStep == 4) {
+                    that.showEndQuiz();
+                }*/
+                console.log("EXPLANATION TIMELINE HIDDEN");
+            }});
+
+            this.revExplanationTimeline.to(explanationPage, 1, { autoAlpha: 0 }).set(explanationPage, {zIndex: -20});
+        },
         createThumbsTimelines() {
             let up = $('#up');
             let down = $('#down');
@@ -137,25 +174,27 @@ export default {
 
             this.upTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("THUMB UP COMPLETED");
-
-                if (that.currentStep == 4) {
-                    that.showEndQuiz();
-                } 
+                that.explanationTimeline.play(0);
             }});
             this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.4, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.2, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
 
             this.downTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("THUMB DOWN COMPLETED"); 
-                if (that.currentStep == 4) {
-                    that.showEndQuiz();
-                }
+                that.explanationTimeline.play(0);
             }});
             this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.4, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.2, {autoAlpha: 0}, "+=1").set(down, {display: 'none'});
         },
         showEndQuiz() {
             let endPage = $('#end-quiz');
-            TweenLite.set(endPage, {zIndex: 20})
-            TweenLite.to(endPage, 1, { delay: 2, autoAlpha: 1 });
+            TweenLite.set(endPage, { zIndex: 20 });
+            TweenLite.to(endPage, 1, { autoAlpha: 1 });
+        },
+        nextQuestion() {
+            if (this.currentStep == 4) {
+                this.showEndQuiz();
+            } else {
+                this.revExplanationTimeline.play(0);
+            }
         }
     }
   }

@@ -78,6 +78,19 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
 
+    #explanation {
+        position: absolute;
+        top: 0;
+        z-index: -10;
+        visibility: visible;
+        width: 100vw;
+        height: 100vh;
+        text-align: center;
+        background-color: black;
+        opacity: 0;
+        font-size: 3.5rem;
+    }                                                        
+
     #end-quiz {
         position: absolute;
         top: 0;
