@@ -88,6 +88,7 @@ export default {
             revExplanationTimeline: {},
             choiceTimeline: {},
             punteggio: 0,
+            clickedAnswer: false,
         }
     },
     mounted() {
@@ -130,14 +131,17 @@ export default {
             return randomArr;
         },
         chooseAnswer(answer, idx) {
-            console.log(idx);
-            let span = $('#' + idx + 'span');
-            let that = this;
-            let timeLine = new TimelineLite({ onComplete: function() {
-                that.animateThumb(answer.corretta);
-            }});
+            if (this.clickedAnswer == false) {
+                this.clickedAnswer = true;
+                console.log(idx);
+                let span = $('#' + idx + 'span');
+                let that = this;
+                let timeLine = new TimelineLite({ onComplete: function() {
+                    that.animateThumb(answer.corretta);
+                }});
 
-            timeLine.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white'});
+                timeLine.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white'});
+            }
         },
         animateThumb(correct) {
             if (correct) {
@@ -196,6 +200,7 @@ export default {
             if (this.currentStep == 5) {
                 this.showEndQuiz();
             } else {
+                this.clickedAnswer = false;
                 this.currentStep += 1;
                 this.revExplanationTimeline.play(0);
             }
