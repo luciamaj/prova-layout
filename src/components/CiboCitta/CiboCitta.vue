@@ -233,22 +233,25 @@ export default {
         },
         biggerChoiceAnim(event, toggle, myChoice) {
             console.log(event, toggle);
+            let el = event.target;
+
+            if (!($(event.target).hasClass('mode'))) {
+                el = $(event.target).parent();
+            }
+
+            let timelineUp = new TimelineLite({paused: true});
+            timelineUp.to(el, 0.3, { scale: 1.1 });
+            let that = this;
+
+            let timelineDown = new TimelineLite({paused: true, onComplete: function() {
+                that.choice(myChoice);
+            }});
+            timelineDown.to(el, 0.3, { scale: 1 });
             
-            if ($(event.target).hasClass('mode')) {
-                if (toggle) {
-                    TweenLite.to(event.target, 0.3, { scale: 1.1 })
-                } else {
-                    TweenLite.to(event.target, 0.3, { scale: 1 });
-                    this.choice(myChoice);
-                }
+            if (toggle) {
+                timelineUp.play(0);
             } else {
-                let parent = $(event.target).parent();
-                if (toggle) {
-                    TweenLite.to(parent, 0.3, { scale: 1.1 })
-                } else {
-                    TweenLite.to(parent, 0.3, { scale: 1 });
-                    this.choice(myChoice);
-                }
+                timelineDown.play(0);
             }
         },
         getResult() {
