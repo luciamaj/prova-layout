@@ -5,6 +5,7 @@ import Piramide from './../components/Piramide/Piramide.vue'
 import Cultura from './../components/Cultura.vue'
 import Piatto from './../components/PiattoVirtuale.vue'
 import CiboCitta from './../components/CiboCitta/CiboCitta.vue'
+import CiboSDG from './../components/CiboSDG/CiboSDG.vue'
 
 Vue.use(Router);
 
@@ -35,6 +36,11 @@ const router = new Router({
       path: '/piramide',
       name: 'piramide',
       component: Piramide
+    },
+    {
+      path: '/cibosdg',
+      name: 'cibosdg',
+      component: CiboSDG
     }
   ]
 })
