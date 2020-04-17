@@ -9,7 +9,7 @@
         <div class="tophalf">
             <div class="block"><div class="labelMode">MODALITÀ <br> AVANZATA</div></div>
             <div class="block">
-                <div class="mode" id="hard" v-on:click="choice('hard')">
+                <div class="mode" id="hard" v-on:mousedown="biggerChoiceAnim($event, true, null)" v-on:mouseup="biggerChoiceAnim($event, false, 'hard')" v-on:mouseleave="biggerChoiceAnim($event, false, null)">
                     <div class="mode-txt">CLICCA QUI</div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
         <div class="bottomhalf">
             <div class="block"><div class="labelMode">MODALITÀ <br> SEMPLICE</div></div>
             <div class="block">
-                <div class="mode" id="easy" v-on:click="choice('easy')">
+                <div class="mode" id="easy" v-on:mousedown="biggerChoiceAnim($event, true, null)" v-on:mouseup="biggerChoiceAnim($event, false, 'easy')" v-on:mouseleave="biggerChoiceAnim($event, false, null)">
                     <div class="mode-txt">CLICCA QUI</div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
             <div class="rightHalf">
                 <ul class="bulleted" v-if="myQuestions[currentStep - 1] != null">
                     <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep - 1].risposte">                   
-                        <span v-on:mouseover="playFocusAnimation($event, true)" v-on:mouseleave="playFocusAnimation($event, false)" :id='idxquestion + "span"' v-on:click="chooseAnswer(question, idxquestion)" class="bullet">{{ indexes[idxquestion] }}</span>
+                        <span v-on:mousedown="playFocusAnimation($event, true)" v-on:mouseup="playFocusAnimation($event, false)" :id='idxquestion + "span"' v-on:click="chooseAnswer(question, idxquestion)" class="bullet">{{ indexes[idxquestion] }}</span>
                         <div v-on:click="chooseAnswer(question, idxquestion)" class="text">
                             <p>{{ question.testo }}</p>
                         </div>
@@ -124,16 +124,18 @@ export default {
             TweenLite.to(modePage, 1, { autoAlpha: 0 });
         },
         choice(type) {
-            this.hideMode();
+            if (type != null) {
+                this.hideMode();
 
-            this.myQuestions = [];
-            this.modeChosen = type;
-            let domande = this.dataApp.data[type];
-            let randomArr = this.getRandomNumbers(5,1);
+                this.myQuestions = [];
+                this.modeChosen = type;
+                let domande = this.dataApp.data[type];
+                let randomArr = this.getRandomNumbers(5,1);
 
 
-            for(let ran of randomArr) {
-                this.myQuestions.push(domande[ran]);
+                for(let ran of randomArr) {
+                    this.myQuestions.push(domande[ran]);
+                }
             }
         },
         getRandomNumbers(max, min) {
@@ -196,13 +198,13 @@ export default {
                 console.log("THUMB UP COMPLETED");
                 that.explanationTimeline.play(0);
             }});
-            this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.4, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.2, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
+            this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.2, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.3, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
 
             this.downTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("THUMB DOWN COMPLETED"); 
                 that.explanationTimeline.play(0);
             }});
-            this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.4, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.2, {autoAlpha: 0}, "+=1").set(down, {display: 'none'});
+            this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.2, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.3, {autoAlpha: 0}, "+=0.5").set(down, {display: 'none'});
         },
         showEndQuiz() {
             let endPage = $('#end-quiz');
@@ -226,7 +228,28 @@ export default {
             console.log("THE ID", $(event.target).attr('id'));
             let idBullet = $(event.target).attr('id');
             let bullet = $('#' + idBullet + 'span');
+
             console.log(bullet);
+        },
+        biggerChoiceAnim(event, toggle, myChoice) {
+            console.log(event, toggle);
+            
+            if ($(event.target).hasClass('mode')) {
+                if (toggle) {
+                    TweenLite.to(event.target, 0.3, { scale: 1.1 })
+                } else {
+                    TweenLite.to(event.target, 0.3, { scale: 1 });
+                    this.choice(myChoice);
+                }
+            } else {
+                let parent = $(event.target).parent();
+                if (toggle) {
+                    TweenLite.to(parent, 0.3, { scale: 1.1 })
+                } else {
+                    TweenLite.to(parent, 0.3, { scale: 1 });
+                    this.choice(myChoice);
+                }
+            }
         },
         getResult() {
             if (this.punteggio <= 20) {
