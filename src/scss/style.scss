@@ -89,7 +89,7 @@ body {
         text-align: center;
         background-color: $viola;
         opacity: 0;
-        font-size: 3rem;
+        font-size: 2rem;
         padding: 3vw;
 
         #continue-btn {
@@ -109,7 +109,7 @@ body {
         width: 100vw;
         height: 100vh;
         text-align: center;
-        background-color: black;
+        background-color: $viola;
         opacity: 0;
         font-size: 3.5rem;
     }
@@ -139,6 +139,7 @@ body {
             background-color: $arancione;
             display: inline-block;
             padding: 1vw;
+            z-index: 99;
         }
 
         .rightHalf {

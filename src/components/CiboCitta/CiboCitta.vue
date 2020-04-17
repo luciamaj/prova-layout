@@ -141,6 +141,7 @@ export default {
         },
         animateThumb(correct) {
             if (correct) {
+                this.punteggio += 10;
                 this.upTimeline.play(0);
             } else {
                 this.downTimeline.play(0);
@@ -189,11 +190,11 @@ export default {
         },
         showEndQuiz() {
             let endPage = $('#end-quiz');
-            TweenLite.set(endPage, { zIndex: 20 });
+            TweenLite.set(endPage, { zIndex: 100 });
             TweenLite.to(endPage, 1, { autoAlpha: 1 });
         },
         nextQuestion() {
-            if (this.currentStep == 4) {
+            if (this.currentStep == 5) {
                 this.showEndQuiz();
             } else {
                 this.revExplanationTimeline.play(0);
