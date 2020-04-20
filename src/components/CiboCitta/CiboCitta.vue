@@ -60,7 +60,7 @@
             </div>
             <div class="rightHalf">
                 <ul class="bulleted" v-if="myQuestions[currentStep - 1] != null">
-                    <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep - 1].risposte">                   
+                    <li v-bind:key="idxquestion" v-for="(question, idxquestion) in myQuestions[currentStep - 1].risposte" class="answer" :id='idxquestion + "all"'>                   
                         <span v-on:mousedown="playFocusAnimation($event, true)" v-on:mouseup="playFocusAnimation($event, false)" :id='idxquestion + "span"' v-on:click="chooseAnswer(question, idxquestion)" class="bullet">{{ indexes[idxquestion] }}</span>
                         <div v-on:click="chooseAnswer(question, idxquestion)" class="text">
                             <p>{{ question.testo }}</p>
@@ -100,6 +100,7 @@ export default {
             explanationTimeline: {},
             revExplanationTimeline: {},
             choiceTimeline: {},
+            answerTimeline:{},
             punteggio: 0,
             clickedAnswer: false,
             results: [{"title": "OTTIMO RISULTATO!", "description": "Sei un cittadino ben informato!"}, {"title": "DECENTE RISULTATO!", "description": "Sei un cittadino ben informato!"}, {"title": "PESSIMO RISULTATO!", "description": "Sei un cittadino ben informato!"}]
@@ -150,23 +151,28 @@ export default {
             if (this.clickedAnswer == false) {
                 this.clickedAnswer = true;
                 console.log(idx);
+                
+                
+                let currentAnsw= $('#' + idx + 'all');
                 let span = $('#' + idx + 'span');
-                let spans = $('.bullet');
-                console.log("THE IDX", idx);
-
-                let filteredSpans = spans.slice(idx, 1);
+                let answ = $('.answer');
+                let bulleted=answ.parent();
+                console.log(" bullls "+bulleted.outerHeight()+ " "+bulleted.position().top+ " " +currentAnsw.position().top);
+                console.log("THE IDX", idx );
+               
+                let filteredSpans = answ.splice(idx, 1);
                 console.log("THE SPANS", filteredSpans);
 
-                for(span of spans) {
-                    console.log("THE ID OF EVERY SPAN", $(span).attr('id'))
+                for(let spann of answ) {
+                    console.log("THE ID OF EVERY SPAN", $(spann).attr('id'))
                 }
 
                 let that = this;
-                let timeLine = new TimelineLite({ onComplete: function() {
+               this.answerTimeline = new TimelineLite({ onComplete: function() {
                     that.animateThumb(answer.corretta);
                 }});
-
-                timeLine.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white'});
+                TweenLite.to(answ, 0.2,{autoAlpha:0, ease:"power1.in"});
+                this.answerTimeline.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white',}).to(currentAnsw,0.8,{y:-currentAnsw.position().top+bulleted.height()/2, ease:"sine.inOut" });
             }
         },
         animateThumb(correct) {
@@ -180,11 +186,15 @@ export default {
         createExplanationTimeline() {
             let explanationPage = $('#explanation');
             let that = this;
-
+            
             this.explanationTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("EXPLANATION COMPLETED");
                 var spans = $('.bullet');
+                var answ = $('.answer');
+                that.answerTimeline.reverse();
+                TweenLite.set(answ,{autoAlpha:1});
                 TweenLite.to(spans, 0.15, {scale: 1.0, lineHeight: '4.9vh', backgroundColor: 'white', color: 'black'});
+                
             }});
 
             this.explanationTimeline.set(explanationPage, {zIndex: 20}).to(explanationPage, 1, { autoAlpha: 1 });
@@ -208,13 +218,13 @@ export default {
                 console.log("THUMB UP COMPLETED");
                 that.explanationTimeline.play(0);
             }});
-            this.upTimeline.set(up, {autoAlpha: 1, display: "block"}).to(up, 0.2, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.3, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
+            this.upTimeline.set(up, {autoAlpha: 1, display: "block", delay:0.8}).to(up, 0.2, {scale: 1.5}).to(up, 0.2, {scale: 1}).to(up, 0.3, {autoAlpha: 0}, "+=1").set(up, {display: 'none'});
 
             this.downTimeline = new TimelineLite({paused: true, onComplete: function() { 
                 console.log("THUMB DOWN COMPLETED"); 
                 that.explanationTimeline.play(0);
             }});
-            this.downTimeline.set(down, {autoAlpha: 1, display: "block"}).to(down, 0.2, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.3, {autoAlpha: 0}, "+=0.5").set(down, {display: 'none'});
+            this.downTimeline.set(down, {autoAlpha: 1, display: "block",delay:0.8}).to(down, 0.2, {scale: 1.5}).to(down, 0.2, {scale: 1}).to(down, 0.3, {autoAlpha: 0}, "+=0.5").set(down, {display: 'none'});
         },
         showEndQuiz() {
             let endPage = $('#end-quiz');
