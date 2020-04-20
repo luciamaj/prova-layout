@@ -1,7 +1,8 @@
 var data = {
     obiettivi: [
-        {id:"1" ,name: "sconfiggere la povertà", name2:null, text1:"pippo", text2:null, color:"#cd0404" },
-        {id: "2", name: "sconfiggere la fame", name2:null, text1:"pluto", text2:null, color:"#f54141"},
+        {id:"1" ,name: "sconfiggere la povertà", name2:null,
+         text1:"Cras tempus, ipsum sit amet luctus congue, lorem diam congue magna, ut feugiat lacus massa sit amet eros. Vivamus sed leo et urna feugiat faucibus sodales sed enim. Cras at quam in magna facilisis bibendum quis ut lorem. Nulla convallis venenatis augue, fringilla laoreet mauris accumsan vel. Curabitur quis velit diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pellentesque, eros in imperdiet varius, lorem erat blandit elit, et molestie mi ante eu augue. Mauris nisl diam, aliquet vel dolor id, venenatis pretium purus.", text2:null, color:"#cd0404" },
+        {id: "2", name: "sconfiggere la fame", name2:null, text1:"Cras tempus, ipsum sit amet luctus congue, lorem diam congue magna, ut feugiat lacus massa sit amet eros. Vivamus sed leo et urna feugiat faucibus sodales sed enim. Cras at quam in magna facilisis bibendum quis ut lorem. Nulla convallis venenatis augue, fringilla laoreet mauris accumsan vel. Curabitur quis velit diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pellentesque, eros in imperdiet varius, lorem erat blandit elit, et molestie mi ante eu augue. Mauris nisl diam, aliquet vel dolor id, venenatis pretium purus.", text2:null, color:"#f54141"},
         {id: "3",name: "salute e benessere", name2:null,text1:"paperino", text2:null, color:"#0aa746"},
         {id: "4", name: "istruzione di qualità", name2:null,text1:"minni", text2:null, color:"#dc1b1b" },
         {id: "5",name: "parità di genere ", name2:null,text1:null, text2:null, color:"#da410d"},
@@ -18,7 +19,13 @@ var data = {
         {id: "16",name: "pace, giustizia e istituzioni solide", name2:null,text1:null, text2:null, color:"#176cbd"},
         {id: "17",name: "partnership per gli obiettivi", name2:null,text1:null, text2:null, color:"#23335d"},
         
-    ]
+    ],
+    testoFinale:{
+        p1:"Questi sono gli Obiettivi di Sviluppo Sostenibile delle Nazioni Unite da raggiungere entro il 2030.",
+        p2:"Il cibo è fortemente legato a ciascuno di essi.",
+        p3:"Risolverele sfide legate all'alimentazione ci permeterà di fare grandi passi avanti nel creare un mondo migliore."
+    }
+
 }
 
 exports.data = data;    
