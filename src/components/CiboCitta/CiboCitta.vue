@@ -40,7 +40,7 @@
             <div class="punti-cont-finale">
                 PUNTEGGIO {{this.punteggio}}
             </div>
-            <div class="punti-cont-finale" v-on:click="resetGame()">
+            <div class="termina" v-on:click="resetGame()">
                 CLICCA PER TERMINARE
             </div>
         </div>
@@ -151,6 +151,16 @@ export default {
                 this.clickedAnswer = true;
                 console.log(idx);
                 let span = $('#' + idx + 'span');
+                let spans = $('.bullet');
+                console.log("THE IDX", idx);
+
+                let filteredSpans = spans.slice(idx, 1);
+                console.log("THE SPANS", filteredSpans);
+
+                for(span of spans) {
+                    console.log("THE ID OF EVERY SPAN", $(span).attr('id'))
+                }
+
                 let that = this;
                 let timeLine = new TimelineLite({ onComplete: function() {
                     that.animateThumb(answer.corretta);
