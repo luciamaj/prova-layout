@@ -145,7 +145,6 @@ export default {
         },
         choice(type) {
             if (type != null) {
-                this.hideMode();
 
                 this.myQuestions = [];
                 this.modeChosen = type;
@@ -156,6 +155,8 @@ export default {
                 for(let ran of randomArr) {
                     this.myQuestions.push(domande[ran]);
                 }
+
+                this.hideMode();
             }
         },
         getRandomNumbers(max, min) {
