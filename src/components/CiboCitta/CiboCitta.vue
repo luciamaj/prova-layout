@@ -124,7 +124,7 @@ export default {
             let circles = $('.mode');
 
             let timeline = new TimelineLite({paused: true});
-            timeline.set(circles, {scale: 0.8}).to(labels, 1, { autoAlpha: 1 }).to(circles, 1, { autoAlpha: 1, scale: 1 }, "-=1");
+            timeline.set(circles, {scale: 0.8}).to(labels, 0.5, { autoAlpha: 1 }).to(circles, 0.5, { autoAlpha: 1, scale: 1 }, "-=0.5");
             timeline.play();
         },
         hideStart() {
@@ -197,6 +197,7 @@ export default {
                 this.answerTimeline = new TimelineLite({ onComplete: function() {
                     that.animateThumb(answer.corretta);
                 }});
+                this.sound.click.play();
                 TweenLite.to(answ, 0.2,{autoAlpha:0, ease:"power1.in"});
 
                 console.log("AAA", (window.innerHeight / 2) - currentAnsw.position().top - bulleted.height());
@@ -262,6 +263,7 @@ export default {
             TweenLite.to(endPage, 1, { autoAlpha: 1 });
         },
         nextQuestion() {
+            this.sound.click.play();
             if (this.currentStep == 5) {
                 this.showEndQuiz();
             } else {
@@ -307,6 +309,7 @@ export default {
             }
         },
         resetGame() {
+            this.sound.click.play();
             //VARIABLES
             this.modeChosen = undefined;
             this.currentStep = 1;
