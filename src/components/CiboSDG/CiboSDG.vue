@@ -17,10 +17,10 @@
                 <template v-for="(obs,index) in punti ">
                     <div class="col-lg-2 col-md-3 col-sm-6" :key="(obs,index)">
                         <div class="square">
-                            <div class="innerSq fall" :style="'background-color:'+obs.color+';'" v-on:click="selectedCard(obs)" :id="obs.id"> 
-                                <div class="up"><div class="number">{{obs.id}}</div> 
-                                    <div class="name">{{obs.name}}</div>
-                                </div>
+                            <div class="innerSq fall"  v-on:click="selectedCard(obs)" :id="obs.id"> 
+                                
+                                <img :src="'../../../static/cibo_SDG/SDG_Icons/SDG-icon-'+obs.id+'.jpg'" :alt="'img obiettivo'+obs.id">
+                       
                             </div>
 
                         </div>
@@ -34,10 +34,8 @@
              <div class=" row endingContainer">
                 <div class="col-lg-3 col-md-4 col-sm-12"> 
                     <div class="square">
-                        <div class="innerSq " style="background-color:transparent;"> 
-                            <div class="up"><div class="number">{{slideObject.id}}</div> 
-                                <div class="name">{{slideObject.name}}</div>
-                            </div>
+                        <div class="innerSq " :style="'background-image:url);'"> 
+                            <img :src="'../../../static/cibo_SDG/SDG_Icons/SDG-icon-'+slideObject.id+'.jpg'" :alt="'img obiettivo'+slideObject.id">
                         </div>
 
                     </div>
