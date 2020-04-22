@@ -184,6 +184,7 @@ export default {
                 scrollVelocity:1.8
 
             },
+            xxM:0,
             ratio: 0,
             step: 0,
             foodMoved: 0,
@@ -253,14 +254,17 @@ export default {
             let el = $("#scroll-box");
             let rightArrow = $("#right");
             let leftArrow = $("#left");
-
+            let food=$(".tile-wrapper");
+            
             let maxStep = 25 - this.carouselOptions.slidesToShow;
+            let from;
 
             if(isMoving == false) {
                 isMoving = true;
                 let xMove = '';
                 console.log("sono qui");
                 if (direction == 'left') {
+                    from="end";
                     if (this.step != 0) {
                         this.step -= this.carouselOptions.slidesToScroll;
                         TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
@@ -270,8 +274,10 @@ export default {
                         }
                     }
                     console.log("MAXSTEP", maxStep, this.step);
-                    xMove = '-= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
+                    xMove = '-= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' ;
+                    this.xxM +=this.ratio * this.carouselOptions.slidesToScroll;
                 } else {
+                     from="start";
                     if (this.step < maxStep) {
                         this.step += this.carouselOptions.slidesToScroll;
                         TweenLite.to(leftArrow, 0.5, { autoAlpha: 1});
@@ -281,14 +287,23 @@ export default {
                         }
                     }
                     console.log("MAXSTEP", maxStep, this.step);
-                    xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
+                    xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' ;
+                    this.xxM -=this.ratio * this.carouselOptions.slidesToScroll;
                 }
+                console.log("xmove "+ this.xxM);
+                
                
-                tl.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
+               
+               tl.to(food, 0.2, {left:this.xxM, stagger:{each:0.09, from:from}, onComplete: function() {
                     console.log("complete");
                     isMoving = false;
                     //tl.pause(0);
                 }});
+                /*tl.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
+                    console.log("complete");
+                    isMoving = false;
+                    //tl.pause(0);
+                }});*/
             }
         },
         reportWindowSize(){
@@ -431,7 +446,11 @@ export default {
 
         middlePage(){
             let middlePage = $('.over');
-            TweenLite.to(middlePage, 2, { top: -500, autoAlpha: 0 }).delay(1);
+            let food= $('.tile-wrapper');
+            var tl= new TimelineLite();
+            tl.to(middlePage, 2, { top: -500, autoAlpha: 0,}).delay(1).from(food, 1.5, {scale:0.7, autoAlpha:0.05, stagger:{ each:0.15}},"-=1.2");
+            
+            
         },
         
          showEnding() {

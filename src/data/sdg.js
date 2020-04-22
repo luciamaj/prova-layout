@@ -6,7 +6,7 @@ var data = {
         {id: "3",name: "salute e benessere", name2:null,text1:"paperino", text2:null, color:"#4ca146"},
         {id: "4", name: "istruzione di qualità", name2:null,text1:"minni", text2:null, color:"#c7212f" },
         {id: "5",name: "parità di genere ", name2:null,text1:null, text2:null, color:"#ef402d"},
-        {id: "6",name: "acqua pulita e servizi igienico sanitari",name2:null,text1:null, text2:null, color:"#27bfe6" },
+        {id: "6",name: "acqua pulita e servizi igienico-sanitari",name2:null,text1:null, text2:null, color:"#27bfe6" },
         {id: "7",name: "energia pulita e accessibile", name2:null, text1:null, text2:null, color:"#fbc412"},
         {id: "8",name: "lavoro dignitoso e crescita economica",name2:null,text1:null, text2:null, color:"#a31c44" },
         {id: "9",name: "imprese, innovazione e infrastrutture",name2:null,text1:null, text2:null, color:"#f26a2e" },
@@ -14,8 +14,8 @@ var data = {
         {id: "11",name: "città e comunità sostenibili",name2:null,text1:null, text2:null, color:"#f89d2a" },
         {id: "12",name: "consumo e produzione responsabili", name2:null,text1:null, text2:null, color:"#bf8d2c"},
         {id: "13",name: "lotta contro il cambiamento climatico", name2:null,text1:null, text2:null, color:"#407f46" },
-        {id: "14",name: "vita sott'acqua", name2:null,text1:null, text2:null, color:"#1f97d4"},
-        {id: "15",name: "vita sulla terra", name2:null,text1:null, text2:null, color:"#59ba47"},
+        {id: "14",name: "la vita sott'acqua", name2:null,text1:null, text2:null, color:"#1f97d4"},
+        {id: "15",name: "la vita sulla terra", name2:null,text1:null, text2:null, color:"#59ba47"},
         {id: "16",name: "pace, giustizia e istituzioni solide", name2:null,text1:null, text2:null, color:"#136a9f"},
         {id: "17",name: "partnership per gli obiettivi", name2:null,text1:null, text2:null, color:"#14496b"},
         
@@ -23,7 +23,7 @@ var data = {
     testoFinale:{
         p1:"Questi sono gli Obiettivi di Sviluppo Sostenibile delle Nazioni Unite da raggiungere entro il 2030.",
         p2:"Il cibo è fortemente legato a ciascuno di essi.",
-        p3:"Risolverele sfide legate all'alimentazione ci permeterà di fare grandi passi avanti nel creare un mondo migliore."
+        p3:"Risolverele sfide legate all'alimentazione ci permetterà di fare grandi passi avanti nel creare un mondo migliore."
     }
 
 }

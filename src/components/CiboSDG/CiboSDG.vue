@@ -2,7 +2,7 @@
     <div class="cibosdg">
 
         <div id="over">
-            <div id="name-game"><div class="inner"><div class="appName">cibo & sdg</div> </div></div>
+            <div id="name-game"><div class="inner"><div class="appName">cibo & sdgs</div> </div></div>
             <div v-on:click="hideStart()" id="start-game">START GAME</div>
             <img src="../../assets/cammello.jpg" alt="">
         </div>
@@ -35,7 +35,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-12"> 
                     <div class="square">
                         <div class="innerSq " :style="'background-image:url);'"> 
-                            <img :src="'../../../static/cibo_SDG/SDG_Icons/SDG-icon-'+slideObject.id+'.jpg'" :alt="'img obiettivo'+slideObject.id">
+                            <img :src="'../../../static/cibo_SDG/SDG_Icons/SDG-icon-'+slideObject.id+'.jpg'" v-if="slideObject.id!=undefined" :alt="'img obiettivo'+slideObject.id">
                         </div>
 
                     </div>
@@ -172,13 +172,13 @@ export default {
             var boxC =$(".fall");
             var fade=TweenLite.to(boxC ,{autoAlpha:0.1, duration:1 });
             var fall=TweenLite.to(boxC ,{scale: 0.01, duration:0.45, stagger: { each: 0.085, from:"start",ease:"exp"}, });
-            var anim=TweenLite.to(card, 0.6, { autoAlpha:0,delay:1.5, ease:"power2.in"});
+            var anim=TweenLite.to(card, 0.6, { autoAlpha:0, delay:1.5, ease:"power2.in"});
             TweenLite.set($('#com1'), {autoAlpha:0});
             TweenLite.to(slide1, 0.8,{autoAlpha:1, delay:2.1, onComplete:function () {  
                 TweenLite.to($('#com1'),1, {autoAlpha:1, delay:1.5, yoyo:true, repeat:2});
-                anim.reverse();
-                fall.reverse();
-                fade.reverse();
+                anim.pause(0);
+                fall.pause(0);
+                fade.pause(0);
             }},'-=2');
             
             
