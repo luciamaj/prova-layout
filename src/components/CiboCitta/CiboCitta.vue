@@ -102,6 +102,7 @@ export default {
             revExplanationTimeline: {},
             choiceTimeline: {},
             answerTimeline:{},
+            revAnswerTimeline:{},
             punteggio: 0,
             clickedAnswer: false,
             results: [{"title": "OTTIMO RISULTATO!", "description": "Sei un cittadino ben informato!"}, {"title": "DECENTE RISULTATO!", "description": "Sei un cittadino ben informato!"}, {"title": "PESSIMO RISULTATO!", "description": "Sei un cittadino ben informato!"}]
@@ -175,7 +176,7 @@ export default {
                 }
 
                 let that = this;
-               this.answerTimeline = new TimelineLite({ onComplete: function() {
+                this.answerTimeline = new TimelineLite({ onComplete: function() {
                     that.animateThumb(answer.corretta);
                 }});
                 TweenLite.to(answ, 0.2,{autoAlpha:0, ease:"power1.in"});
@@ -198,10 +199,9 @@ export default {
                 console.log("EXPLANATION COMPLETED");
                 var spans = $('.bullet');
                 var answ = $('.answer');
-                that.answerTimeline.reverse();
+                that.answerTimeline.pause(0);
                 TweenLite.set(answ,{autoAlpha:1});
-                TweenLite.to(spans, 0.15, {scale: 1.0, lineHeight: '4.9vh', backgroundColor: 'white', color: 'black'});
-                
+                TweenLite.to(spans, 0.15, {scale: 1.0, lineHeight: '4.9vh', backgroundColor: 'white', color: 'black'});    
             }});
 
             this.explanationTimeline.set(explanationPage, {zIndex: 20}).to(explanationPage, 1, { autoAlpha: 1 });
