@@ -9,7 +9,7 @@
         <div class="tophalf">
             <div class="block"><div class="labelMode">MODALITÀ <br> AVANZATA</div></div>
             <div class="block">
-                <div class="mode" id="hard" v-on:mousedown="biggerChoiceAnim($event, true, null)" v-on:mouseup="biggerChoiceAnim($event, false, 'hard')" v-on:mouseleave="biggerChoiceAnim($event, false, null)">
+                <div class="mode" id="hard" v-on:click="biggerChoiceAnim($event, 'hard')">
                     <div class="mode-txt">CLICCA QUI</div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
         <div class="bottomhalf">
             <div class="block"><div class="labelMode">MODALITÀ <br> SEMPLICE</div></div>
             <div class="block">
-                <div class="mode" id="easy" v-on:mousedown="biggerChoiceAnim($event, true, null)" v-on:mouseup="biggerChoiceAnim($event, false, 'easy')" v-on:mouseleave="biggerChoiceAnim($event, false, null)">
+                <div class="mode" id="easy" v-on:click="biggerChoiceAnim($event, 'easy')">
                     <div class="mode-txt">CLICCA QUI</div>
                 </div>
             </div>
@@ -119,22 +119,32 @@ export default {
         //
     },
     methods: {
+        modeStartAnimation() {
+            let labels = $('.labelMode');
+            let circles = $('.mode');
+
+            let timeline = new TimelineLite({paused: true});
+            timeline.set(circles, {scale: 0.8}).to(labels, 0.5, { autoAlpha: 1 }).to(circles, 0.5, { autoAlpha: 1, scale: 1 }, "-=0.5");
+            timeline.play();
+        },
         hideStart() {
             let startPage = $('#over');
             let button = $('#start-game');
+            let that = this;
+
            this.sound.click.play();
             TweenLite.from(button, 0.5, { scale: 0.7 ,ease:"power1.in",  onComplete:function(){
                 TweenLite.to(startPage,1, { autoAlpha: 0});
-            } });  
-            
+                that.modeStartAnimation();
+            }});
         },
         hideMode() {
             let modePage = $('#modalita');
+
             TweenLite.to(modePage, 1, { autoAlpha: 0 });
         },
         choice(type) {
             if (type != null) {
-                this.hideMode();
 
                 this.myQuestions = [];
                 this.modeChosen = type;
@@ -145,13 +155,15 @@ export default {
                 for(let ran of randomArr) {
                     this.myQuestions.push(domande[ran]);
                 }
+
+                this.hideMode();
             }
         },
         getRandomNumbers(max, min) {
             var randomArr = [];
             while(max>= min) randomArr.push(max--)    
 
-            randomArr.sort(function(){return .5- Math.random()});  
+            randomArr.sort(function(){return .5 - Math.random()});  
 
             return randomArr;
         },
@@ -164,6 +176,12 @@ export default {
                 let currentAnsw= $('#' + idx + 'all');
                 let span = $('#' + idx + 'span');
                 let answ = $('.answer');
+                let domandaRect = $('.domanda')[0].getBoundingClientRect();
+                let currentRect = currentAnsw[0].getBoundingClientRect();
+
+                let provaY = domandaRect.y - (domandaRect.height / 2);
+                console.log("THE CURRENT RECT", currentRect);
+
                 let bulleted=answ.parent();
                 console.log(" bullls "+bulleted.outerHeight()+ " "+bulleted.position().top+ " " +currentAnsw.position().top);
                 console.log("THE IDX", idx );
@@ -179,8 +197,14 @@ export default {
                 this.answerTimeline = new TimelineLite({ onComplete: function() {
                     that.animateThumb(answer.corretta);
                 }});
+                this.sound.click.play();
                 TweenLite.to(answ, 0.2,{autoAlpha:0, ease:"power1.in"});
-                this.answerTimeline.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white',}).to(currentAnsw,0.8,{y:-currentAnsw.position().top+bulleted.height()/2, ease:"sine.inOut" });
+
+                console.log("AAA", (window.innerHeight / 2) - currentAnsw.position().top - bulleted.height());
+                
+                //this.answerTimeline.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white',}).to(currentAnsw, 0.8, {y: window.innerHeight - currentAnsw.position().top, ease:"sine.inOut" });
+
+                this.answerTimeline.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white',}).to(currentAnsw, 0.8,{y: bulleted.height() / 2 - (currentAnsw.position().top), ease:"sine.inOut" });
             }
         },
         animateThumb(correct) {
@@ -196,10 +220,10 @@ export default {
             let that = this;
             
             this.explanationTimeline = new TimelineLite({paused: true, onComplete: function() { 
+                that.answerTimeline.pause(0);
                 console.log("EXPLANATION COMPLETED");
                 var spans = $('.bullet');
                 var answ = $('.answer');
-                that.answerTimeline.pause(0);
                 TweenLite.set(answ,{autoAlpha:1});
                 TweenLite.to(spans, 0.15, {scale: 1.0, lineHeight: '4.9vh', backgroundColor: 'white', color: 'black'});    
             }});
@@ -239,7 +263,7 @@ export default {
             TweenLite.to(endPage, 1, { autoAlpha: 1 });
         },
         nextQuestion() {
-            console.log("THE CURRENT STEPPPPPP" , this.currentStep);
+            this.sound.click.play();
             if (this.currentStep == 5) {
                 this.showEndQuiz();
             } else {
@@ -258,28 +282,22 @@ export default {
 
             console.log(bullet);
         },
-        biggerChoiceAnim(event, toggle, myChoice) {
-            console.log(event, toggle);
+        biggerChoiceAnim(event, myChoice) {
             let el = event.target;
 
             if (!($(event.target).hasClass('mode'))) {
                 el = $(event.target).parent();
             }
 
-            let timelineUp = new TimelineLite({paused: true});
-            timelineUp.to(el, 0.3, { scale: 1.1 });
             let that = this;
 
-            let timelineDown = new TimelineLite({paused: true, onComplete: function() {
+            let timelineUp = new TimelineLite({paused: true, onComplete: function() {
                 that.choice(myChoice);
             }});
-            timelineDown.to(el, 0.3, { scale: 1 });
+            this.sound.click.play();
+            timelineUp.to(el, 0.2, { scale: 0.8, ease: "expo.in" }).to(el, 0.3, { scale: 1, ease: "expo.in" });
             
-            if (toggle) {
-                timelineUp.play(0);
-            } else {
-                timelineDown.play(0);
-            }
+            timelineUp.play(0);
         },
         getResult() {
             if (this.punteggio <= 20) {
@@ -291,6 +309,7 @@ export default {
             }
         },
         resetGame() {
+            this.sound.click.play();
             //VARIABLES
             this.modeChosen = undefined;
             this.currentStep = 1;
