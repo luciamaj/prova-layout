@@ -17,7 +17,7 @@
         <div class="bottomhalf">
             <div class="block"><div class="labelMode">MODALITÀ <br> SEMPLICE</div></div>
             <div class="block">
-                <div class="mode" id="easy" v-on:mousedown="biggerChoiceAnim($event, true, null)" v-on:mouseup="biggerChoiceAnim($event, false, 'easy')" v-on:mouseleave="biggerChoiceAnim($event, false, null)">
+                <div class="mode" id="easy" v-on:click="biggerChoiceAnim($event, false, 'easy')">
                     <div class="mode-txt">CLICCA QUI</div>
                 </div>
             </div>
@@ -151,7 +151,7 @@ export default {
             var randomArr = [];
             while(max>= min) randomArr.push(max--)    
 
-            randomArr.sort(function(){return .5- Math.random()});  
+            randomArr.sort(function(){return .5 - Math.random()});  
 
             return randomArr;
         },
@@ -180,7 +180,7 @@ export default {
                     that.animateThumb(answer.corretta);
                 }});
                 TweenLite.to(answ, 0.2,{autoAlpha:0, ease:"power1.in"});
-                this.answerTimeline.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white',}).to(currentAnsw,0.8,{y:-currentAnsw.position().top+bulleted.height()/2, ease:"sine.inOut" });
+                this.answerTimeline.to(span, 0.15, {scale: 1.06, fontSize: '0.85em', lineHeight: '4.8vh', backgroundColor: '#9e3e7e', color: 'white',}).to(currentAnsw,0.8,{y: - currentAnsw.position().top + bulleted.height() / 2, ease:"sine.inOut" });
             }
         },
         animateThumb(correct) {

@@ -360,7 +360,7 @@ export default {
             });
         },
         playSound() {
-            this.sound.play();
+            this.sound.click.play();
         }
     }
   }
