@@ -220,10 +220,10 @@ export default {
             let that = this;
             
             this.explanationTimeline = new TimelineLite({paused: true, onComplete: function() { 
+                that.answerTimeline.pause(0);
                 console.log("EXPLANATION COMPLETED");
                 var spans = $('.bullet');
                 var answ = $('.answer');
-                that.answerTimeline.pause(0);
                 TweenLite.set(answ,{autoAlpha:1});
                 TweenLite.to(spans, 0.15, {scale: 1.0, lineHeight: '4.9vh', backgroundColor: 'white', color: 'black'});    
             }});
