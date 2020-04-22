@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=block');
 
 $success: rgb(47, 155, 54);
 $warning:  rgb(255, 147, 24);
@@ -16,6 +16,7 @@ $giallo: #F4D203;
 $spacer-width: 40px;
 
 body {
+    font-family:'Roboto Condensed', sans-serif;
     color: $primary;
     user-select: none;
 
@@ -691,7 +692,7 @@ body {
 
 .piatto-virtuale {
 
-    font-family: 'Roboto Condensed', sans-serif;
+   // font-family: 'Roboto Condensed';
     background-color: black;
     color: white;
     text-align: center;
@@ -1752,7 +1753,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     height: 100vh;
     background-color: black;
     color: white;
-    font-family: 'Roboto Condensed', sans-serif;
+   // font-family: 'Roboto Condensed', sans-serif;
     overflow: hidden !important;
     #over {  
         position: absolute;
