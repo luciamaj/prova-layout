@@ -1,7 +1,7 @@
 <template>
   <div class="cibocitta">
     <div id="over">
-        <div id="name-game"></div>
+        <div id="name-game"><div class="inner"><div class="appName">cibo & città</div> </div></div>
         <div v-on:click="hideStart()" id="start-game">START GAME</div>
         <img src="../../assets/cammello.jpg" alt="">
     </div>
@@ -90,6 +90,7 @@ export default {
     components: { },
     data() {
         return {
+            sound:{click:null, bip:null},
             dataApp: data,
             modeChosen: undefined,
             currentStep: 1,
@@ -111,6 +112,7 @@ export default {
         this.createExplanationTimeline();
         this.createRevExplanationTimeline();
         this.createChoiceTimeline();
+        this.loadSound()
     },
     created() {
         //
@@ -118,7 +120,12 @@ export default {
     methods: {
         hideStart() {
             let startPage = $('#over');
-            TweenLite.to(startPage, 1, { autoAlpha: 0 });
+            let button = $('#start-game');
+           this.sound.click.play();
+            TweenLite.from(button, 0.5, { scale: 0.7 ,ease:"power1.in",  onComplete:function(){
+                TweenLite.to(startPage,1, { autoAlpha: 0});
+            } });  
+            
         },
         hideMode() {
             let modePage = $('#modalita');
@@ -304,7 +311,27 @@ export default {
             let explanationPage = $('#explanation');
             TweenLite.set(explanationPage, { zIndex: -99 });
             TweenLite.set(explanationPage, { autoAlpha: 0 });
-        }
+        },
+        loadSound() {
+            this.sound.click = new Howl({
+                src: ['/static/sounds/click.wav'],
+                html5: false,
+                autoplay: false,
+                volume: 1.0,
+                format: 'mp3',
+                onload: function() { console.log('song loaded!')},
+                onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
+            });
+            this.sound.bip = new Howl({
+                src: ['/static/sounds/blip.wav'],
+                html5: false,
+                autoplay: false,
+                volume: 1.0,
+                format: 'mp3',
+                onload: function() { console.log('song loaded!')},
+                onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
+            });
+        },
     }
   }
 </script>

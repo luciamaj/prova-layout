@@ -348,6 +348,17 @@ body {
             display: block;
             padding-bottom: 100%;
         }
+        
+        .appName{ 
+            width: 100%;
+            position: absolute;
+            font-size:xxx-large;
+            text-transform: uppercase;
+            font-weight: 700;
+            top:50%;
+            transform: translateY(-50%);
+    
+        }
 
         #start-game {
             position: absolute;
@@ -761,6 +772,16 @@ body {
             background-color:#98bc1f;
             color: white;
         }
+        .appName{ 
+            width: 100%;
+            position: absolute;
+            font-size:xxx-large;
+            text-transform: uppercase;
+            font-weight: 700;
+            top:50%;
+            transform: translateY(-50%);
+    
+        }
           
         #name-game:after {
             content: "";
@@ -981,7 +1002,8 @@ body {
             color: whitesmoke;
         }
         
-        .dish{
+
+        /*.dish{
             width: 28.7%;
             height: 40.28%;
             opacity: 0.9;
@@ -991,12 +1013,41 @@ body {
             border: 1.5px solid rgb(206, 0, 0);
             background-color: gray;
             border-radius: 50%;
+        }*/
+       
+
+        .dish {
+            position: absolute;
+            width: 28.7%;
+            padding: 0;
+            opacity: 0.9;
+            top: 50%;
+            left: 50%;  
+            border: 1.5px solid rgb(206, 0, 0);
+            background-color: gray;
+            border-radius: 50%;
         }
-        /*.dish:after {
+        .dish:after {
             content: "";
             display: block;
             padding-bottom: 100%;
-        }*/
+        }
+        
+        
+          
+        .innerSq {
+            box-shadow: 0px 1px 12px 1px #abaaaaba;
+            cursor: pointer;
+            position: absolute;
+            border: 1px solid whitesmoke;
+            width: 100%;
+            height: 100%;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            font-weight: 700;
+         
+          
+        }
         
         #dish-1{ 
            transform: translate(-114%, -101.5%);
@@ -1422,7 +1473,17 @@ and (-webkit-min-device-pixel-ratio: 2) {
             display: block;
             padding-bottom: 100%;
         }
-
+        
+        .appName{ 
+            width: 100%;
+            position: absolute;
+            font-size:xxx-large;
+            text-transform: uppercase;
+            font-weight: 700;
+            top:50%;
+            transform: translateY(-50%);
+    
+        }
         #start-game {
             position: absolute;
             width: 30%;

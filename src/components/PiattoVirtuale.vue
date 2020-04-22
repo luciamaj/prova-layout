@@ -2,7 +2,7 @@
     <div class="piatto-virtuale">
 
             <div id="over">
-                <div id="name-game"></div>
+                <div id="name-game"><div class="inner"><div class="appName">piatto virtuale</div> </div></div>
                 <div v-on:click="hideStart()" id="start-game">START GAME</div>
                 <img src="../assets/cammello.jpg" alt="">
             </div>
@@ -187,9 +187,7 @@ export default {
             ratio: 0,
             step: 0,
             foodMoved: 0,
-            sound: {
-                click:null,
-                bip:null},
+            sound: { click:null, bip:null},
             positions:[],
             scopes: [],
             total:{
@@ -423,8 +421,12 @@ export default {
         hideStart() {
             console.log("HIDE START");
             let startPage = $('#over');
-
-            TweenLite.to(startPage, 1, { autoAlpha: 0 , onComplete:this.middlePage()});  
+            let button = $('#start-game');
+            this.sound.click.play();
+            var that=this;
+            TweenLite.from(button, 0.5, { scale: 0.7 ,ease:"power1.in",  onComplete:function(){
+                 TweenLite.to(startPage, 1, { autoAlpha: 0 , onComplete:that.middlePage()});  
+            } });  
         },
 
         middlePage(){

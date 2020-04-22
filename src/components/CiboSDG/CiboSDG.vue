@@ -102,9 +102,7 @@ export default {
             position:[],
             ratio: 0,
          
-            sound: {
-                click:null,
-                bip:null},
+            sound: { click:null, bip:null},
             //anim:null,
           
             slideObject:{},
@@ -137,7 +135,7 @@ export default {
            
             let startPage = $('#over');
             let button = $('#start-game');
-            this.sound.bip.play();
+            this.sound.click.play();
             var that=this;
             TweenLite.from(button, 0.5, { scale: 0.7 ,ease:"power1.in",  onComplete:function(){
                 TweenLite.to(startPage,1, { autoAlpha: 0});
@@ -240,17 +238,7 @@ export default {
             console.log("after switch");
 
         },
-        indietro(position){
-            let slide1=$('#text1');
-            let slide2=$('#img');
-            let slide3=$('#text2');
-            TweenLite.set(slide1, { zIndex:-2});
-            TweenLite.set(slide2, {zIndex:5});
-           
-
-
-
-        },
+      
          loadSound() {
             this.sound.click = new Howl({
                 src: ['/static/sounds/click.wav'],

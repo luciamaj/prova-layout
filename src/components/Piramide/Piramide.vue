@@ -1,7 +1,7 @@
 <template>
     <div class="clone-piramide">
         <div id="over">
-            <div id="name-game"></div>
+            <div id="name-game"><div class="inner"><div class="appName">doppia piramide</div> </div></div>
             <div v-on:click="hideStart()" id="start-game">START GAME</div>
             <img src="../../assets/cammello.jpg" alt="">
         </div>
@@ -94,7 +94,7 @@ export default {
             scopes: [],
             step: 0,
             foodMoved: 0,
-            sound: null,
+            sound: { click:null, bip:null},
         }
     },
     mounted() {
@@ -324,8 +324,13 @@ export default {
         },
         hideStart() {
             let startPage = $('#over');
-
-            TweenLite.to(startPage, 1, { autoAlpha: 0 });
+            let button = $('#start-game');
+            this.sound.click.play();
+           
+            TweenLite.from(button, 0.5, { scale: 0.7 ,ease:"power1.in",  onComplete:function(){
+                TweenLite.to(startPage,1, { autoAlpha: 0});
+            } });  
+           
         },
         showEnding() {
             let endingPage = $('#over-ending');
@@ -335,7 +340,7 @@ export default {
             this.resetPositions();
         },
         loadSound() {
-            this.sound = new Howl({
+            this.sound.click = new Howl({
                 src: ['/static/sounds/click.wav'],
                 html5: false,
                 autoplay: false,
@@ -343,7 +348,16 @@ export default {
                 format: 'mp3',
                 onload: function() { console.log('song loaded!')},
                 onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
-            })
+            });
+            this.sound.bip = new Howl({
+                src: ['/static/sounds/blip.wav'],
+                html5: false,
+                autoplay: false,
+                volume: 1.0,
+                format: 'mp3',
+                onload: function() { console.log('song loaded!')},
+                onloaderror: function(id, error) { console.log('loadError: ' + id +' - ' + error); }
+            });
         },
         playSound() {
             this.sound.play();
