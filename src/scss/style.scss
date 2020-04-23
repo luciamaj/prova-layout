@@ -1621,6 +1621,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
             height: 14vh;
             cursor: pointer;
             border-radius: 50%;
+            opacity: 0;
           
             &.clone {
               position: absolute;

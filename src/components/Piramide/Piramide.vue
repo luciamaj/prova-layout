@@ -115,6 +115,12 @@ export default {
         },
     },
     methods: {
+        foodInitialMov() {
+            let tl = new TimelineLite();
+            var tiles = $(".tile:not(.clone)"); 
+            TweenLite.set(tiles, {scale: 0})
+            tl.to(tiles, 1,{  scale: 1, autoAlpha:1, stagger:{ each:0.05, ease:"circ"} });
+        },
         clone() {
             var container = $("#clone-container");
             var sectionContainer = $("#section-container");
@@ -326,9 +332,11 @@ export default {
             let startPage = $('#over');
             let button = $('#start-game');
             this.sound.click.play();
+            let that = this;
            
             TweenLite.from(button, 0.5, { scale: 0.7 ,ease:"power1.in",  onComplete:function(){
                 TweenLite.to(startPage,1, { autoAlpha: 0});
+                that.foodInitialMov();
             } });  
            
         },
