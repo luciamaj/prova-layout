@@ -121,7 +121,7 @@ export default {
             this.foodTimeline = new TimelineLite({paused: true});
             let tiles = $(".tile:not(.clone)"); 
             TweenLite.set(tiles, {scale: 0});
-            this.foodTimeline.to(tiles, 0.5, {  scale: 1, autoAlpha:1, stagger:{ each:0.05, ease:"circ"} });
+            this.foodTimeline.to(tiles, 0.8, {  scale: 1, autoAlpha:1, stagger:{ each:0.05, ease:"circ"} });
             this.foodTimeline.progress(1).progress(0);
         },
         foodInitialMov() {
