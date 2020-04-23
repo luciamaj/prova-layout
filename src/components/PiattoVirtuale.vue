@@ -187,6 +187,7 @@ export default {
             xxM:0,
             ratio: 0,
             step: 0,
+            stepV2:0,
             foodMoved: 0,
             sound: { click:null, bip:null},
             positions:[],
@@ -209,7 +210,7 @@ export default {
         this.clone();
         this.setCarousel();
         this.loadSound();
-        
+        this.stepV2=this.carouselOptions.slidesToScroll;
          
     },
      transition: {
@@ -264,41 +265,45 @@ export default {
                 let xMove = '';
                 console.log("sono qui");
                 if (direction == 'left') {
-                    from="end";
                     if (this.step != 0) {
+                        this.stepV2=Math.abs( this.step+this.carouselOptions.slidesToScroll);
                         this.step -= this.carouselOptions.slidesToScroll;
                         TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
                        
                         if (this.step <= 0) {
-                            TweenLite.to(leftArrow, 0.5, { autoAlpha: 0.3});
+                            TweenLite.to(leftArrow, 0.5, { autoAlpha: 0.2});
                         }
+                        this.xxM +=this.ratio * this.carouselOptions.slidesToScroll;
                     }
                     console.log("MAXSTEP", maxStep, this.step);
                     xMove = '-= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' ;
-                    this.xxM +=this.ratio * this.carouselOptions.slidesToScroll;
+                    
                 } else {
-                     from="start";
                     if (this.step < maxStep) {
+                        this.stepV2= this.step;
                         this.step += this.carouselOptions.slidesToScroll;
                         TweenLite.to(leftArrow, 0.5, { autoAlpha: 1});
                        
                         if (this.step >= maxStep) {
-                            TweenLite.to(rightArrow, 0.5, { autoAlpha: 0.3});
+                            TweenLite.to(rightArrow, 0.5, { autoAlpha: 0.2});
                         }
+                        this.xxM -=this.ratio * this.carouselOptions.slidesToScroll;
                     }
                     console.log("MAXSTEP", maxStep, this.step);
                     xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' ;
-                    this.xxM -=this.ratio * this.carouselOptions.slidesToScroll;
+                    
                 }
                 console.log("xmove "+ this.xxM);
                 
+               console.log("thissteppp"+this.stepV2+ " , "+Math.abs(this.stepV2) );
+               isMoving = false;
                
-               
-               tl.to(food, 0.2, {left:this.xxM, stagger:{each:0.09, from:from}, onComplete: function() {
+               tl.to(food, 1.5, {left:this.xxM, stagger:{each:0.05, from:this.stepV2}, ease:"power2.out", onComplete: function() {
                     console.log("complete");
-                    isMoving = false;
+                    
                     //tl.pause(0);
                 }});
+                
                 /*tl.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
                     console.log("complete");
                     isMoving = false;
@@ -448,7 +453,7 @@ export default {
             let middlePage = $('.over');
             let food= $('.tile-wrapper');
             var tl= new TimelineLite();
-            tl.to(middlePage, 2, { top: -500, autoAlpha: 0,}).delay(1).from(food, 1.5, {scale:0.7, autoAlpha:0.05, stagger:{ each:0.15}},"-=1.2");
+            tl.to(middlePage, 2, { top: -500, autoAlpha: 0,}).delay(1).from(food, 1.5, {scale:0.5, autoAlpha:0.01, stagger:{ each:0.15}},"-=1.2");
             
             
         },
