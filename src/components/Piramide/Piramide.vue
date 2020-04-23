@@ -95,6 +95,7 @@ export default {
             step: 0,
             foodMoved: 0,
             sound: { click:null, bip:null},
+            foodTimeline: {}
         }
     },
     mounted() {
@@ -103,6 +104,7 @@ export default {
         this.getDimensions();
         this.setCarousel();
         this.loadSound();
+        this.createTimelines();
     },
     created() {
     },
@@ -115,11 +117,15 @@ export default {
         },
     },
     methods: {
+        createTimelines() {
+            this.foodTimeline = new TimelineLite({paused: true});
+            let tiles = $(".tile:not(.clone)"); 
+            TweenLite.set(tiles, {scale: 0});
+            this.foodTimeline.to(tiles, 0.5, {  scale: 1, autoAlpha:1, stagger:{ each:0.05, ease:"circ"} });
+            this.foodTimeline.progress(1).progress(0);
+        },
         foodInitialMov() {
-            let tl = new TimelineLite();
-            var tiles = $(".tile:not(.clone)"); 
-            TweenLite.set(tiles, {scale: 0})
-            tl.to(tiles, 1,{  scale: 1, autoAlpha:1, stagger:{ each:0.05, ease:"circ"} });
+            this.foodTimeline.play(0);
         },
         clone() {
             var container = $("#clone-container");

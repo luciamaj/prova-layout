@@ -28,6 +28,7 @@ body {
     -ms-user-select: none;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
     overflow: hidden;
 }
 
@@ -1976,4 +1977,9 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     }
     
+}
+
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: -ms-autohiding-scrollbar !important;
 }
