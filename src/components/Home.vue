@@ -1,7 +1,7 @@
 <template>
   <div class="home">
       <div class="container">
-        <h1>LISTA APPS</h1>
+        <h1>LISTA APP</h1>
         <ul>
           <li>
             <a href="#/piramide">PIRAMIDE</a>
@@ -10,10 +10,13 @@
             <a href="#/piatto_virtuale">PIATTO VIRTUALE</a> 
           </li>
           <li>
-            <a href="#/cibocitta">CIBO E CIITA'</a> 
+            <a href="#/cibocitta">CIBO E CITTA'</a> 
           </li>
           <li>
             <a href="#/cibosdg">CIBO & SDG</a> 
+          </li>
+          <li>
+            <a href="#/cultura">CULTURA</a> 
           </li>
         </ul>
       </div>
