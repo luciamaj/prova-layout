@@ -105,6 +105,7 @@ export default {
         this.setCarousel();
         this.loadSound();
         this.createTimelines();
+        this.registerScroll();
     },
     created() {
     },
@@ -117,6 +118,24 @@ export default {
         },
     },
     methods: {
+        registerScroll() {
+            let that = this;
+            let one = $(".tile-wrapper")[0];
+            let maxScroll = $(one).width() * (that.food.length - that.carouselOptions.slidesToShow)
+
+            $('#scroll-box').on({'touchmove': function(e) {
+                if ($(this).scrollLeft() > 0 && $(this).scrollLeft() <= maxScroll) {
+                    that.toggleArrows('right', true);
+                    that.toggleArrows('left', true);
+                }  else if ($(this).scrollLeft() == 0) {
+                    console.log("SECONDO IF");
+                    that.toggleArrows('left', false);
+                }   else if ($(this).scrollLeft() > maxScroll) {
+                    console.log("PRIMO IF");
+                    that.toggleArrows('right', false); 
+                }            
+            }});
+        },
         createTimelines() {
             this.foodTimeline = new TimelineLite({paused: true});
             let tiles = $(".tile:not(.clone)"); 
@@ -261,14 +280,31 @@ export default {
 
             this.positions = positions;            
         },
+        toggleArrows(direction, show) {
+            let rightArrow = $("#right");
+            let leftArrow = $("#left");
+
+            if(direction == 'left') {
+                if(show) {
+                    TweenLite.to(leftArrow, 0.5, { autoAlpha: 1});
+                } else {
+                    TweenLite.to(leftArrow, 0.5, { autoAlpha: 0});
+                }
+            } else {
+                if(show) {
+                    TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
+                } else {
+                    TweenLite.to(rightArrow, 0.5, { autoAlpha: 0});
+                }
+            }
+        },
         clickedArrow(direction) {
             console.log("THE STEP:", this.step);
             let content = $("#tile-container");
             let tileWrapper = $(".tile-wrapper");
             var isMoving = false;
             let el = $("#scroll-box");
-            let rightArrow = $("#right");
-            let leftArrow = $("#left");
+
             let tl = new TimelineLite(); 
 
             let maxStep = this.food.length - this.carouselOptions.slidesToShow;
@@ -279,9 +315,9 @@ export default {
                 if (direction == 'left') {
                     if (this.step != 0) {
                         this.step -= this.carouselOptions.slidesToScroll;
-                        TweenLite.to(rightArrow, 0.5, { autoAlpha: 1});
+                        this.toggleArrows('right', true)
                         if (this.step <= 0) {
-                            TweenLite.to(leftArrow, 0.5, { autoAlpha: 0});
+                            this.toggleArrows('left', false)
                         }
                     }
                     console.log("MAXSTEP", maxStep, this.step);
@@ -289,12 +325,11 @@ export default {
                 } else {
                     if (this.step < maxStep) {
                         this.step += this.carouselOptions.slidesToScroll;
-                        TweenLite.to(leftArrow, 0.5, { autoAlpha: 1});
+                        this.toggleArrows('left', true)
                         if (this.step >= maxStep) {
-                            TweenLite.to(rightArrow, 0.5, { autoAlpha: 0});
+                            this.toggleArrows('right', false)
                         }
                     }
-                    console.log("MAXSTEP", maxStep, this.step);
                     xMove = '+= ' + (this.ratio * this.carouselOptions.slidesToScroll) + '' 
                 }
                 tl.to(el, this.carouselOptions.scrollVelocity, {scrollTo: {x: xMove}, onComplete: function() {
