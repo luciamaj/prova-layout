@@ -165,17 +165,7 @@ export default {
     //components: { Slick },
     data() {
         return {
-            /*slickOptions: {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                 
-                accessibility: true,
-                adaptiveHeight: false,
-                arrows: true,
-                draggable: true,
-                edgeFriction: 0.30,
-                swipe: true
-            },*/
+         
             food:data.piatto,
             foodSelected:[],
             carouselOptions: {
@@ -396,14 +386,6 @@ export default {
 
         },
 
-        
-        selected(element){
-         // let  dishIn=document.getElementById(element.id);
-            console.log("SONO CLiccato");
-            //dishIn.style.border="solid 3px white";
-
-        },
-
         cancella(){
             let ultimoPiatto;
             let ultimoDiv;
@@ -453,7 +435,7 @@ export default {
             let middlePage = $('.over');
             let food= $('.tile-wrapper');
             var tl= new TimelineLite();
-            tl.to(middlePage, 2, { top: -500, autoAlpha: 0,}).delay(1).from(food, 1.5, {scale:0.5, autoAlpha:0.01, stagger:{ each:0.15}},"-=1.2");
+            tl.to(middlePage, 2, { top: -500, autoAlpha: 0,}).delay(1).from(food, 1.5, {scale:0.1, autoAlpha:0.01, stagger:{ each:0.15}},"-=1.3");
             
             
         },

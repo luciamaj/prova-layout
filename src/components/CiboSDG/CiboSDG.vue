@@ -101,7 +101,7 @@ export default {
             slide3:data. testoFinale,
             position:[],
             ratio: 0,
-         
+            cascade:null,
             sound: { click:null, bip:null},
             //anim:null,
           
@@ -111,7 +111,7 @@ export default {
     },
     mounted() {
         this.loadSound();    
-        //this.getTilePos();
+        
     },
     
     methods: {
@@ -145,11 +145,8 @@ export default {
 
         initalComposition(){
             var tiles = $('.innerSq');
-           
-            var that=this;
             
-             tl.from(tiles, 0.5,{  y:1000, stagger:{ each:0.05, ease:"circ"} });
-           
+             tl.from(tiles, 0.5,{  y:1000, stagger:{ each:0.05, ease:"circ"} }); 
             
         },
 
@@ -159,18 +156,31 @@ export default {
             let card=$('#'+element.id); 
             let slide1=$('#text1');
             let slide2=$('#img');
-            let slide3=$('#text2');
             this.sound.bip.play();
             card.removeClass("fall");
-            
+            this.cascade= new TimelineLite();
+            let fadein= new TimelineLite();
             var that=this;
             TweenLite.set(slide1, { backgroundColor:element.color,zIndex:5});
             TweenLite.set(slide2, { backgroundColor:element.color});
-           
-           
-            TweenLite.from(card, 0.5, { scale: 0.5 });
             var boxC =$(".fall");
-            var fade=TweenLite.to(boxC ,{autoAlpha:0.1, duration:1 });
+            TweenLite.set($('#com1'), {autoAlpha:0});
+            TweenLite.from(card, 0.5, { scale: 0.5 });
+            this.cascade.to(boxC, 1 ,{autoAlpha:0.1})
+            .to(boxC ,{scale: 0.01, duration:0.8, stagger: { each: 0.085, from:"start",ease:"exp"}},'-=1')
+            .to(card, 0.6, { autoAlpha:0, ease:"power2.in", onComplete:function (){
+                 fadein.to(slide1, 0.8,{autoAlpha:1, delay:2.1,  onComplete:function () { 
+                    that.cascade.pause(0).progress(0);
+                    TweenLite.to($('#com1'),1, {autoAlpha:1, delay:1.5 ,yoyo:true, repeat:2},);
+                   } 
+                 },'-=2');   
+            }},'+=0.5');
+           
+           
+            
+           
+
+            /*var fade=TweenLite.to(boxC ,{autoAlpha:0.1, duration:1 });
             var fall=TweenLite.to(boxC ,{scale: 0.01, duration:0.45, stagger: { each: 0.085, from:"start",ease:"exp"}, });
             var anim=TweenLite.to(card, 0.6, { autoAlpha:0, delay:1.5, ease:"power2.in"});
             TweenLite.set($('#com1'), {autoAlpha:0});
@@ -181,7 +191,7 @@ export default {
                 fade.pause(0);
             }},'-=2');
             
-            
+            */
             
             card.addClass("fall");
             
